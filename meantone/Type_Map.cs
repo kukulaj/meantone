@@ -21,15 +21,15 @@ namespace meantone
 
         public Type_Map(Random r)
         {
-            row_size = 8;
-            dimension = 3;
+            row_size = 18;
+            dimension = 2;
             size = 1;
             for (int i = 0; i < dimension; i++)
             {
                 size = size * row_size;
             }
 
-            duration = 5.2;
+            duration = 9.2;
 
             drange = 4;
             rand = r;

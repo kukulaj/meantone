@@ -320,17 +320,32 @@ namespace meantone
                     commas[0] = new Comma(this, new int[] { 5, -6, 0 });
                     pumps[0] = new Pump(commas[0]);
                     commas[1] = new Comma(this, new int[] { 8, 1, 0 });
-                    pumps[1] = new Pump(commas[1]);
+                    pumps[1] = new Pump(commas[1],
+                        new int[] {22, 44, 13, 35, 4, 26, 48, 17, 39 });
                     commas[2] = new Comma(this, new int[] { 3, 7, 0 });
                     pumps[2] = new Pump(commas[2]);
-                    PumpStructure a53 = new PumpStructureSimple(this, 0);
-                    PumpStructure b53 = new PumpStructureBig(this, 2);
-                    pumpStructure = new PumpStructureSum(this, a53, b53);
+                    pumpStructure  = new PumpStructureSimple(this, 1);
+                    //PumpStructure b53 = new PumpStructureBig(this, 2);
+                    //pumpStructure = new PumpStructureSum(this, a53, b53);
 
+                    /*
                     scale = new bool[14];
                     scale[0] = true;
                     scale[3] = true;
                     scale[11] = true;
+                    */
+
+                    for (int i = 0; i < edo; i++)
+                    {
+                        scale[i] = false;
+                    }
+
+                    for (int i = 0; i < 12; i++)
+                    {
+                        scale[(22 * i) % edo] = true;
+                    }
+                    break;
+
 
                     break;
 
@@ -398,9 +413,9 @@ namespace meantone
                     pumps[3] = new Pump(commas[3]);
                     commas[4] = new Comma(this, new int[] { -2, -4, 0, 1 });
                     pumps[4] = new Pump(commas[4]);
-                    PumpStructure a87 = new PumpStructureSimple(this, 4);
-                    PumpStructure b87 = new PumpStructureBig(this, 3);
-                    pumpStructure = new PumpStructureSum(this, a87, b87);
+                    pumpStructure  = new PumpStructureSimple(this, 4);
+                    //PumpStructure b87 = new PumpStructureBig(this, 3);
+                    //pumpStructure = new PumpStructureSum(this, a87, b87);
                     break;
                 case 118:
                     comma3[1] = 8;
@@ -618,11 +633,11 @@ namespace meantone
                     //int thirds = 0;
                     for (int thirds = -20; thirds < 21; thirds++)
                     {
-                        //int sevenths = 0;
-                        for (int sevenths = -20; sevenths < 21; sevenths++)
+                        int sevenths = 0;
+                        //for (int sevenths = -20; sevenths < 21; sevenths++)
                         {
-                            //int elevens = 0;
-                            for (int elevens = -20; elevens < 21; elevens++)
+                            int elevens = 0;
+                            //for (int elevens = -20; elevens < 21; elevens++)
                             {
                                 int i = ed3 * fifths
                                     + ed5 * thirds
