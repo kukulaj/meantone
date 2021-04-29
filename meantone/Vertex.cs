@@ -375,7 +375,7 @@ namespace meantone
 
             string score = string.Format("i{0} {1} {2} {3} {4}",
                vi + 1 /*instrument*/,
-               (s + start * measure.shrink()),
+               (s + start * measure.shrink() + measure.voice.work.tweak_time(s+start)),
                 d,
                 vector.frequency(),
                 amplitude / 2.0);

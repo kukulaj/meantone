@@ -28,7 +28,7 @@ namespace meantone
             }
             
             double temp = 30000.0;
-            double target = 0.23;
+            double target = 0.16;
             for (int iter = 0; iter < 1; iter++)
             {
                 //work.voices[freeze].freeze = !fmode;
@@ -40,12 +40,12 @@ namespace meantone
                 }
 
                 //target = target * 0.97;
-                //temp = 40000.0;
-                //work.jostle(temp, 10000);
+                temp = 40000.0;
+                work.jostle(temp, 10000);
                 double bfrac = work.bfrac();
                 //temp = 140.0 - 5.0 * (double)iter;
-                temp = 780.0;
-                work.jostle(temp, 25000);
+                //temp = 780.0;
+                //work.jostle(temp, 25000);
                 //work.jostle(5000.0, 1500);
 
                 bfrac = work.bfrac();
@@ -53,12 +53,12 @@ namespace meantone
                 //bfrac = 0.0;
 
                 double move = 0.02;
-                int effort = 2400;
+                int effort = 800;
                 //double target = 0.1;
 
                 bool up = false;
                 int bounce = 0;
-                while (bounce < 0)
+                while (bounce < 5)
                 {
                     if (up)
                     {

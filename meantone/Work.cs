@@ -27,7 +27,7 @@ namespace meantone
             trace = new System.IO.StreamWriter(tfs);
 
             //vectorFactory = new GeneralFactory(generators, intervals);
-            vectorFactory = new FactoryEDO5(53, map);
+            vectorFactory = new FactoryEDO5(118, map);
             vectorFactory.scaleSearch();
             rand = map.rand;
             measure_count = map.size;
@@ -123,6 +123,18 @@ namespace meantone
                 voices[i].amplitudes();
 
             }
+        }
+
+        public double tweak_time(double t)
+        {
+            double result = 0;
+
+            for (double p = 0.2; p < 30.0; p *= 1.302)
+            {
+                result += Math.Sin(t * p);
+            }
+
+            return 0.01 * result;
         }
 
 
