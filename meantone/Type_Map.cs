@@ -21,7 +21,7 @@ namespace meantone
 
         public Type_Map(Random r)
         {
-            row_size = 14;
+            row_size = 30;
             dimension = 2;
             size = 1;
             for (int i = 0; i < dimension; i++)
@@ -29,7 +29,7 @@ namespace meantone
                 size = size * row_size;
             }
 
-            duration = 16.4;
+            duration = 5.4;
 
             drange = 4;
             rand = r;

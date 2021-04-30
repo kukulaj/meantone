@@ -129,12 +129,14 @@ namespace meantone
         {
             double result = 0;
 
-            for (double p = 0.2; p < 30.0; p *= 1.302)
+            double w = 1.0;
+            for (double p = 0.1; p < 30.0; p *= 1.302)
             {
-                result += Math.Sin(t * p);
+                result += w *  Math.Sin(t * p);
+                w *= 0.93;
             }
 
-            return 0.01 * result;
+            return 0.07 * result;
         }
 
 
