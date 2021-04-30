@@ -16,7 +16,7 @@ namespace meantone
         public int voice_count;
         public Voice[] voices;
         public StreamWriter trace;
-        Type_Map map;
+        public Type_Map map;
 
 
         public Work(Type_Map m)
@@ -34,7 +34,7 @@ namespace meantone
             voice_count = 4;
 
             vertex_count = 0;
-            vertices = new Vertex[50 * voice_count * measure_count];
+            vertices = new Vertex[500 * voice_count * measure_count];
 
             
             Rhythm origin = new Rhythm(this, map.duration);
@@ -249,6 +249,9 @@ namespace meantone
 
         public void phase_histogram(Type_Map map)
         {
+            if (map.dimension == 1)
+                return;
+
             int row_size = map.row_size;
             int row_cnt = map.size / map.row_size;
 

@@ -62,6 +62,24 @@ namespace meantone
             divide(e, min_dur, max_div, d, mphase, dphase, vi, tdur);
         }
 
+        public Rhythm(Work w, int vi)
+        {
+            work = w;
+            rand = w.map.rand;
+            int denom = (vi + 1) * work.map.row_size;
+            duration = work.map.duration;
+            double start = 0.0;
+            double ed = duration / (int)denom;
+
+            path = new List<Rhythm_Element>();
+            for (int i = 0; i < denom; i++)
+            {
+                path.Add(new Rhythm_Element(start, ed, 1, denom ));
+                start += ed;
+            }
+
+        }
+
         public void walk_part(double start, double pduration, int snumer, int sdenom, bool osilent, double min_dur)
         {
             const int prange = 4;

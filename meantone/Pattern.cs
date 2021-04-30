@@ -23,23 +23,40 @@ namespace meantone
             min_dur = 1.5 / (4.5 + (double)vi);
 
             face = map.size / map.row_size;
+            Rhythm lroot = null;
+            if (face == 1)
+            {
+                lroot = new Rhythm(w, vi);
+            }
+
             int fstart = 0;
             int fend = (measure_count / face) - 1;
 
             while (fstart <= fend)
             {
-                assign(root[fstart], 0 + fstart * face, map.row_size + fstart * face);
-                if (fend > fstart)
+                if (face > 1)
                 {
-                    assign(root[fstart], 0 + fend * face, map.row_size + fend * face);
-                }
+                    assign(root[fstart], 0 + fstart * face, map.row_size + fstart * face);
+                    if (fend > fstart)
+                    {
+                        assign(root[fstart], 0 + fend * face, map.row_size + fend * face);
+                    }
 
+                }
+                else
+                {
+                    sequence[fstart] = lroot.vary(min_dur, vi);
+                    if (fend > fstart)
+                    {
+                        sequence[fend] = sequence[fstart];
+                    }
+                }
                 fstart++;
                 fend--;
             }
-
-
+            
         }
+
         public Pattern(Type_Map pmap, Work w, int pvi)
         {
             map = pmap;
