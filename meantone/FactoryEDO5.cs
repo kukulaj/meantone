@@ -196,23 +196,24 @@ namespace meantone
                     PumpStructure b31 = new PumpStructureBig(this, 1);
                     pumpStructure = new PumpStructureSum(this, a31, b31);
 
-                    /*
+                    
                     for(int i = 0; i < edo; i++)
                     {
                         scale[i] = false;
                     }
 
-                    for (int i = 0; i < 13; i++)
+                    for (int i = 0; i < 12; i++)
                     {
-                        scale[(7 * i) % edo] = true;
+                        scale[(13 * i) % edo] = true;
                     }
-                    */
+                    
+                    /*
                     scale = new bool[18];
                     scale[0] = true;
                     scale[5] = true;
                     scale[10] = true;
                     scale[13] = true;
-
+                    */
                     break;
                 case 34:
                     comma3[0] = 4;

@@ -26,7 +26,7 @@ namespace meantone
             Rhythm lroot = null;
             if (face == 1)
             {
-                lroot = new Rhythm(w, vi);
+                lroot = new Rhythm(w, vi);  
             }
 
             int fstart = 0;
@@ -45,7 +45,9 @@ namespace meantone
                 }
                 else
                 {
-                    sequence[fstart] = lroot.vary(min_dur, vi);
+                    lroot = lroot.vary(min_dur, vi);
+
+                    sequence[fstart] = lroot;
                     if (fend > fstart)
                     {
                         sequence[fend] = sequence[fstart];
