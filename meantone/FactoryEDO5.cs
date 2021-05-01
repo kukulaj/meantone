@@ -634,8 +634,8 @@ namespace meantone
                     //int thirds = 0;
                     for (int thirds = -20; thirds < 21; thirds++)
                     {
-                        int sevenths = 0;
-                        //for (int sevenths = -20; sevenths < 21; sevenths++)
+                        //int sevenths = 0;
+                        for (int sevenths = -20; sevenths < 21; sevenths++)
                         {
                             int elevens = 0;
                             //for (int elevens = -20; elevens < 21; elevens++)

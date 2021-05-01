@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5127));
+            Type_Map map = new Type_Map(new Random(5128));
 
             Work work;
 
@@ -44,10 +44,10 @@ namespace meantone
                 work.jostle(temp, 10000);
                 double bfrac = work.bfrac();
                 //temp = 140.0 - 5.0 * (double)iter;
-                temp = 1500.0;
+                temp = 1000.0;
                 work.jostle(temp, 10000);
 
-                temp = 48.0;
+                temp = 25.0;
                 work.jostle(temp, 8000);
                 //work.jostle(5000.0, 1500);
 
