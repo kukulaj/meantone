@@ -51,6 +51,7 @@ namespace meantone
                 scale[i] = true;
             }
 
+            pumpStructure = new PumpStructureNull(this);
             switch (edo)
             {
                 case 10:
@@ -466,6 +467,16 @@ namespace meantone
                     comma7[0] = 5;
                     comma3[1] = 5;
                     comma5[1] = -6;
+
+                    for (int i = 0; i < edo; i++)
+                    {
+                        scale[i] = false;
+                    }
+                    for (int i = 0; i < 32; i++)
+                    {
+                        scale[(13 * i) % edo] = true;
+                    }
+
                     break;
                 case 159:
                     commas = new Comma[3];
