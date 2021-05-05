@@ -699,7 +699,7 @@ namespace meantone
                 }
             }
 
-            string cfilename = @"C:\Users\Jim\Documents\tuning\meantone\intervals.txt";
+            string cfilename =  map.file_prefix + "intervals.txt";
 
             StreamWriter cfile = new System.IO.StreamWriter(cfilename);
             intervals[0] = 0.0;
@@ -900,7 +900,7 @@ namespace meantone
         }
         public override void scaleSearch()
         {
-            string sfilename = @"C:\Users\Jim\Documents\tuning\meantone\scales.txt";
+            string sfilename = map.file_prefix + "scales.txt";
 
             StreamWriter sfile = new System.IO.StreamWriter(sfilename);
             double tot = 0.0;

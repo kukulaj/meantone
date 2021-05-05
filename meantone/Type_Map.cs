@@ -18,9 +18,11 @@ namespace meantone
         public int dimension;
         public Random rand;
         int drange;
+        public string file_prefix;
 
         public Type_Map(Random r)
         {
+            file_prefix = @"C:\Users\James\Documents\tuning\meantone\";
             row_size = 36;
             dimension = 1;
             size = 1;

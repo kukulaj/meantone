@@ -17,13 +17,15 @@ namespace meantone
         public Voice[] voices;
         public StreamWriter trace;
         public Type_Map map;
+        public string file_prefix;
 
 
         public Work(Type_Map m)
         {
             map = m;
+            file_prefix = map.file_prefix;
 
-            FileStream tfs = File.OpenWrite(@"C:\Users\Jim\Documents\tuning\meantone\trace.txt");
+            FileStream tfs = File.OpenWrite(file_prefix + "trace.txt");
             trace = new System.IO.StreamWriter(tfs);
 
             //vectorFactory = new GeneralFactory(generators, intervals);
@@ -280,7 +282,7 @@ namespace meantone
             }
             StreamWriter file;
 
-            FileStream pfs = File.OpenWrite(@"C:\Users\Jim\Documents\tuning\meantone\phasegram.txt");
+            FileStream pfs = File.OpenWrite(file_prefix + "phasegram.txt");
             // work.voices[0].mute = true;
             file = new System.IO.StreamWriter(pfs);
             for (int i = 0; i < row_size; i++)
@@ -377,9 +379,9 @@ namespace meantone
 
         public void intevalHistograms()
         {
-            StreamWriter acrossf = new StreamWriter(@"C:\Users\Jim\Documents\tuning\meantone\acrossIH.txt");
-            StreamWriter afterf = new StreamWriter(@"C:\Users\Jim\Documents\tuning\meantone\afterIH.txt");
-            StreamWriter verticalf = new StreamWriter(@"C:\Users\Jim\Documents\tuning\meantone\verticalIH.txt");
+            StreamWriter acrossf = new StreamWriter(file_prefix + "acrossIH.txt");
+            StreamWriter afterf = new StreamWriter(file_prefix + "afterIH.txt");
+            StreamWriter verticalf = new StreamWriter(file_prefix + "verticalIH.txt");
 
             Interval_Histogram acrossIH = vectorFactory.getHistogram();
             Interval_Histogram afterIH = vectorFactory.getHistogram();

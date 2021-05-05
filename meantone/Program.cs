@@ -144,7 +144,7 @@ namespace meantone
 
             StreamWriter file;
 
-            file = new StreamWriter(@"C:\Users\Jim\Documents\tuning\meantone\mtscore.txt"); 
+            file = new StreamWriter(work.file_prefix + "mtscore.txt"); 
 
             // work.voices[0].mute = true;
             
