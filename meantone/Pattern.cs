@@ -20,7 +20,7 @@ namespace meantone
             measure_count = w.measure_count;
             sequence = new Rhythm[measure_count];
 
-            min_dur = 1.5 / (4.5 + (double)vi);
+            min_dur = 4.0 / (4.5 + (double)vi);
 
             face = map.size / map.row_size;
             Rhythm lroot = null;
@@ -70,7 +70,7 @@ namespace meantone
             origin.singleton();
 
             min_dur = 0.9 / (2.25 + (double)vi);
-            Rhythm osplit = origin.splinter(min_dur, 3 + vi);
+            Rhythm osplit = origin.splinter(min_dur, 2 + vi);
             Rhythm ostick = osplit.stick(0.2);
             Rhythm root = ostick.silence(min_dur, 0.0, 0.0, vi, min_dur);
             assign(root, 0, measure_count);

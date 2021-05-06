@@ -160,6 +160,7 @@ namespace meantone
 
 
                     break;
+
                 case 31:
                     comma3[1] = 0;
                     comma5[1] = 5;
@@ -235,12 +236,20 @@ namespace meantone
                         scale[i] = false;
                     }
 
+                    /*
                     scale[0] = true;
                     scale[3] = true;
                     scale[6] = true;
                     scale[17] = true;
                     scale[20] = true;
                     scale[23] = true;
+                    */
+
+
+                    for(int i = 0; i<15; i++)
+                    {
+                        scale[(9 * i)%edo] = true;
+                    }
 
                     break;
                 case 41:
@@ -645,8 +654,8 @@ namespace meantone
                     //int thirds = 0;
                     for (int thirds = -20; thirds < 21; thirds++)
                     {
-                        //int sevenths = 0;
-                        for (int sevenths = -20; sevenths < 21; sevenths++)
+                        int sevenths = 0;
+                        //for (int sevenths = -20; sevenths < 21; sevenths++)
                         {
                             int elevens = 0;
                             //for (int elevens = -20; elevens < 21; elevens++)

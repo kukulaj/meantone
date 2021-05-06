@@ -136,11 +136,11 @@ namespace meantone
         public double scost(Vector v)
         {
             double df = v.log_frequency() - measure.voice.rootlf;
-            double result = 1000.0 * df * df * df * df;
+            double result = 2000.0 * df * df * df * df;
 
             if(!v.inScale())
             {
-                result += 6000;
+                result += 8000;
             }
 
             return result;
