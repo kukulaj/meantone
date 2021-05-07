@@ -231,11 +231,12 @@ namespace meantone
                     pumps[2] = new Pump(commas[0], new int[] {0, 20, 6, 17, 3, 23});
                     pumpStructure = new PumpStructureSimple(this, 2);
 
+                    /*
                     for (int i = 0; i < edo; i++)
                     {
                         scale[i] = false;
                     }
-
+                    */
                     /*
                     scale[0] = true;
                     scale[3] = true;
@@ -245,10 +246,10 @@ namespace meantone
                     scale[23] = true;
                     */
 
-
-                    for(int i = 0; i<15; i++)
+                    scale = new bool[17];
+                    for(int i = 0; i<11; i++)
                     {
-                        scale[(9 * i)%edo] = true;
+                        scale[(3 * i)%17] = true;
                     }
 
                     break;
