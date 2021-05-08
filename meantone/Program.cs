@@ -40,8 +40,8 @@ namespace meantone
                 }
 
                 //target = target * 0.97;
-                temp = 40000.0;
-                work.jostle(temp, 10000);
+                //temp = 40000.0;
+                //work.jostle(temp, 10000);
                 double bfrac = work.bfrac();
                 //temp = 140.0 - 5.0 * (double)iter;
                // temp = 3000.0;
@@ -50,11 +50,11 @@ namespace meantone
                 //work.jostle(temp, 1500);
                 //work.bfrac();
 
-                //temp = 200.0;
-                //work.jostle(temp, 15);
+                temp = 250.0;
+                work.jostle(temp, 2000);
                 //work.jostle(5000.0, 1500);
 
-                //bfrac = work.bfrac();
+                bfrac = work.bfrac();
                
                 //bfrac = 0.0;
 
@@ -64,7 +64,7 @@ namespace meantone
 
                 bool up = false;
                 int bounce = 0;
-                while (bounce < 7)
+                while (bounce < 0)
                 {
                     if (up)
                     {

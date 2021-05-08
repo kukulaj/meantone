@@ -225,11 +225,11 @@ namespace meantone
                     commas = new Comma[2];
                     pumps = new Pump[3];
                     commas[0] = new Comma(this, new int[] { 4, 2, 0 });
-                    pumps[0] = new Pump(commas[0]);
+                    pumps[0] = new Pump(commas[0], new int[] {0, 23, 3, 17, 6, 20 });
                     commas[1] = new Comma(this, new int[] { 5, -6, 0 });
                     pumps[1] = new Pump(commas[1]);
                     pumps[2] = new Pump(commas[0], new int[] {0, 20, 6, 17, 3, 23});
-                    pumpStructure = new PumpStructureSimple(this, 2);
+                    pumpStructure = new PumpStructureSimple(this, 0);
 
                     /*
                     for (int i = 0; i < edo; i++)
