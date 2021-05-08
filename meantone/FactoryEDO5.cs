@@ -465,7 +465,7 @@ namespace meantone
                     */
 
                     scale = new bool[59];
-                    for (int i = 0; i < 7; i++)
+                    for (int i = 0; i < 17; i++)
                     {
                         scale[(7 * i) % 59] = true;
                     }
