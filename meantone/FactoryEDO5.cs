@@ -358,7 +358,22 @@ namespace meantone
                     }
                     break;
 
+                case 65:
+                    commas = new Comma[4];
+                    pumps = new Pump[4];
+                    commas[0] = new Comma(this, new int[] { 15, 10});
+                    pumps[0] = new Pump(commas[0], new int[] 
+                    {0, 38, 11, 32, 5, 26, 64, 37, 58, 31, 52, 25, 63, 19, 57, 13, 51, 
+                    24, 45, 18, 39, 12, 50, 6, 44});
 
+                    pumpStructure = new PumpStructureSimple(this, 0);
+
+                    scale = new bool[13];
+
+                    for (int i = 0; i < 5; i++)
+                    {
+                        scale[(6 * i) % 13] = true;
+                    }
                     break;
 
                 case 72: 

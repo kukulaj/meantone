@@ -29,11 +29,11 @@ namespace meantone
             trace = new System.IO.StreamWriter(tfs);
 
             //vectorFactory = new GeneralFactory(generators, intervals);
-            vectorFactory = new FactoryEDO5(118, map);
+            vectorFactory = new FactoryEDO5(65, map);
             vectorFactory.scaleSearch();
             rand = map.rand;
             measure_count = map.size;
-            voice_count = 3;
+            voice_count = 4;
 
             vertex_count = 0;
             vertices = new Vertex[500 * voice_count * measure_count];

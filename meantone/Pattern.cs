@@ -20,7 +20,7 @@ namespace meantone
             measure_count = w.measure_count;
             sequence = new Rhythm[measure_count];
 
-            min_dur = 4.0 / (4.5 + (double)vi);
+            min_dur = 3.0 / (4.5 + (double)vi);
 
             face = map.size / map.row_size;
             Rhythm lroot = null;
