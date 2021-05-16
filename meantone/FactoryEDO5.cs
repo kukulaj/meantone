@@ -443,6 +443,13 @@ namespace meantone
                     pumpStructure  = new PumpStructureSimple(this, 4);
                     //PumpStructure b87 = new PumpStructureBig(this, 3);
                     //pumpStructure = new PumpStructureSum(this, a87, b87);
+
+                    scale = new bool[29];
+                    for(int i = 0; i<7; i++)
+                    {
+                        scale[(2 * i) % 29] = true;
+                    }
+
                     break;
                 case 118:
                     comma3[1] = 8;
