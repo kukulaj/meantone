@@ -46,6 +46,7 @@ namespace meantone
                 else
                 {
                     lroot = lroot.vary(min_dur, vi);
+                    min_dur *= 0.95;
 
                     sequence[fstart] = lroot;
                     if (fend > fstart)

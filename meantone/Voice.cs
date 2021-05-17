@@ -38,7 +38,7 @@ namespace meantone
             for (int i = 0; i < measure_count; i++)
             {
                 measures[i] = new Measure(this, map, i);
-                measures[i].temp_factor = 1.0 - 0.3 * Math.Cos(2.0 * Math.PI * ((double)(i)) / ((double)map.size));
+                measures[i].temp_factor = 1.0 - 0.35 * Math.Cos(2.0 * Math.PI * ((double)(i)) / ((double)map.size));
             }
 
             int range = 1;
