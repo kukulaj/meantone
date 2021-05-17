@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5140));
+            Type_Map map = new Type_Map(new Random(5141));
 
             Work work;
 

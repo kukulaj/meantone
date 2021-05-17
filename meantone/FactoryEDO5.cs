@@ -445,9 +445,9 @@ namespace meantone
                     //pumpStructure = new PumpStructureSum(this, a87, b87);
 
                     scale = new bool[29];
-                    for(int i = 0; i<7; i++)
+                    for(int i = 0; i<5; i++)
                     {
-                        scale[(2 * i) % 29] = true;
+                        scale[(7 * i) % 29] = true;
                     }
 
                     break;
