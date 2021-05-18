@@ -7,11 +7,19 @@ namespace meantone
     public class Pattern
     {
         public Rhythm[] sequence;
-        int measure_count;
-        int face;
-        int vi;
-        double min_dur;
-        Type_Map map;
+        public int measure_count;
+        public int face;
+        public int vi;
+        public double min_dur;
+        public Type_Map map;
+
+        protected Pattern(Type_Map pmap, Work w, int pvi)
+        {
+            map = pmap;
+            vi = pvi;
+            measure_count = w.measure_count;
+            sequence = new Rhythm[measure_count];
+        }
 
         public Pattern(Type_Map pmap, Work w, int pvi, Rhythm[] root)
         {
@@ -60,25 +68,7 @@ namespace meantone
             
         }
 
-        public Pattern(Type_Map pmap, Work w, int pvi)
-        {
-            map = pmap;
-            measure_count = w.measure_count;
-            sequence = new Rhythm[measure_count];
-            vi = pvi;
-
-            Rhythm origin = new Rhythm(w, map.duration);
-            origin.singleton();
-
-            min_dur = 0.9 / (2.25 + (double)vi);
-            Rhythm osplit = origin.splinter(min_dur, 2 + vi);
-            Rhythm ostick = osplit.stick(0.2);
-            Rhythm root = ostick.silence(min_dur, 0.0, 0.0, vi, min_dur);
-            assign(root, 0, measure_count);
-        }
-
-
-        private void divar(Rhythm root, int from, int to)
+        protected void divar(Rhythm root, int from, int to)
         {
             sequence[from] = root;
             Rhythm rsplit = root.splinter(min_dur, 4 + 2 * vi);
@@ -87,14 +77,14 @@ namespace meantone
             assign(nroot, from + 1, to);
         }
 
-        private void dup(Rhythm root, int i)
+        protected void dup(Rhythm root, int i)
         {      
             for (int r = 0; r < face; r += map.row_size)
             {
                 sequence[i + r ] = root;
             }
         }
-        private void assign(Rhythm root, int from, int to)
+        protected void assign(Rhythm root, int from, int to)
         {
             if (to - from < 4)
             {

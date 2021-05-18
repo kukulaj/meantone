@@ -32,13 +32,14 @@ namespace meantone
             temp_factor = 1.0;
             measure_count = work.measure_count;
             measures = new Measure[measure_count];
-            pattern = new Pattern(tm, w, voice, rootr);
+            //pattern = new Pattern(tm, w, voice, rootr);
+            pattern = new Patchwork(tm, w, voice);
 
             int row_size = map.row_size;
             for (int i = 0; i < measure_count; i++)
             {
                 measures[i] = new Measure(this, map, i);
-                measures[i].temp_factor = 1.0 - 0.35 * Math.Cos(2.0 * Math.PI * ((double)(i)) / ((double)map.size));
+                measures[i].temp_factor = 1.0 - 0.15 * Math.Cos(2.0 * Math.PI * ((double)(i)) / ((double)map.size));
             }
 
             int range = 1;
