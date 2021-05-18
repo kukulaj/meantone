@@ -17,6 +17,7 @@ namespace meantone
         public int ed5;
         public int ed7;
         public int ed11;
+        public int ed13;
         public int[] harmonics;
         public int[] comma3;
         public int[] comma5;
@@ -34,11 +35,13 @@ namespace meantone
             ed5 = (int)(0.5 + (((float)edo) * Math.Log(5.0) / Math.Log(2.0)));
             ed7 = (int)(0.5 + (((float)edo) * Math.Log(7.0) / Math.Log(2.0)));
             ed11 = (int)(0.5 + (((float)edo) * Math.Log(11.0) / Math.Log(2.0)));
-            harmonics = new int[4];
+            ed13 = (int)(0.5 + (((float)edo) * Math.Log(13.0) / Math.Log(2.0)));
+            harmonics = new int[5];
             harmonics[0] = ed3;
             harmonics[1] = ed5;
             harmonics[2] = ed7;
             harmonics[3] = ed11;
+            harmonics[4] = ed13;
 
             int ccnt = 3;
             comma3 = new int[ccnt];
@@ -444,11 +447,17 @@ namespace meantone
                     //PumpStructure b87 = new PumpStructureBig(this, 3);
                     //pumpStructure = new PumpStructureSum(this, a87, b87);
 
+                    /*
                     scale = new bool[29];
                     for(int i = 0; i<5; i++)
                     {
                         scale[(7 * i) % 29] = true;
                     }
+                    */
+
+                    scale = new bool[3];
+                    scale[0] = true;
+                    scale[1] = true;
 
                     break;
                 case 118:
@@ -678,57 +687,63 @@ namespace meantone
 
             for (int octaves = -20; octaves < 21; octaves++)
             {
-                for (int fifths = -20; fifths < 21; fifths++)
+                for (int fifths = -15; fifths < 16; fifths++)
                 {
                     //int thirds = 0;
-                    for (int thirds = -20; thirds < 21; thirds++)
+                    for (int thirds = -12; thirds < 13; thirds++)
                     {
-                        int sevenths = 0;
-                        //for (int sevenths = -20; sevenths < 21; sevenths++)
+                        //int sevenths = 0;
+                        for (int sevenths = -8; sevenths < 9; sevenths++)
                         {
-                            int elevens = 0;
-                            //for (int elevens = -20; elevens < 21; elevens++)
+                            //int elevens = 0;
+                            for (int elevens = -6; elevens < 7; elevens++)
                             {
-                                int i = ed3 * fifths
+                                for (int thirteens = -4; thirteens < 5; thirteens++)
+                                {
+                                    int i = ed3 * fifths
                                     + ed5 * thirds
                                     + edo * octaves
                                     + ed7 * sevenths
-                                    + ed11 * elevens;
-                                if (i < 0)
-                                {
-                                    i = -i;
-                                }
-                                double ji =
-                                       ((double)octaves) * Math.Log(2.0)
-                                      + ((double)fifths) * Math.Log(3.0)
-                                      + ((double)thirds) * Math.Log(5.0)
-                                      + ((double)sevenths) * Math.Log(7.0)
-                                       + ((double)elevens) * Math.Log(11.0);
-
-                                double scale = ((double)edo) * ji / Math.Log(2);
-
-                                if (i < icnt)
-                                {
-                                    scale = - scale;
-
-                                    double tempered = (double)i;
-
-                                    double err = Math.Abs(scale - tempered); 
-
-                                    double c =
-                                        err * err * 0.1
-                                         + 1.3 * (double)(elevens * elevens)
-                                        + 1.1 * (double)(sevenths * sevenths)
-                                        + (double)(thirds * thirds)
-                                        + 0.9 * (double)(fifths * fifths)
-                                        + 0.15 * (double)(octaves * octaves);
-                                    intervals[i] += 1.0 / (c * c );
-
-                                    if (best[i] == 0.0 || c < best[i])
+                                    + ed11 * elevens
+                                    + ed13 * elevens;
+                                    if (i < 0)
                                     {
-                                        best[i] = c;
-                                        why[i] = string.Format("[{0} {1} {2} {3} {4}>",
-                                            octaves, fifths, thirds, sevenths, elevens);
+                                        i = -i;
+                                    }
+                                    double ji =
+                                           ((double)octaves) * Math.Log(2.0)
+                                          + ((double)fifths) * Math.Log(3.0)
+                                          + ((double)thirds) * Math.Log(5.0)
+                                          + ((double)sevenths) * Math.Log(7.0)
+                                          + ((double)elevens) * Math.Log(11.0)
+                                           + ((double)thirteens) * Math.Log(13.0);
+
+                                    double scale = ((double)edo) * ji / Math.Log(2);
+
+                                    if (i < icnt)
+                                    {
+                                        scale = -scale;
+
+                                        double tempered = (double)i;
+
+                                        double err = Math.Abs(scale - tempered);
+
+                                        double c =
+                                            err * err * 0.1
+                                             + 1.3 * (double)(thirteens * thirteens)
+                                             + 1.2 * (double)(elevens * elevens)
+                                            + 1.1 * (double)(sevenths * sevenths)
+                                            + (double)(thirds * thirds)
+                                            + 0.9 * (double)(fifths * fifths)
+                                            + 0.15 * (double)(octaves * octaves);
+                                        intervals[i] += 1.0 / (c * c);
+
+                                        if (best[i] == 0.0 || c < best[i])
+                                        {
+                                            best[i] = c;
+                                            why[i] = string.Format("[{0} {1} {2} {3} {4}>",
+                                                octaves, fifths, thirds, sevenths, elevens);
+                                        }
                                     }
                                 }
                             }
