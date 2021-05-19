@@ -16,6 +16,7 @@ namespace meantone
             Rhythm osplit = origin.splinter(min_dur, 2 + vi);
             Rhythm ostick = osplit.stick(0.2);
             Rhythm root = ostick.silence(min_dur, 0.0, 0.0, vi, min_dur);
+            root = root.vary(min_dur, vi);
 
             double vprob = 0.1 + 0.6 * (double)vi / (double)(vi + 2);
             for(int i = 0; i < measure_count; i++)

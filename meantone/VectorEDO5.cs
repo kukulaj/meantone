@@ -32,7 +32,7 @@ namespace meantone
 
             while (pitch < root * edo)
             {
-                pitch += factory.scale.Length;
+                pitch += edo; // factory.scale.Length;
             }
         }
 
