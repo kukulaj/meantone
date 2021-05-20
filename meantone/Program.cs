@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5145));
+            Type_Map map = new Type_Map(new Random(5146));
 
             Work work;
 
@@ -40,8 +40,8 @@ namespace meantone
                 }
 
                 //target = target * 0.97;
-                //temp = 40000.0;
-                //work.jostle(temp, 10000);
+                temp = 40000.0;
+                work.jostle(temp, 10000);
                 double bfrac = work.bfrac();
                 //temp = 140.0 - 5.0 * (double)iter;
                // temp = 3000.0;
@@ -50,7 +50,7 @@ namespace meantone
                 //work.jostle(temp, 1500);
                 //work.bfrac();
 
-                temp = 3.0;
+                //temp = 3.0;
                 //work.jostle(temp, 2000);
                 //work.jostle(5000.0, 1500);
 
@@ -62,13 +62,13 @@ namespace meantone
                 int effort = 150;
                 //double target = 0.1;
 
-                bool up = true;
+                bool up = false;
                 int bounce = 0;
-                while (bounce < 1)
+                while (bounce < 7)
                 {
                     if (up)
                     {
-                        const double upper_lim = 1000.0;
+                        const double upper_lim = 500.0;
                         while (temp < upper_lim && bfrac > target)
                         {
                             temp = temp / (1.0 - move);
@@ -83,7 +83,7 @@ namespace meantone
                     }
                     else
                     {
-                        const double lower_lim = 5.0;
+                        const double lower_lim = 3.0;
                         while (temp > lower_lim && bfrac < target)
                         {
                             temp *= (1.0 - move);

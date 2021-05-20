@@ -32,5 +32,25 @@ namespace meantone
             }
            
         }
+
+        public Patchwork(Type_Map pmap, Work w, int pvi, Rhythm[] roots) : base(pmap, w, pvi)
+        {
+            min_dur = 0.9 / (2.25 + (double)vi);
+            Rhythm root = roots[0].vary(min_dur, vi);
+
+            double vprob = 0.1 + 0.6 * (double)vi / (double)(vi + 2);
+            for (int i = 0; i < measure_count; i++)
+            {
+                if (map.rand.NextDouble() < vprob)
+                {
+                    sequence[i] = root.vary(min_dur, vi);
+                }
+                else
+                {
+                    sequence[i] = root;
+                }
+            }
+
+        }
     }
 }
