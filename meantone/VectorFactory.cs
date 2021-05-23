@@ -18,6 +18,9 @@ namespace meantone
             return new Interval_Histogram();
         }
 
+        public virtual void show_pattern()
+        {
+        }
         public virtual void scaleSearch()
         {
         }

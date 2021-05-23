@@ -29,7 +29,8 @@ namespace meantone
             trace = new System.IO.StreamWriter(tfs);
 
             //vectorFactory = new GeneralFactory(generators, intervals);
-            vectorFactory = new FactoryEDO5(37, map, new bool[] {true, false, true, true, true });
+            vectorFactory = new FactoryEDO171(map, new bool[] {true, true, true, true, true });
+            vectorFactory.show_pattern();
             vectorFactory.scaleSearch();
             rand = map.rand;
             measure_count = map.size;
