@@ -53,10 +53,17 @@ namespace meantone
             {
                 pstep[i] = (int)(0.5 + (((float)edo) * Math.Log((double)(primes[i])) / Math.Log(2.0)));
             }
+
+            scale = new bool[edo];
+            for (int i = 0; i < edo; i++)
+            {
+                scale[i] = true;
+            }
         }
 
         public FactoryEDO5(int e, Type_Map pmap, bool[] pinc): this(e, pmap)
         {
+            pumpStructure = new PumpStructureNull(this);
             included = pinc;
 
             for(int i = 0; i < pcnt; i++)
