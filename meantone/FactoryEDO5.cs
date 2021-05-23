@@ -7,18 +7,22 @@ namespace meantone
 {
     public class FactoryEDO5 : VectorFactory
     {
+        public int edo;
+        int pcnt;
+        bool[] included;
+        int[] primes;
+        int[] range;
+        int[] coord;
+        double[] cost;
+        public int[] pstep;
+
+
         public double[] intervals;
         public double[] best;
         public bool[] scale;
         
         public int icnt;
-        public int edo;
-        public int ed3;
-        public int ed5;
-        public int ed7;
-        public int ed11;
-        public int ed13;
-        public int[] harmonics;
+        
         public int[] comma3;
         public int[] comma5;
         public int[] comma7;
@@ -27,21 +31,137 @@ namespace meantone
         public Pump[] pumps;
         public PumpStructure pumpStructure;
 
-        public FactoryEDO5(int e, Type_Map tmap)
+        public FactoryEDO5(int e, Type_Map pmap)
+        {
+            edo = e;
+            map = pmap;
+           
+            primes = new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59};
+            range = new int[] { 10, 6, 4, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1};
+            pcnt = primes.Length;
+            coord = new int[pcnt];
+            cost = new double[pcnt];
+            double bc = 0.2;
+            for(int i = 0; i < pcnt; i++)
+            {
+                cost[i] = bc;
+                bc = 1.2 * (bc + 0.4);
+            }
+
+            pstep = new int[pcnt];
+            for (int i = 0; i < pcnt; i++)
+            {
+                pstep[i] = (int)(0.5 + (((float)edo) * Math.Log((double)(primes[i])) / Math.Log(2.0)));
+            }
+        }
+
+        public FactoryEDO5(int e, Type_Map pmap, bool[] pinc): this(e, pmap)
+        {
+            included = pinc;
+
+            for(int i = 0; i < pcnt; i++)
+            {
+                if(i < included.Length && included[i])
+                {
+                    coord[i] = range[i];
+                }
+            }
+
+            icnt = 5 * edo;
+
+            intervals = new double[icnt];
+            string[] why = new string[icnt];
+            double[] best = new double[icnt];
+
+            for (int i = 0; i < icnt; i++)
+            {
+                intervals[i] = 0.00001;
+            }
+
+            bool done = false;
+            while (!done)
+            {
+                int interval = 0;
+                double ji = 0.0;
+                for(int i = 0; i < pcnt; i++)
+                {
+                    interval += pstep[i] * coord[i];
+                    ji += coord[i] * Math.Log((double)(primes[i]));
+                }
+
+                 
+                if (interval < 0)
+                {
+                    interval = -interval;
+                    ji = -ji;
+                }
+
+                if (interval < icnt)
+                {
+                    double scale = ((double)edo) * ji / Math.Log(2);
+                    double tempered = (double)interval;
+
+                    double err = Math.Abs(scale - tempered);
+
+                    double c = err * err * 0.1;
+                    for (int i = 0; i < pcnt; i++)
+                    {
+                        c += cost[i] * coord[i] * coord[i];
+                    }
+                    intervals[interval] += 1.0 / (c * c);
+
+                    if (best[interval] == 0.0 || c < best[interval])
+                    {
+                        best[interval] = c;
+                        why[interval] = "[";
+                        for (int i = 0; i < pcnt; i++)
+                        {
+                            why[interval] += string.Format("{0} ", coord[i]);
+                        }
+
+                        why[interval] += ">";
+                    }
+                }
+                
+                    bool inc = false;
+                    for (int i = 0; i < pcnt && !inc; i++)
+                    {
+                        if (i < included.Length && included[i])
+                        {
+                            coord[i]--;
+                            if (coord[i] < -range[i])
+                            {
+                                coord[i] = range[i];
+                            }
+                            else
+                            {
+                                inc = true;
+                            }
+                        }
+                    }
+                    
+                    done = !inc;
+
+                }
+                string cfilename = map.file_prefix + "intervals.txt";
+
+                StreamWriter cfile = new System.IO.StreamWriter(cfilename);
+                intervals[0] = 0.0;
+                for (int i = 1; i < icnt; i++)
+                {  
+                   intervals[i] = 1.0 / intervals[i]; // multiple hits lowers cost
+                  
+                    cfile.WriteLine(string.Format("{0}: {1}; {2} ", i, intervals[i], why[i]));
+                }
+                cfile.Close();
+            
+        }
+
+        public  void olFactoryEDO5(int e, Type_Map tmap)  
         {
             map = tmap;
-            edo = e;
-            ed3 = (int)(0.5 + (((float)edo) * Math.Log(3.0) / Math.Log(2.0)));
-            ed5 = (int)(0.5 + (((float)edo) * Math.Log(5.0) / Math.Log(2.0)));
-            ed7 = (int)(0.5 + (((float)edo) * Math.Log(7.0) / Math.Log(2.0)));
-            ed11 = (int)(0.5 + (((float)edo) * Math.Log(11.0) / Math.Log(2.0)));
-            ed13 = (int)(0.5 + (((float)edo) * Math.Log(13.0) / Math.Log(2.0)));
-            harmonics = new int[5];
-            harmonics[0] = ed3;
-            harmonics[1] = ed5;
-            harmonics[2] = ed7;
-            harmonics[3] = ed11;
-            harmonics[4] = ed13;
+            
+             
 
             int ccnt = 3;
             comma3 = new int[ccnt];
@@ -671,109 +791,14 @@ namespace meantone
                     break;
             }
 
-            for (int ci = 0; ci < ccnt; ci++)
-            {
-                if (0 != (comma3[ci] * ed3 + comma5[ci] * ed5 + comma7[ci] * ed7) % edo)
-                {
-                    Console.WriteLine("comma error");
-                }
-            }
+            
 
             icnt = 5 * edo;
 
-            intervals = new double[icnt];
-            string[] why = new string[icnt];
-            double[] best = new double[icnt];
-            for (int i = 0; i < icnt; i++)
-            {
-                intervals[i] = 0.0;
-            }
+            
 
-            for (int octaves = -20; octaves < 21; octaves++)
-            {
-                for (int fifths = -15; fifths < 16; fifths++)
-                {
-                    //int thirds = 0;
-                    for (int thirds = -12; thirds < 13; thirds++)
-                    {
-                        //int sevenths = 0;
-                        for (int sevenths = -8; sevenths < 9; sevenths++)
-                        {
-                            //int elevens = 0;
-                            for (int elevens = -6; elevens < 7; elevens++)
-                            {
-                                for (int thirteens = -4; thirteens < 5; thirteens++)
-                                {
-                                    int i = ed3 * fifths
-                                    + ed5 * thirds
-                                    + edo * octaves
-                                    + ed7 * sevenths
-                                    + ed11 * elevens
-                                    + ed13 * thirteens;
-                                    if (i < 0)
-                                    {
-                                        i = -i;
-                                    }
-                                    double ji =
-                                           ((double)octaves) * Math.Log(2.0)
-                                          + ((double)fifths) * Math.Log(3.0)
-                                          + ((double)thirds) * Math.Log(5.0)
-                                          + ((double)sevenths) * Math.Log(7.0)
-                                          + ((double)elevens) * Math.Log(11.0)
-                                           + ((double)thirteens) * Math.Log(13.0);
-
-                                    double scale = ((double)edo) * ji / Math.Log(2);
-
-                                    if (i < icnt)
-                                    {
-                                        scale = -scale;
-
-                                        double tempered = (double)i;
-
-                                        double err = Math.Abs(scale - tempered);
-
-                                        double c =
-                                            err * err * 0.1
-                                             + 1.3 * (double)(thirteens * thirteens)
-                                             + 1.2 * (double)(elevens * elevens)
-                                            + 1.1 * (double)(sevenths * sevenths)
-                                            + (double)(thirds * thirds)
-                                            + 0.9 * (double)(fifths * fifths)
-                                            + 0.15 * (double)(octaves * octaves);
-                                        intervals[i] += 1.0 / (c * c);
-
-                                        if (best[i] == 0.0 || c < best[i])
-                                        {
-                                            best[i] = c;
-                                            why[i] = string.Format("[{0} {1} {2} {3} {4} {5}>",
-                                                octaves, fifths, thirds, sevenths, elevens, thirteens);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            string cfilename =  map.file_prefix + "intervals.txt";
-
-            StreamWriter cfile = new System.IO.StreamWriter(cfilename);
-            intervals[0] = 0.0;
-            for (int i = 1; i < icnt; i++)
-            {
-                if (intervals[i] == 0.0)
-                {
-                    intervals[i] = 1000.0;
-                }
-                else
-                {
-                    intervals[i] = 1.0 / intervals[i]; // multiple hits lowers cost
-                }
-                cfile.WriteLine(string.Format("{0}: {1}; {2} ", i, intervals[i], why[i]));
-            }
-            cfile.Close();
-
+            
+             
             show_pattern();
 
             /*
@@ -815,56 +840,7 @@ namespace meantone
             int small = loc % map.row_size;
             int big = loc / map.row_size; ;
 
-            int third = ed5 - 2 * edo;
-            int fifth = ed3 - edo;
-            int seventh = ed7 - 3 * edo;
-            /*
-            int c3_0 = 0, c5_0 = 0, c7_0 = 0, c3_1 = 0, c5_1 = 0, c7_1 = 0;
-
-            c3_1 = comma3[2];
-            c5_1 = comma5[2];
-            c7_1 = comma7[2];
-
-            switch ((8 * big) / map.row_size)
-            {
-                case 7:
-                case 0:
-                    c3_0 = comma3[0];
-                    c5_0 = comma5[0];
-                    c7_0 = comma7[0];
-                    break;
-                case 1:
-                case 2:
-                    c3_0 = comma3[1];
-                    c5_0 = comma5[1];
-                    c7_0 = comma7[1];
-                    break;
-                case 3:
-                case 4:
-                    c3_0 = -comma3[0];
-                    c5_0 = -comma5[0];
-                    c7_0 = -comma7[0];
-                    break;
-                case 5:
-                case 6:
-                    c3_0 = -comma3[1];
-                    c5_0 = -comma5[1];
-                    c7_0 = -comma7[1];
-                    break;
-            }
-
-            pitch = (30 * edo 
-                + third
-                  * (cspace(c5_0, small, 0.3)
-                     + cspace(c5_1, big, 0.3))
-                + fifth
-                  * (cspace(c3_0, small, 0.6)
-                     + cspace(c3_1, big, 0.6))                         
-                + seventh
-                  * (cspace(c7_0, small, 0.9)
-                     + cspace(c7_1, big, 0.9)))
-                % edo;
-            */
+            
 
             pitch = pumps[0].sequence[(small * pumps[0].sequence.Length) / map.row_size];
 

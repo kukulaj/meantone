@@ -41,13 +41,7 @@ namespace meantone
             return new VectorEDO5(factory, pitch + p);
         }
 
-        Vector make_option(int d3, int d5, int d7)
-        {
-            int p = d3 * factory.ed3 + d5 * factory.ed5 + d7 * factory.ed7;
-            int o = p / factory.edo;
-            p = p - o * factory.edo;
-            return delta(p);
-        }
+         
 
         public override Vector[] jostle()
         {

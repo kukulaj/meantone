@@ -51,7 +51,7 @@ namespace meantone
                         bestj = j;
                     }
                 }
-                int move = comma.factory.harmonics[bestj];
+                int move = comma.factory.pstep[bestj];
                 if (!positive[bestj])
                 {
                     move = -move;

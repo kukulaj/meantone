@@ -17,7 +17,7 @@ namespace meantone
             int vec = 0;
             for (int i = 0; i < factors.Length; i++)
             {
-                vec += factors[i] * factory.harmonics[i];
+                vec += factors[i] * factory.pstep[i];
             }
             if (vec % factory.edo != 0)
             {
