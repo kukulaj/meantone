@@ -49,10 +49,10 @@ namespace meantone
             */
 
 
-            scale = new bool[15];
-            for(int i=0; i<7; i++)
+            scale = new bool[4];
+            for(int i=0; i<2; i++)
             {
-                scale[(4 * i) % 15] = true;
+                scale[(1*i) % scale.Length] = true;
             }
 
             /*
