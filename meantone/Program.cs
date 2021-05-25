@@ -46,8 +46,8 @@ namespace meantone
                 //temp = 140.0 - 5.0 * (double)iter;
                // temp = 3000.0;
                 //work.bfrac();
-                temp = 58.0;
-                work.jostle(temp, 1500);
+                temp = 65.0;
+                work.jostle(temp, 3000);
                 //work.bfrac();
 
                 //temp = 3.0;
