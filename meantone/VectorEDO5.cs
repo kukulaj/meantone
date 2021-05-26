@@ -30,7 +30,7 @@ namespace meantone
             edo = f.edo;
             pitch = factory.pumpStructure.pattern(loc);
 
-            int incr = (edo / factory.scale.Length) * factory.scale.Length;
+            int incr = ((edo + factory.scale.Length/2) / factory.scale.Length) * factory.scale.Length;
 
             while (pitch < root * edo)
             {
