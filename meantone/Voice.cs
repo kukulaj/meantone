@@ -80,8 +80,8 @@ namespace meantone
                 }
             }
 
-            Measure[] alignment = new Measure[map.dimension+1];
-            Measure[] palignment = new Measure[map.dimension + 1];
+            Measure[] alignment = new Measure[2];
+            Measure[] palignment = new Measure[2];
 
             for (int i = 0; i < measure_count; i++)
             {
@@ -91,12 +91,12 @@ namespace meantone
                 for (int d = 0; d < map.dimension; d++)
                 {
                     Measure other = measures[(i + range) % measure_count];
-                    alignment[d + 1] = other;
-                    palignment[d+1]= measures[(i + range - 1) % measure_count];
+                    alignment[1] = other;
+                    palignment[1]= measures[(i + range - 1) % measure_count];
+                    palign(alignment, palignment);
                     measures[i].acrossp(other);
                     range = range * row_size;
                 }
-                align(alignment, palignment);
             }
                
 
@@ -161,9 +161,27 @@ namespace meantone
 
         }
 
-        public void align(Measure[] mmatrix, Measure [] pmatrix)
+        public void align(Measure[] mmatrix, Measure[] pmatrix)
         {
-            Vertex[] matrix = new Vertex[mmatrix.Length];
+            Measure[] mmatrix2 = new Measure[2];
+            Measure[] pmatrix2 = new Measure[2];
+
+            for(int i = 0; i < mmatrix.Length; i++)
+            {
+                for(int j = i+1; j < mmatrix.Length; j++)
+                {
+                    mmatrix2[0] = mmatrix[i];
+                    mmatrix2[1] = mmatrix[j];
+                    pmatrix2[0] = pmatrix[i];
+                    pmatrix2[1] = pmatrix[j];
+                    palign(mmatrix2, pmatrix2);
+                }
+            }
+
+        }
+            public void palign(Measure[] mmatrix, Measure[] pmatrix)
+            {
+                Vertex[] matrix = new Vertex[mmatrix.Length];
             Vertex[] omatrix = new Vertex[mmatrix.Length];
             int[] vi = new int[mmatrix.Length];
 
