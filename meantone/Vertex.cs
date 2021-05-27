@@ -10,8 +10,8 @@ namespace meantone
         HashSet<Vertex> vertical;
         HashSet<Vertex> acrossi;
         HashSet<Vertex> acrossp;
-        public HashSet<Vertex> before;
-        public HashSet<Vertex> after;
+        public Dictionary<Vertex, Parallel> before;
+        public Dictionary<Vertex, Parallel> after;
         public Vector vector;
         public Measure measure;
         public double duration;
@@ -29,8 +29,8 @@ namespace meantone
             vertical = new HashSet<Vertex>();
             acrossi = new HashSet<Vertex>();
             acrossp = new HashSet<Vertex>();
-            before = new HashSet<Vertex>();
-            after = new HashSet<Vertex>();
+            before = new Dictionary<Vertex, Parallel>();
+            after = new Dictionary<Vertex, Parallel>();
 
             vector = measure.voice.work.vectorFactory.initialVector(m.voice.work.rand,
                 measure.voice.root,
@@ -69,17 +69,17 @@ namespace meantone
         {
             bool ok = true;
 
-            foreach (Vertex v in after)
+            foreach (KeyValuePair<Vertex, Parallel> kp in after)
             {
-                if (!v.before.Contains(this))
+                if (!kp.Key.before.ContainsKey(this))
                 {
                     ok = false;
                 }
             }
 
-            foreach (Vertex v in before)
+            foreach (KeyValuePair<Vertex, Parallel> kp in before)
             {
-                if (!v.after.Contains(this))
+                if (!kp.Key.after.ContainsKey(this))
                 {
                     ok = false;
                 }
@@ -180,17 +180,17 @@ namespace meantone
         {
             double total = 0.0;
 
-            foreach (Vertex there in before)
+            foreach (KeyValuePair<Vertex, Parallel> there in before)
             {
 
-                total += v.adjacence(there.vector);
+                total += v.adjacence(there.Key.vector);
             }
 
             total = correction(total);
 
-            foreach (Vertex there in after)
+            foreach (KeyValuePair<Vertex, Parallel>  there in after)
             {
-                total += v.adjacence(there.vector);
+                total += v.adjacence(there.Key.vector);
             }
 
             total = correction(total);
@@ -229,14 +229,14 @@ namespace meantone
             {
                 double subtot = 0.0;
                 double count = 0.0;
-                foreach (Vertex b in before)
+                foreach (KeyValuePair<Vertex, Parallel> b in before)
                 {
-                    foreach (Vertex bthere in there.before)
+                    foreach (KeyValuePair<Vertex, Parallel> bthere in there.before)
                     {
-                        if (b.acrossi.Contains(bthere))
+                        if (b.Key.acrossi.Contains(bthere.Key))
                         {
                             count += 1.0;
-                            if (!v.same_interval(b.vector, there.vector, bthere.vector))
+                            if (!v.same_interval(b.Key.vector, there.vector, bthere.Key.vector))
                             {
                                 subtot += 1.0;
                             }
@@ -255,14 +255,14 @@ namespace meantone
 
                 subtot = 0.0;
                 count = 0;
-                foreach (Vertex a in after)
+                foreach (KeyValuePair<Vertex, Parallel> a in after)
                 {
-                    foreach (Vertex athere in there.after)
+                    foreach (KeyValuePair<Vertex, Parallel> athere in there.after)
                     {
-                        if (a.acrossi.Contains(athere))
+                        if (a.Key.acrossi.Contains(athere.Key))
                         {
                             count += 1.0;
-                            if (!v.same_interval(a.vector, there.vector, athere.vector))
+                            if (!v.same_interval(a.Key.vector, there.vector, athere.Key.vector))
                             {
                                 subtot += 1.0;
                             }
@@ -279,7 +279,7 @@ namespace meantone
                 }
             }
 
-            return 5.0 * total;
+            return 12.5 * total;
         }
 
         public double cost(Vector v)
@@ -406,9 +406,9 @@ namespace meantone
                 Interval i = vector.interval(v.vector);
                 acrossIH.Tally(i);
             }
-            foreach (Vertex v in after)
+            foreach (KeyValuePair<Vertex, Parallel> v in after)
             {
-                Interval i = vector.interval(v.vector);
+                Interval i = vector.interval(v.Key.vector);
                 afterIH.Tally(i);
             }
 

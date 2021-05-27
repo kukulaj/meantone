@@ -294,8 +294,9 @@ namespace meantone
 
             for (int i = 1; i < vertex_count; i++)
             {
-                vertices[i].before.Add(vertices[i - 1]);
-                vertices[i - 1].after.Add(vertices[i]);
+                Parallel p = new Parallel(vertices[i-1], vertices[i]);
+                vertices[i].before[vertices[i - 1]] = p;
+                vertices[i - 1].after[vertices[i]] = p;
             }
         }
 
@@ -336,8 +337,9 @@ namespace meantone
                 Vertex there = m.vertices[m.vertex_count - 1];
                 if (here != there)
                 {
-                    there.after.Add(here);
-                    here.before.Add(there);
+                    Parallel p = new Parallel(there, here);
+                    there.after[here] = p;
+                    here.before[there] = p;
                 }
             }
         }

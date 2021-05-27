@@ -33,7 +33,7 @@ namespace meantone
             measure_count = work.measure_count;
             measures = new Measure[measure_count];
             //pattern = new Pattern(tm, w, voice, rootr);
-            pattern = new Patchwork(tm, w, voice, rootr);
+            pattern = new Matrix(tm, w, voice, rootr);
 
             int row_size = map.row_size;
             for (int i = 0; i < measure_count; i++)
@@ -47,7 +47,14 @@ namespace meantone
             {
                 for (int i = 0; i < measure_count; i++)
                 {
-                    measures[i].acrossp(measures[(i + range) % measure_count]);
+                    if (d == 0)
+                    {
+                        measures[i].acrossp(measures[(i + range) % measure_count]);
+                    }
+                    else
+                    {
+                        measures[i].acrossi(measures[(i + range) % measure_count]);
+                    }
                 }
                 range = range * row_size;
             }
