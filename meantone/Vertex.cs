@@ -225,61 +225,31 @@ namespace meantone
         {
             double total = 0.0;
 
-            foreach (Vertex there in acrossi)
+            foreach(KeyValuePair<Vertex, Parallel> kvp in before)
             {
-                double subtot = 0.0;
-                double count = 0.0;
-                foreach (KeyValuePair<Vertex, Parallel> b in before)
+                foreach(Parallel there in kvp.Value.across)
+                if (!v.same_interval(kvp.Key.vector, there.after.vector, there.before.vector))
                 {
-                    foreach (KeyValuePair<Vertex, Parallel> bthere in there.before)
-                    {
-                        if (b.Key.acrossi.Contains(bthere.Key))
-                        {
-                            count += 1.0;
-                            if (!v.same_interval(b.Key.vector, there.vector, bthere.Key.vector))
-                            {
-                                subtot += 1.0;
-                            }
-                        }
-                    }
-                }
-
-                if (individual)
-                {
-                    total += subtot * 4.0; // 2.0 * (before.Count + there.before.Count)  / (double)(before.Count * there.before.Count);
-                }
-                else
-                {
-                    total += subtot;
-                }
-
-                subtot = 0.0;
-                count = 0;
-                foreach (KeyValuePair<Vertex, Parallel> a in after)
-                {
-                    foreach (KeyValuePair<Vertex, Parallel> athere in there.after)
-                    {
-                        if (a.Key.acrossi.Contains(athere.Key))
-                        {
-                            count += 1.0;
-                            if (!v.same_interval(a.Key.vector, there.vector, athere.Key.vector))
-                            {
-                                subtot += 1.0;
-                            }
-                        }
-                    }
-                }
-                if (individual)
-                {
-                    total += subtot * 4.0; // * 2.0 * ( after.Count + there.after.Count)  / (double)(after.Count * there.after.Count);
-                }
-                else
-                {
-                    total += subtot;
+                    total += 1.0;
                 }
             }
 
-            return 12.5 * total;
+            foreach (KeyValuePair<Vertex, Parallel> kvp in after)
+            {
+                foreach (Parallel there in kvp.Value.across)
+                    if (!v.same_interval(kvp.Key.vector, there.before.vector, there.after.vector))
+                    {
+                        total += 1.0;
+                    }
+            }
+
+           
+            double result =  12.5 * total;
+            if(individual)
+            {
+                result *= 4.0;
+            }
+            return result;
         }
 
         public double cost(Vector v)

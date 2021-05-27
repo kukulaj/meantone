@@ -42,22 +42,7 @@ namespace meantone
                 measures[i].temp_factor = 1.0; // - 0.15 * Math.Cos(2.0 * Math.PI * ((double)(i)) / ((double)map.size));
             }
 
-            int range = 1;
-            for (int d = 0; d < map.dimension; d++)
-            {
-                for (int i = 0; i < measure_count; i++)
-                {
-                    if (d == 0)
-                    {
-                        measures[i].acrossp(measures[(i + range) % measure_count]);
-                    }
-                    else
-                    {
-                        measures[i].acrossi(measures[(i + range) % measure_count]);
-                    }
-                }
-                range = range * row_size;
-            }
+           
 
             sequence_count = work.measure_count;
             sequence = new Measure[sequence_count];
@@ -94,6 +79,27 @@ namespace meantone
                     measures[(i + 1) % measure_count].after(measures[i]);
                 }
             }
+
+            Measure[] alignment = new Measure[map.dimension+1];
+            Measure[] palignment = new Measure[map.dimension + 1];
+
+            for (int i = 0; i < measure_count; i++)
+            {
+                alignment[0] = measures[i];
+                palignment[0] = measures[(i+measure_count-1)% measure_count ];
+                int range = 1;
+                for (int d = 0; d < map.dimension; d++)
+                {
+                    Measure other = measures[(i + range) % measure_count];
+                    alignment[d + 1] = other;
+                    palignment[d+1]= measures[(i + range - 1) % measure_count];
+                    measures[i].acrossp(other);
+                    range = range * row_size;
+                }
+                align(alignment, palignment);
+            }
+               
+
 
             //for (int i = 0; i < row; i++)
             //{
@@ -153,7 +159,106 @@ namespace meantone
             */
             // }
 
+        }
 
+        public void align(Measure[] mmatrix, Measure [] pmatrix)
+        {
+            Vertex[] matrix = new Vertex[mmatrix.Length];
+            Vertex[] omatrix = new Vertex[mmatrix.Length];
+            int[] vi = new int[mmatrix.Length];
+
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                vi[i] = 0;
+                matrix[i] = mmatrix[i].vertices[0];
+                omatrix[i] = pmatrix[i].vertices[pmatrix[i].vertices.Length - 1];
+            }
+
+            while (true)
+            {
+                // create parallel links
+
+                for (int i = 0; i < matrix.Length; i++)
+                {
+                    if (matrix[i] != null)
+                    {
+                        Parallel p1 = matrix[i].before[omatrix[i]];
+                         
+                        for (int j = 0; j < matrix.Length; j++)
+                        {
+                            if (i != j && matrix[j] != null)
+                            {
+                                Parallel p2 = matrix[j].before[omatrix[j]];
+                                
+                                p1.across.Add(p2);
+                            }
+                        }
+                    }
+                }
+
+                // step forward
+
+                for (int i = 0; i < matrix.Length; i++)
+                {
+                    if (vi[i] >= mmatrix[i].vertices.Length - 1)
+                    {
+                        omatrix[i] = null;
+                        matrix[i] = null;
+                    }
+                    else
+                    {
+
+                        omatrix[i] = mmatrix[i].vertices[vi[i]];
+                        vi[i]++;
+                        matrix[i] = mmatrix[i].vertices[vi[i]];
+                    }
+                }
+
+                // find maximum start time
+
+                double maxtime = 0.0;
+
+                for (int i = 0; i < matrix.Length; i++)
+                {
+                    if (matrix[i] != null && matrix[i].start > maxtime)
+                    {
+                        maxtime = matrix[i].start;
+                    }
+                }
+
+                //  line up others to maxtime
+                for (int i = 0; i < matrix.Length; i++)
+                {
+                    while (matrix[i] != null && matrix[i].start < maxtime)
+                    {
+                        if (vi[i] >= mmatrix[i].vertices.Length - 1)
+                        {
+                            omatrix[i] = null;
+                            matrix[i] = null;
+                        }
+                        else
+                        {
+
+                            omatrix[i] = mmatrix[i].vertices[vi[i]];
+                            vi[i]++;
+                            matrix[i] = mmatrix[i].vertices[vi[i]];
+                        }
+                    }
+                }
+
+                int nonnull = 0;
+                for(int i = 0; i < matrix.Length; i++)
+                {
+                    if(matrix[i]!= null)
+                    {
+                        nonnull++;
+                    }
+                }
+                if (nonnull < 2)
+                {
+                    break;
+                }
+            }
         }
 
         public void above(Voice v)

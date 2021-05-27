@@ -9,9 +9,9 @@ namespace meantone
     // to move by the same interval, or at least in the same direction
     public class Parallel
     {
-        Vertex before;
-        Vertex after;
-        HashSet<Parallel> across;
+        public Vertex before;
+        public Vertex after;
+        public HashSet<Parallel> across;
 
         public Parallel(Vertex b, Vertex a)
         {
