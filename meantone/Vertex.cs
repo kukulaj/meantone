@@ -221,6 +221,38 @@ namespace meantone
             return (individual ? 2.0 : 1.0) * total;
         }
 
+        public void align_count(int[] tallies)
+        {
+           
+
+            foreach (KeyValuePair<Vertex, Parallel> kvp in before)
+            {
+               
+                foreach (Parallel there in kvp.Value.across)
+                {
+                    tallies[0]++;
+                    if (vector.same_interval(kvp.Key.vector, there.after.vector, there.before.vector))
+                    {
+                        tallies[1]++;
+                    }
+                }
+            }
+
+            foreach (KeyValuePair<Vertex, Parallel> kvp in after)
+            {
+               
+                foreach (Parallel there in kvp.Value.across)
+                {
+                    tallies[0]++;
+                    if (vector.same_interval(kvp.Key.vector, there.before.vector, there.after.vector))
+                    {
+                        tallies[1]++; 
+                    }
+                }
+            }
+
+        }
+
         public double interval_cost(Vector v, bool individual)
         {
             double total = 0.0;
@@ -244,7 +276,7 @@ namespace meantone
             }
 
            
-            double result =  12.5 * total;
+            double result =  200.0 * total;
             if(individual)
             {
                 result *= 4.0;

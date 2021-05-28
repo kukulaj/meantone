@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5160));
+            Type_Map map = new Type_Map(new Random(5161));
 
             Work work;
 
@@ -74,6 +74,7 @@ namespace meantone
                             temp = temp / (1.0 - move);
                             work.jostle(temp, effort);
                             bfrac = work.bfrac();
+                            work.align_count();
                         }
                         if(temp >= upper_lim)
                         {
@@ -89,6 +90,7 @@ namespace meantone
                             temp *= (1.0 - move);
                             work.jostle(temp, effort);
                             bfrac = work.bfrac();
+                            work.align_count();
                             //effort = (108 * effort) / 100;
                         }
                         if(temp <= lower_lim)

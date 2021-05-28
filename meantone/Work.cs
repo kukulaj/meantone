@@ -81,6 +81,16 @@ namespace meantone
             vertex_count++;
         }
 
+        public void align_count()
+        {
+            int[] tallies = new int[2];
+            for (int i = 0; i < vertex_count; i++)
+            {
+                vertices[i].align_count(tallies);
+            }
+            Console.WriteLine(string.Format("{0} parallel; {1} aligned", tallies[0], tallies[1]));
+        }
+
         public bool check()
         {
             bool ok = true;
