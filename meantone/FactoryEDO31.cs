@@ -48,12 +48,13 @@ namespace meantone
             }
             */
 
-
+            /*
             scale = new bool[4];
             for(int i=0; i<2; i++)
             {
                 scale[(1*i) % scale.Length] = true;
             }
+            */
 
             /*
             scale = new bool[18];
