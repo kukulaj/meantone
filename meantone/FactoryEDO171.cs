@@ -53,12 +53,13 @@ namespace meantone
             // pumpStructure = new PumpStructureSum(this, a171, b171);
             //pumpStructure = new PumpStructureSimple(this, 2);
 
+            /*
             scale = new bool[19];
             for (int i = 0; i < 3; i++)
             {
                 scale[(7 * i) % scale.Length] = true;
             }
-
+            */
 
             /*
             for (int i = 0; i < edo; i++)
