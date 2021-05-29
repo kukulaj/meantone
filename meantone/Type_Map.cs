@@ -24,14 +24,14 @@ namespace meantone
         {
             file_prefix = @"C:\Users\James\Documents\tuning\meantone\";
             row_size = 4;
-            dimension = 4;
+            dimension = 5;
             size = 1;
             for (int i = 0; i < dimension; i++)
             {
                 size = size * row_size;
             }
 
-            duration = 8.0;
+            duration = 5.0;
 
             drange = 4;
             rand = r;
