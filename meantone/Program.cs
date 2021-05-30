@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5165));
+            Type_Map map = new Type_Map(new Random(5166));
 
             Work work;
 
@@ -65,11 +65,11 @@ namespace meantone
 
                 bool up = false;
                 int bounce = 0;
-                while (bounce < 8)
+                while (bounce < 9)
                 {
                     if (up)
                     {
-                        const double upper_lim = 900.0;
+                        const double upper_lim = 2000.0;
                         while (temp < upper_lim && afrac > target)
                         {
                             temp = temp / (1.0 - move);
@@ -85,7 +85,7 @@ namespace meantone
                     }
                     else
                     {
-                        const double lower_lim = 100.0;
+                        const double lower_lim = 30.0;
                         while (temp > lower_lim && afrac < target)
                         {
                             temp *= (1.0 - move);
