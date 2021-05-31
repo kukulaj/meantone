@@ -29,7 +29,7 @@ namespace meantone
             trace = new System.IO.StreamWriter(tfs);
 
             //vectorFactory = new GeneralFactory(generators, intervals);
-            vectorFactory = new FactoryEDO31(map, new bool[] {true, false, true, true });
+            vectorFactory = new FactoryEDO53(map, new bool[] {true, true, true });
             vectorFactory.show_pattern();
             vectorFactory.scaleSearch();
             rand = map.rand;
@@ -88,8 +88,10 @@ namespace meantone
             {
                 vertices[i].align_count(tallies);
             }
-            Console.WriteLine(string.Format("{0} parallel; {1} aligned", tallies[0], tallies[1]));
-            return ((double)tallies[1]) / (double)tallies[0];
+            double result = ((double)tallies[1]) / (double)tallies[0];
+            Console.WriteLine(string.Format("afrac = {0}", result ));
+            return result;
+               
         }
 
         public bool check()
