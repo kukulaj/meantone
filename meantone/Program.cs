@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5170));
+            Type_Map map = new Type_Map(new Random(5171));
 
             Work work;
 
@@ -106,6 +106,7 @@ namespace meantone
                     effort = (2 * effort) ;
                     move *= 0.9;
                     bounce++;
+                    Console.WriteLine(string.Format("bounce = {0};", bounce));
                 }
 
                 /*
