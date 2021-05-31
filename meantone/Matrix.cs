@@ -12,17 +12,41 @@ namespace meantone
             min_dur = 0.95 / (2.0 + (double)vi);
             Rhythm root = roots[0].vary(min_dur, vi);
 
-            Rhythm[] row = new Rhythm[map.row_size];
-            row[0] = root;
+            Rhythm[] frow = new Rhythm[map.row_size];
+            Rhythm[] brow = new Rhythm[map.row_size];
+           
 
-            for(int i = 1; i < map.row_size; i++)
+            for(int i = 0; i < map.row_size; i++)
             {
-                row[i] = root.vary(min_dur, vi);
+                frow[i] = root.vary(min_dur, vi);
+                brow[i] = frow[i];
             }
 
-            for (int i = 0; i < measure_count; i++)
+            int fi = 0;
+            int bi = measure_count - 1;
+            while(fi <= bi)
             {
-                sequence[i] = row[i % map.row_size];
+                if(map.rand.NextDouble() < 0.5)
+                {
+                    int i = fi % map.row_size;
+                    sequence[fi] = frow[i];
+                    fi++;
+                    if (map.rand.NextDouble() < 0.06)
+                    {
+                        frow[i] = frow[i].vary(min_dur, vi);
+                    }
+                }
+                else 
+                {
+                    int i = bi % map.row_size;
+                    sequence[bi] = brow[i];
+                    bi--;
+                    if (map.rand.NextDouble() < 0.06)
+                    {
+                        brow[i] = brow[i].vary(min_dur, vi);
+                    }
+                }
+                
             }
         }
     }

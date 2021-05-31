@@ -110,7 +110,7 @@ namespace meantone
 
                     double err = Math.Abs(scale - tempered);
 
-                    double c = err * err * 30.0;
+                    double c = err * err * 60.0;
                     for (int i = 0; i < pcnt; i++)
                     {
                         c += cost[i] * coord[i] * coord[i];
@@ -251,12 +251,7 @@ namespace meantone
                     pumps[2] = new Pump(commas[2]);
                     pumpStructure = new PumpStructureSimple(this, 2);
                     break;
-                case 27:
-                    
-
-                    break;
-
-               
+                
                 case 34:
                     comma3[0] = 4;
                     comma5[0] = 2;
