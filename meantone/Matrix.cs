@@ -31,7 +31,7 @@ namespace meantone
                     int i = fi % map.row_size;
                     sequence[fi] = frow[i];
                     fi++;
-                    if (map.rand.NextDouble() < 0.06)
+                    if (map.rand.NextDouble() < 0.05)
                     {
                         frow[i] = frow[i].vary(min_dur, vi);
                     }
@@ -41,7 +41,7 @@ namespace meantone
                     int i = bi % map.row_size;
                     sequence[bi] = brow[i];
                     bi--;
-                    if (map.rand.NextDouble() < 0.06)
+                    if (map.rand.NextDouble() < 0.05)
                     {
                         brow[i] = brow[i].vary(min_dur, vi);
                     }
