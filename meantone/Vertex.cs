@@ -274,9 +274,8 @@ namespace meantone
                         total += 1.0;
                     }
             }
-
            
-            double result =  160.0 * total;
+            double result =  26.0 * total;
             if(individual)
             {
                 result *= 4.0;
