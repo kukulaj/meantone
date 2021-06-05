@@ -31,17 +31,36 @@ namespace meantone
             commas[8] = new Comma(this, new int[] { 3, 4, -5 });
             pumps[8] = new Pump(commas[8]);
             commas[9] = new Comma(this, new int[] { 1, -8, 0 });
-            pumps[9] = new Pump(commas[9]);
+            pumps[9] = new Pump(commas[9], new int[] 
+            {0, 18, 8, 29, 19, 6, 27, 17, 30, 20, 10 });
             PumpStructure a = new PumpStructureSimple(this, 7);
             PumpStructure b = new PumpStructureBig(this, 7);
-            pumpStructure = new PumpStructureSum(this, a, b);
+            pumpStructure = new PumpStructureSimple(this, 9);
 
-            /*
+           
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
             }
 
+            scale[0] = true;
+            scale[6] = true;
+            scale[8] = true;
+            scale[10] = true;
+            scale[15] = true;
+            scale[17] = true;
+            scale[18] = true;
+            scale[27] = true;
+            scale[29] = true;
+            scale[20] = true;
+            scale[25] = true;
+            scale[19] = true;
+            scale[13] = true;
+            scale[21] = true;
+            scale[30] = true;
+
+            /*
+            
             for (int i = 0; i < 12; i++)
             {
                 scale[(13 * i) % edo] = true;
