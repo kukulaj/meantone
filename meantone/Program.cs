@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5179));
+            Type_Map map = new Type_Map(new Random(5181));
 
             Work work;
 
@@ -28,7 +28,7 @@ namespace meantone
             }
             
             double temp = 30000.0;
-            double target = 0.3;
+            double target = 0.03;
             for (int iter = 0; iter < 1; iter++)
             {
                 //work.voices[freeze].freeze = !fmode;
@@ -40,16 +40,16 @@ namespace meantone
                 }
 
                 //target = target * 0.97;
-                //temp = 3000000.0;
-                //work.jostle(temp, 2000);
+                temp = 10000000.0;
+                work.jostle(temp, 2000);
                 double bfrac = work.bfrac();
                 double afrac = work.align_count();
                 //temp = 140.0 - 5.0 * (double)iter;
                 // temp = 3000.0;
                 //work.bfrac();
-                temp = 500.0;
-                work.jostle(temp, 3000);
-                afrac = work.align_count();
+                //temp = 500.0;
+                //work.jostle(temp, 3000);
+                //afrac = work.align_count();
                 //work.bfrac();
 
                 //temp = 3.0;
@@ -61,17 +61,17 @@ namespace meantone
                 //bfrac = 0.0;
 
                 double move = 0.02;
-                int effort = 500;
+                int effort = 200;
                 //double target = 0.1;
 
                 bool up = false;
                 int bounce = 0;
-                while (bounce < 0)
+                while (bounce < 6)
                 {
                     if (up)
                     {
                         const double upper_lim = 3000.0;
-                        while (temp < upper_lim && afrac > target)
+                        while (temp < upper_lim && bfrac > target)
                         {
                             temp = temp / (1.0 - move);
                             work.jostle(temp, effort);
@@ -80,14 +80,14 @@ namespace meantone
                         }
                         if(temp >= upper_lim)
                         {
-                            target = 0.03 +afrac * 0.97;
+                            target = 0.03 +bfrac * 0.97;
                             Console.WriteLine(string.Format("new target: {0}", target));
                         }
                     }
                     else
                     {
                         const double lower_lim = 3.0;
-                        while (temp > lower_lim && afrac < target)
+                        while (temp > lower_lim && bfrac < target)
                         {
                             temp *= (1.0 - move);
                             work.jostle(temp, effort);
@@ -97,7 +97,7 @@ namespace meantone
                         }
                         if(temp <= lower_lim)
                         {
-                            target = afrac * 0.95;
+                            target = bfrac * 0.95;
                             Console.WriteLine(string.Format("new target: {0}", target));
                         }
                          
