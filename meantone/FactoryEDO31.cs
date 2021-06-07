@@ -6,6 +6,8 @@ namespace meantone
 {
     public class FactoryEDO31 : FactoryEDO5
     {
+        private bool[] dichotomy;
+
         public FactoryEDO31(Type_Map map, bool[] pinc) : base(31, map, pinc)
         {
             commas = new Comma[10];
@@ -43,29 +45,38 @@ namespace meantone
                 scale[i] = false;
             }
 
-            scale[0] = true;
-            scale[6] = true;
-            scale[8] = true;
-            scale[10] = true;
-            scale[15] = true;
-            scale[17] = true;
-            scale[18] = true;
-            scale[27] = true;
-            scale[29] = true;
-            scale[20] = true;
-            scale[25] = true;
-            scale[19] = true;
-            scale[13] = true;
-            scale[21] = true;
-            scale[30] = true;
+            dichotomy = new bool[edo];
+            dichotomy[0] = true;
+            dichotomy[18] = true;
+            dichotomy[15] = true;
+
+            dichotomy[10] = true;
+            dichotomy[6] = true;
+            dichotomy[17] = true;
+
+            dichotomy[13] = true;
+            dichotomy[21] = true;
+            dichotomy[30] = true;
 
             /*
+            dichotomy[8] = true;
             
-            for (int i = 0; i < 12; i++)
-            {
-                scale[(13 * i) % edo] = true;
-            }
+            dichotomy[15] = true;
+            
+            dichotomy[27] = true;
+            dichotomy[29] = true;
+            dichotomy[20] = true;
+            dichotomy[25] = true;
+            dichotomy[19] = true;
             */
+            
+            
+            
+            for (int i = 0; i < 16; i++)
+            {
+                scale[(10 * i) % edo] = true;
+            }
+            
 
             /*
             scale = new bool[4];
@@ -82,6 +93,17 @@ namespace meantone
             scale[10] = true;
             scale[13] = true;
             */
+        }
+
+        public override double vertical_interval_cost(int dp)
+        {
+            if (dp < 0)
+            {
+                dp = -dp;
+            }
+            if (dichotomy[dp % edo])
+                return 0.0;
+            return 3000.0;
         }
     }
 }

@@ -468,17 +468,29 @@ namespace meantone
                 default:
                    
                     break;
-            }
-
-            
+            }          
 
             icnt = 5 * edo;
-
-            
-
-            
-             
            
+        }
+
+        public double interval_cost(int dp)
+        {
+            if (dp < 0)
+            {
+                dp = -dp;
+            }
+
+            if (dp < icnt)
+            {
+                double result = 2.0 * intervals[dp];
+                return result;
+            }
+            return 1000.0;
+        }
+        public virtual double vertical_interval_cost(int dp)
+        {
+            return interval_cost(dp);
         }
 
         public override Vector randomVector(Random rand, int root)

@@ -199,7 +199,7 @@ namespace meantone
             {
                 total += ocost(v, there);
                 total = correction(total);
-                total += v.concordance(there.vector);
+                total += v.vertical_concordance(there.vector);
                 total = correction(total);
                 if (v.octave_equivalent(there.vector))
                 {
@@ -224,7 +224,6 @@ namespace meantone
         public void align_count(int[] tallies)
         {
            
-
             foreach (KeyValuePair<Vertex, Parallel> kvp in before)
             {
                
@@ -275,7 +274,7 @@ namespace meantone
                     }
             }
            
-            double result =  10.0 * total;
+            double result =  320.0 * total;
             if(individual)
             {
                 result *= 4.0;

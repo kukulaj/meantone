@@ -87,22 +87,21 @@ namespace meantone
             return options;
         }
 
+        public override double vertical_concordance(Vector av)
+        {
+            VectorEDO5 v = (VectorEDO5)av;
+
+            int dp = pitch - v.pitch;
+            return factory.vertical_interval_cost(dp);
+
+        }
+
         public override double concordance(Vector av)
         {
             VectorEDO5 v = (VectorEDO5)av;
 
             int dp = pitch - v.pitch;
-            if (dp < 0)
-            {
-                dp = -dp;
-            }
-
-            if (dp < factory.icnt)
-            {
-                double result = 2.0 * factory.intervals[dp];
-                return result;
-            }
-            return 1000.0;
+            return factory.interval_cost(dp);
 
         }
 

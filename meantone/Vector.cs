@@ -14,6 +14,16 @@ namespace meantone
 
         public abstract double concordance(Vector av);
 
+        public virtual double vertical_concordance(Vector av)
+        {
+            return concordance(av);
+        }
+        public virtual double horizontal_concordance(Vector av)
+        {
+            return concordance(av);
+        }
+
+
         public abstract bool octave_equivalent(Vector av);
 
         public abstract double histd();

@@ -29,19 +29,17 @@ namespace meantone
             trace = new System.IO.StreamWriter(tfs);
 
             //vectorFactory = new GeneralFactory(generators, intervals);
-            bool[] primes = new bool[13];
+            bool[] primes = new bool[3];
             primes[0] = true;
+            primes[1] = true;
             primes[2] = true;
-            primes[3] = true;
-            primes[6] = true;
-            primes[9] = true;
-            primes[12] = true;
-            vectorFactory = new FactoryEDO5(311, map, primes);
+            
+            vectorFactory = new FactoryEDO31( map, primes);
             vectorFactory.show_pattern();
             vectorFactory.scaleSearch();
             rand = map.rand;
             measure_count = map.size;
-            voice_count = 4;
+            voice_count = 2;
 
             vertex_count = 0;
             vertices = new Vertex[500 * voice_count * measure_count];
