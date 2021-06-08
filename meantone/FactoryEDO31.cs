@@ -32,19 +32,21 @@ namespace meantone
             pumps[7] = new Pump(commas[7], new int[] {0, 8, 16, 24 });
             commas[8] = new Comma(this, new int[] { 3, 4, -5 });
             pumps[8] = new Pump(commas[8]);
-            commas[9] = new Comma(this, new int[] { 1, -8, 0 });
-            pumps[9] = new Pump(commas[9], new int[] 
-            {0, 18, 8, 29, 19, 6, 27, 17, 30, 20, 10 });
-            PumpStructure a = new PumpStructureSimple(this, 7);
-            PumpStructure b = new PumpStructureBig(this, 7);
-            pumpStructure = new PumpStructureSimple(this, 9);
+            commas[9] = new Comma(this, new int[] {-1, 8, 0 });
+            pumps[9] = new Pump(commas[9]);
+               // , new int[] {0, 18, 8, 29, 19, 6, 27, 17, 30, 20, 10 });
+            PumpStructure a = new PumpStructureSimple(this, 1);
+            PumpStructure b = new PumpStructureBig(this, 9);
+            pumpStructure = new PumpStructureSum(this, a, b);
 
-           
+           /*
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
             }
+           */
 
+            /*
             dichotomy = new bool[edo];
             dichotomy[0] = true;
             dichotomy[18] = true;
@@ -57,7 +59,7 @@ namespace meantone
             dichotomy[13] = true;
             dichotomy[21] = true;
             dichotomy[30] = true;
-
+            */
             /*
             dichotomy[8] = true;
             
@@ -71,12 +73,12 @@ namespace meantone
             */
             
             
-            
+            /*
             for (int i = 0; i < 16; i++)
             {
                 scale[(10 * i) % edo] = true;
             }
-            
+            */
 
             /*
             scale = new bool[4];
@@ -95,7 +97,7 @@ namespace meantone
             */
         }
 
-        public override double vertical_interval_cost(int dp)
+        /*public override double vertical_interval_cost(int dp)
         {
             if (dp < 0)
             {
@@ -103,7 +105,8 @@ namespace meantone
             }
             if (dichotomy[dp % edo])
                 return 0.0;
-            return 3000.0;
+            return 10000.0;
         }
+        */
     }
 }

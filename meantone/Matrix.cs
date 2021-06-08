@@ -9,7 +9,7 @@ namespace meantone
         public Matrix(Type_Map pmap, Work w, int pvi, Rhythm[] roots ) : base(pmap, w, pvi)
         {
              
-            min_dur = 1.8 / (2.0 + (double)vi);
+            min_dur = 1.6 / (2.0 + (double)vi);
             Rhythm root = roots[0].vary(min_dur, vi);
 
             Rhythm[] frow = new Rhythm[map.row_size];
