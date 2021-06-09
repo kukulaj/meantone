@@ -39,27 +39,25 @@ namespace meantone
             PumpStructure b = new PumpStructureBig(this, 9);
             pumpStructure = new PumpStructureSum(this, a, b);
 
-           /*
+           
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
             }
-           */
+           
 
-            /*
+            
             dichotomy = new bool[edo];
             dichotomy[0] = true;
             dichotomy[18] = true;
-            dichotomy[15] = true;
+            dichotomy[8] = true;
 
             dichotomy[10] = true;
-            dichotomy[6] = true;
-            dichotomy[17] = true;
-
-            dichotomy[13] = true;
+            dichotomy[23] = true;
             dichotomy[21] = true;
-            dichotomy[30] = true;
-            */
+
+           
+            
             /*
             dichotomy[8] = true;
             
@@ -73,12 +71,12 @@ namespace meantone
             */
             
             
-            /*
-            for (int i = 0; i < 16; i++)
+            
+            for (int i = 0; i < 12; i++)
             {
-                scale[(10 * i) % edo] = true;
+                scale[(18 * i) % edo] = true;
             }
-            */
+            
 
             /*
             scale = new bool[4];
@@ -97,7 +95,7 @@ namespace meantone
             */
         }
 
-        /*public override double vertical_interval_cost(int dp)
+        public override double vertical_interval_cost(int dp)
         {
             if (dp < 0)
             {
@@ -105,8 +103,8 @@ namespace meantone
             }
             if (dichotomy[dp % edo])
                 return 0.0;
-            return 10000.0;
+            return 5000.0;
         }
-        */
+        
     }
 }
