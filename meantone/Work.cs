@@ -34,7 +34,7 @@ namespace meantone
             primes[1] = true;
             primes[2] = true;
             
-            vectorFactory = new FactoryEDO31( map, primes);
+            vectorFactory = new FactoryEDO53( map, primes);
             vectorFactory.show_pattern();
             vectorFactory.scaleSearch();
             rand = map.rand;
@@ -69,6 +69,7 @@ namespace meantone
                 voices[i] = new Voice(this, i, map, rows);
             }
 
+            /*
             for (int i = 0; i < voice_count-1; i++)
             {
                 //for (int j = i + 1; j < voice_count; j++)
@@ -77,6 +78,9 @@ namespace meantone
                     voices[i].above(voices[i+1]);
                 }
             }
+            */
+            Voice.stack(voices);
+
             tfs.Flush();
         }
 

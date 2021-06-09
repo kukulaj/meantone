@@ -359,6 +359,60 @@ namespace meantone
             link_overlap(new Above_Factory(), m);
         }
 
+        public static void stack(Edge_Factory ef, Measure[] m)
+        {
+            int[] vi = new int[m.Length];
+            Vertex[] v = new Vertex[m.Length];
+            int left = 0;
+
+            for (int i = 0; i < m.Length; i++)
+            {
+                if(m[i].vertices.Length>0)
+                {
+                    v[i] = m[i].vertices[0];
+                    left++;
+                }
+            }
+           
+            while (left > 1)
+            {
+                double earliest = 1000000.0;
+                int earliesti = -1;
+
+                for (int i = 0; i < m.Length - 1; i++)
+                {
+                    if (v[i] != null)
+                    {
+                        bool found = false;
+                        for (int j = i + i; j < m.Length && !found; j++)
+                        {
+                            if(v[j] != null && v[i].overlap(v[j]))
+                            {
+                                ef.make_edge(v[i], v[j]);
+                                found = true;
+                            }
+                        }
+                        if (v[i].end() < earliest)
+                        {
+                            earliest = v[i].end();
+                            earliesti = i;
+                        }
+                    }
+                }
+
+                if (m[earliesti].vertices.Length > vi[earliesti] + 2)
+                {
+                    vi[earliesti]++;
+                    v[earliesti] = m[earliesti].vertices[vi[earliesti]];
+                }
+                else 
+                {
+                    v[earliesti] = null;
+                    left--;
+                }
+            }
+        }
+
         public void link_overlap(Edge_Factory ef, Measure m)
         {
             int hi = 0;

@@ -287,6 +287,19 @@ namespace meantone
             }
         }
 
+        public static void stack(Voice[] v)
+        {
+            Measure[] m = new Measure[v.Length];
+            for(int i = 0; i < v[0].sequence_count; i++)
+            {
+                for(int j = 0; j < v.Length; j++)
+                {
+                    m[j] = v[j].sequence[i];
+                }
+                Measure.stack(new Above_Factory(), m);
+            }
+        }
+
         public void amplitudes()
         {
             for (int i = 0; i < measure_count; i++)
