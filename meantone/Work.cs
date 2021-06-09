@@ -69,12 +69,12 @@ namespace meantone
                 voices[i] = new Voice(this, i, map, rows);
             }
 
-            for (int i = 0; i < voice_count; i++)
+            for (int i = 0; i < voice_count-1; i++)
             {
-                for (int j = i + 1; j < voice_count; j++)
+                //for (int j = i + 1; j < voice_count; j++)
 
                 {
-                    voices[i].above(voices[j]);
+                    voices[i].above(voices[i+1]);
                 }
             }
             tfs.Flush();
