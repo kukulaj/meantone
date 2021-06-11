@@ -34,7 +34,7 @@ namespace meantone
             primes[1] = true;
             primes[2] = true;
             
-            vectorFactory = new FactoryEDO53( map, primes);
+            vectorFactory = new FactoryEDO31( map, primes);
             vectorFactory.show_pattern();
             vectorFactory.scaleSearch();
             rand = map.rand;

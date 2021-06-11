@@ -492,6 +492,10 @@ namespace meantone
         {
             return interval_cost(dp);
         }
+        public virtual double vertical_interval_cost(int dp, int phase)
+        {
+            return interval_cost(dp);
+        }
 
         public override Vector randomVector(Random rand, int root)
         {

@@ -96,6 +96,15 @@ namespace meantone
 
         }
 
+        public override double vertical_concordance(Vector av, int phase)
+        {
+            VectorEDO5 v = (VectorEDO5)av;
+
+            int dp = pitch - v.pitch;
+            return factory.vertical_interval_cost(dp, phase);
+
+        }
+
         public override double concordance(Vector av)
         {
             VectorEDO5 v = (VectorEDO5)av;

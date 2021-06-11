@@ -18,6 +18,11 @@ namespace meantone
         {
             return concordance(av);
         }
+
+        public virtual double vertical_concordance(Vector av, int phase)
+        {
+            return concordance(av);
+        }
         public virtual double horizontal_concordance(Vector av)
         {
             return concordance(av);

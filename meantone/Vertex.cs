@@ -199,7 +199,7 @@ namespace meantone
             {
                 total += ocost(v, there);
                 total = correction(total);
-                total += v.vertical_concordance(there.vector);
+                total += v.vertical_concordance(there.vector, measure.location);
                 total = correction(total);
                 if (v.octave_equivalent(there.vector))
                 {
@@ -274,7 +274,7 @@ namespace meantone
                     }
             }
            
-            double result =  500.0 * total;
+            double result =  60.0 * total;
             if(individual)
             {
                 result *= 4.0;
