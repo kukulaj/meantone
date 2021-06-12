@@ -74,6 +74,7 @@ namespace meantone
 
             dichotomy[3][0] = true;
             dichotomy[3][18] = true;
+            dichotomy[3][13] = true;
             /*
             dichotomy[3][22] = true;
             dichotomy[3][7] = true;
@@ -144,7 +145,23 @@ namespace meantone
             {
                 dp = -dp;
             }
-            if (dichotomy[(loc)%4][dp % edo])
+            int phase = 3;
+            switch(loc%6)
+            {
+                case 1:
+                case 4:
+                    phase = 0;
+                    break;
+                case 2:
+                    phase = 1;
+                    break;
+                case 3:
+                    phase = 2;
+                    break;
+                default:
+                    break;
+            }
+            if (dichotomy[phase][dp % edo])
                 return 0.0;
             return 5000.0;
         }
