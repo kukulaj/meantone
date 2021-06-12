@@ -46,8 +46,8 @@ namespace meantone
             }
            */
 
-            dichotomy = new bool[5][];
-            for (int i = 0; i < 5; i++)
+            dichotomy = new bool[4][];
+            for (int i = 0; i < 4; i++)
             {
                 dichotomy[i] = new bool[edo];
             }
@@ -58,20 +58,23 @@ namespace meantone
             dichotomy[0][23] = true;
             dichotomy[0][21] = true;
 
-            dichotomy[1][4] = true;
-            dichotomy[1][5] = true;
-            dichotomy[1][3] = true;
-            dichotomy[1][14] = true;
-            dichotomy[1][26] = true;
-            dichotomy[1][13] = true;
+            dichotomy[1][0] = true;
+            dichotomy[1][6] = true;
+            dichotomy[1][25] = true;
+            dichotomy[1][18] = true;
+            dichotomy[1][12] = true;
+            dichotomy[1][19] = true;
 
-            dichotomy[2][20] = true;
-            dichotomy[2][24] = true;
+            dichotomy[2][0] = true;
+            dichotomy[2][6] = true;
             dichotomy[2][25] = true;
-            dichotomy[2][29] = true;
-            dichotomy[2][15] = true;
-            dichotomy[2][16] = true;
+            dichotomy[2][10] = true;
+            dichotomy[2][4] = true;
+            dichotomy[2][27] = true;
 
+            dichotomy[3][0] = true;
+            dichotomy[3][18] = true;
+            /*
             dichotomy[3][22] = true;
             dichotomy[3][7] = true;
             dichotomy[3][11] = true;
@@ -85,7 +88,7 @@ namespace meantone
             dichotomy[4][19] = true;
             dichotomy[4][12] = true;
             dichotomy[4][28] = true;
-
+            */
 
             /*
             dichotomy[8] = true;
@@ -141,7 +144,7 @@ namespace meantone
             {
                 dp = -dp;
             }
-            if (dichotomy[loc%5][dp % edo])
+            if (dichotomy[(loc)%4][dp % edo])
                 return 0.0;
             return 5000.0;
         }

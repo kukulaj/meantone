@@ -379,12 +379,12 @@ namespace meantone
                 double earliest = 1000000.0;
                 int earliesti = -1;
 
-                for (int i = 0; i < m.Length - 1; i++)
+                for (int i = 0; i < m.Length; i++)
                 {
                     if (v[i] != null)
                     {
                         bool found = false;
-                        for (int j = i + i; j < m.Length && !found; j++)
+                        for (int j = i + 1; j < m.Length && !found; j++)
                         {
                             if(v[j] != null && v[i].overlap(v[j]))
                             {
