@@ -39,7 +39,7 @@ namespace meantone
 
             double dist = log_frequency() - v.log_frequency();
 
-            return conc + 100.0 * dist * dist;
+            return conc + 300.0 * dist * dist;
         }
 
         public double sameness(Vector v)
