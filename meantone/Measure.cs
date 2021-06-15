@@ -384,7 +384,7 @@ namespace meantone
                     if (v[i] != null)
                     {
                         bool found = false;
-                        for (int j = i + 1; j < m.Length && !found; j++)
+                        for (int j = i + 1; j < m.Length /* && !found */; j++)
                         {
                             if(v[j] != null && v[i].overlap(v[j]))
                             {
