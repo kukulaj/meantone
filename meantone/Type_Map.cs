@@ -23,15 +23,15 @@ namespace meantone
         public Type_Map(Random r)
         {
             file_prefix = @"C:\Users\James\Documents\tuning\meantone\";
-            row_size = 3;
-            dimension = 5;
+            row_size = 12;
+            dimension = 2;
             size = 1;
             for (int i = 0; i < dimension; i++)
             {
                 size = size * row_size;
             }
 
-            duration = 9.3;
+            duration = 16.0;
 
             drange = 4;
             rand = r;

@@ -40,7 +40,7 @@ namespace meantone
                 scale[(14 * i) % edo] = true;
             }
             
-            dichotomy = new bool[2,edo];
+            dichotomy = new bool[3,edo];
             dichotomy[0,0] = true;
             dichotomy[0,31] = true;
             dichotomy[0,22] = true;
@@ -48,12 +48,18 @@ namespace meantone
             dichotomy[0,17] = true;
             dichotomy[0,39] = true;
             dichotomy[0,36] = true;
-            dichotomy[0, 48] = true;
-            dichotomy[0, 5] = true;
+            
+            dichotomy[1, 0] = true;           
+            dichotomy[1, 14] = true;
+            dichotomy[1, 17] = true;
+            dichotomy[1, 39] = true;
+            dichotomy[1, 36] = true;
+            dichotomy[1, 48] = true;
+            dichotomy[1, 5] = true;
 
-            dichotomy[1, 0] = true;
-            dichotomy[1, 22] = true;
-            dichotomy[1,31] = true;
+            dichotomy[2, 0] = true;
+            dichotomy[2, 22] = true;
+            dichotomy[2,31] = true;
 
         }
 
@@ -64,10 +70,10 @@ namespace meantone
                 dp = -dp;
             }
 
-            int phase = 0;
-            if (loc % 3 == 2)
+            int phase = loc % 2;
+            if (loc % 12 == 11)
             {
-                phase = 1;
+                phase = 2;
             }
             if (dichotomy[phase, dp % edo])
                 return 0.0;
