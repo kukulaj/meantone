@@ -83,7 +83,7 @@ namespace meantone
             }
 
             int phase = 0;
-            if (loc % 14 == 13)
+            if ((loc+1) % map.row_size == 0)
             {
                 phase = 1;
             }
