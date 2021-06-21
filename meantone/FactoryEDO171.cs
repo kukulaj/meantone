@@ -6,6 +6,7 @@ namespace meantone
 {
     public class FactoryEDO171 : FactoryEDO5
     {
+        private bool[,] dichotomy;
         public FactoryEDO171(Type_Map map, bool[] pinc) : base(171, map, pinc)
         {
             commas = new Comma[10];
@@ -61,19 +62,19 @@ namespace meantone
             }
             */
 
-            /*
+            
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
             }
-            */
-            /*
+            
+            
             for (int i = 0; i < 33; i++)
             {
                 scale[(26 * i) % edo] = true;
             }
-            */
-            
+
+
             /*
             scale[0] = true;
             scale[11] = true;
@@ -91,6 +92,23 @@ namespace meantone
             scale[143] = true;
             scale[154] = true;
      */
+            dichotomy = new bool[1, edo];
+            dichotomy[0, 0] = true;
+            dichotomy[0, 55] = true;
+            dichotomy[0, 116] = true;
+            dichotomy[0, 100] = true;
+            dichotomy[0, 71] = true;
+            dichotomy[0, 45] = true;
+            dichotomy[0, 126] = true;
+            dichotomy[0, 38] = true;
+            dichotomy[0, 133] = true;
+            dichotomy[0, 83] = true;
+            dichotomy[0, 88] = true;
+            dichotomy[0, 138] = true;
+            dichotomy[0, 33] = true;
+
+
+
         }
     }
 }

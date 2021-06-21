@@ -41,10 +41,16 @@ namespace meantone
             {
                 scale[i] = false;
             }
+            for (int i = 0; i < 29; i++)
+            {
+                scale[(69 * i) % edo] = true;
+            }
+            /*
             for (int i = 0; i < 42; i++)
             {
                 scale[(31 * i) % edo] = true;
             }
+            */
 
             /*
             scale = new bool[59];
@@ -83,10 +89,12 @@ namespace meantone
             }
 
             int phase = 0;
+            /*
             if ((loc+1) % map.row_size == 0)
             {
                 phase = 1;
             }
+            */
             if (dichotomy[phase, dp % edo])
                 return 0.0;
             return 5000.0;
