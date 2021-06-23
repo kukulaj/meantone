@@ -6,6 +6,7 @@ namespace meantone
 {
     public class FactoryEDO27 : FactoryEDO5
     {
+        private bool[,] dichotomy;
         public FactoryEDO27(Type_Map map, bool[] pinc) : base(27, map, pinc)
         {
             commas = new Comma[6];
@@ -33,17 +34,57 @@ namespace meantone
 
             pumpStructure = new PumpStructureSum(this, a27, b27);
 
-            /*
+           
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
             }
 
+            scale[0] = true;
+            scale[2] = true;
+            scale[9] = true;
+            scale[11] = true;
+            scale[16] = true;
+            scale[18] = true;
+            scale[22] = true;
+
+
+            /*
+             
             for (int i = 0; i < 17; i++)
             {
                 scale[(13 * i) % edo] = true;
             }
             */
+
+            dichotomy = new bool[1,edo];
+             
+            dichotomy[0,0] = true;
+            dichotomy[0,11] = true;
+            dichotomy[0,16] = true;
+            dichotomy[0,9] = true;
+            dichotomy[0,18] = true;
+            dichotomy[0,20] = true;
+            dichotomy[0,7] = true;
+        }
+
+        public override double vertical_interval_cost(int dp, int loc)
+        {
+            if (dp < 0)
+            {
+                dp = -dp;
+            }
+
+            int phase = 0;
+            /*
+            if ((loc+1) % map.row_size == 0)
+            {
+                phase = 1;
+            }
+            */
+            if (dichotomy[phase, dp % edo])
+                return 0.0;
+            return 5000.0;
         }
     }
 }
