@@ -105,10 +105,25 @@ namespace meantone
             dichotomy[0, 83] = true;
             dichotomy[0, 88] = true;
             dichotomy[0, 138] = true;
-            dichotomy[0, 33] = true;
+            dichotomy[0, 33] = true;            
+    }
+        public override double vertical_interval_cost(int dp, int loc)
+        {
+            if (dp < 0)
+            {
+                dp = -dp;
+            }
 
-
-
+            int phase = 0;
+            /*
+            if ((loc+1) % map.row_size == 0)
+            {
+                phase = 1;
+            }
+            */
+            if (dichotomy[phase, dp % edo])
+                return 0.0;
+            return 5000.0;
         }
     }
 }
