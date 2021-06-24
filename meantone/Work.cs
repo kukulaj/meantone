@@ -50,14 +50,16 @@ namespace meantone
             Rhythm origin = new Rhythm(this, map.duration);
             origin.singleton();
 
-            double min_dur = map.duration / 12.0;
+            double min_dur = 2.0;
             Rhythm osplit = origin.splinter(min_dur, 9);
             
             Rhythm ostick = osplit.stick(0.3);
             Rhythm osplit2 = ostick.splinter(min_dur, 9);
             Rhythm ostick2 = osplit2.stick(0.2);
             Rhythm root = ostick2.silence(min_dur, 0.0, 0.0, 2, min_dur/1.5);
-            
+            root = root.vary(min_dur, 0);
+            root = root.vary(min_dur, 0);
+
             Rhythm[] rows = new Rhythm[map.row_size];
             for (int ri = 0; ri < rows.Length; ri++)
             {

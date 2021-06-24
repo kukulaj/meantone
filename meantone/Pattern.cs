@@ -28,15 +28,16 @@ namespace meantone
             measure_count = w.measure_count;
             sequence = new Rhythm[measure_count];
 
-            min_dur = 3.0 / (4.5 + (double)vi);
+            min_dur = 3.0 / (1.5 + (double)vi);
 
             face = map.size / map.row_size;
             Rhythm lroot = null;
             if (face == 1)
             {
-                lroot = new Rhythm(w, vi);  
+                //lroot = new Rhythm(w, vi);  
+                lroot = root[0];
             }
-
+            lroot = lroot.vary(min_dur, vi);
             int fstart = 0;
             int fend = (measure_count / face) - 1;
 
@@ -53,8 +54,9 @@ namespace meantone
                 }
                 else
                 {
+                    
                     lroot = lroot.vary(min_dur, vi);
-                    min_dur *= 0.95;
+                    min_dur *= 0.98;
 
                     sequence[fstart] = lroot;
                     if (fend > fstart)
