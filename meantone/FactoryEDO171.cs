@@ -69,7 +69,7 @@ namespace meantone
             }
             
             
-            for (int i = 0; i < 33; i++)
+            for (int i = 0; i < 79; i++)
             {
                 scale[(26 * i) % edo] = true;
             }
