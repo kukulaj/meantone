@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5206));
+            Type_Map map = new Type_Map(new Random(5207));
 
             Work work;
 
@@ -28,7 +28,7 @@ namespace meantone
             }
             
             double temp = 30.0;
-            double target = 0.06;
+            double target = 0.075;
             for (int iter = 0; iter < 1; iter++)
             {
                 //work.voices[freeze].freeze = !fmode;
@@ -40,8 +40,8 @@ namespace meantone
                 }
 
                 //target = target * 0.97;
-                temp = 2500000.0;
-                work.jostle(temp, 3000);
+                //temp = 2500000.0;
+                //work.jostle(temp, 3000);
                 double bfrac = work.bfrac();
                 double afrac = work.align_count();
                 //temp = 140.0 - 5.0 * (double)iter;
@@ -58,8 +58,8 @@ namespace meantone
 
                 }
                 */
-                //temp = 1500.0;
-                //work.jostle(temp, 5000);
+                temp = 750.0;
+                work.jostle(temp, 10000);
                 //work.jostle(5000.0, 1500);
 
                 bfrac = work.bfrac();
@@ -68,12 +68,12 @@ namespace meantone
                 //bfrac = 0.0;
 
                 double move = 0.02;
-                int effort = 1200;
+                int effort = 600;
                 //double target = 0.1;
 
-                bool up = false;
+                bool up = true;
                 int bounce = 0;
-                while (bounce < 3)
+                while (bounce < 0)
                 {
                     if (up)
                     {
@@ -93,7 +93,7 @@ namespace meantone
                     }
                     else
                     {
-                        const double lower_lim = 3.0;
+                        const double lower_lim = 30.0;
                         while (temp > lower_lim && bfrac < target)
                         {
                             temp *= (1.0 - move);
