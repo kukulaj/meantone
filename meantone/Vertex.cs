@@ -218,7 +218,7 @@ namespace meantone
             {
                 total += v.sameness(there.vector);
             }
-            return (individual ? 2.0 : 1.0) * total;
+            return (individual ? 2.0 : 1.0) * 2.0 * total / (double)(measure.voice.work.map.dimension);
         }
 
         public void align_count(int[] tallies)
@@ -274,12 +274,12 @@ namespace meantone
                     }
             }
            
-            double result =  0.5 * total;
+            double result =  800.0 * total;
             if(individual)
             {
                 result *= 4.0;
             }
-            return result;
+            return result * 2.0 / (double)(measure.voice.work.map.dimension);
         }
 
         public double cost(Vector v)

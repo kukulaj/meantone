@@ -70,11 +70,13 @@ namespace meantone
                 dp = -dp;
             }
 
-            int phase = loc % 2;
+            int phase = 0;// loc % 2;
+             /*
             if (loc % 12 == 11)
             {
                 phase = 2;
             }
+             */
             if (dichotomy[phase, dp % edo])
                 return 0.0;
             return 5000.0;
