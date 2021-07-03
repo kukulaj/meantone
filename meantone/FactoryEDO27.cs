@@ -44,10 +44,10 @@ namespace meantone
             scale[2] = true;
             scale[9] = true;
             scale[11] = true;
-            scale[16] = true;
+            //scale[16] = true;
             scale[18] = true;
-            scale[22] = true;
-
+            //scale[22] = true;
+            scale[20] = true;
 
             /*
              
@@ -76,13 +76,18 @@ namespace meantone
             }
 
             int phase = 0;
+            dp = dp % edo;
             /*
             if ((loc+1) % map.row_size == 0)
             {
                 phase = 1;
             }
             */
-            if (dichotomy[phase, dp % edo])
+            if (dp == 0)
+            {
+                return 100.0;
+            }
+            if (dichotomy[phase, dp])
                 return 0.0;
             return 5000.0;
         }
