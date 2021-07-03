@@ -29,10 +29,10 @@ namespace meantone
            {0, 11, 22});
 
             //pumpStructure = new PumpStructureSimple(tpumps[3] = new Pump(commas[3], new int[]
-            PumpStructure a27 = new PumpStructureSimple(this, 4);
-            PumpStructure b27 = new PumpStructureBig(this, 5);
+            pumpStructure  = new PumpStructureSimple(this, 3);
+            //PumpStructure b27 = new PumpStructureBig(this, 5);
 
-            pumpStructure = new PumpStructureSum(this, a27, b27);
+            //pumpStructure = new PumpStructureSum(this, a27, b27);
 
            
             for (int i = 0; i < edo; i++)
@@ -40,6 +40,7 @@ namespace meantone
                 scale[i] = false;
             }
 
+            /*
             scale[0] = true;
             scale[2] = true;
             scale[9] = true;
@@ -48,14 +49,14 @@ namespace meantone
             scale[18] = true;
             //scale[22] = true;
             scale[20] = true;
-
-            /*
+            */
+            
              
             for (int i = 0; i < 17; i++)
             {
-                scale[(13 * i) % edo] = true;
+                scale[(6+16 * i) % edo] = true;
             }
-            */
+            
 
             dichotomy = new bool[1,edo];
              
