@@ -42,18 +42,28 @@ namespace meantone
                 measures[i].temp_factor = 1.0; // - 0.15 * Math.Cos(2.0 * Math.PI * ((double)(i)) / ((double)map.size));
             }
 
-           
-
-            sequence_count = work.measure_count;
-            sequence = new Measure[sequence_count];
 
             int row = measure_count / row_size;
+            sequence_count = row_size * work.measure_count;
+            sequence = new Measure[sequence_count];
+
+            int pace = 1;
+            for (int pi = 0; pi < vi; pi++)
+            {
+                pace *= 2;
+            }
+
+
 
             if (true)
             {
                 for (int i = 0; i < sequence_count; i++)
                 {
-                    sequence[i] = measures[i];
+                    int j = i / row_size;
+                    int ri = i % row_size;
+                    int rj = ((j * pace) / row_size) % row;
+                    sequence[i] = measures[ri + rj*row_size];
+                    //sequence[i] = measures[(i % row + ((i/row) * pace) / row) % measure_count];
                     /*
                     sequence[4 * i] = measures[i];
                     sequence[4 * i + 1] = measures[i];

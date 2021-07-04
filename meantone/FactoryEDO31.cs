@@ -15,7 +15,8 @@ namespace meantone
 
 
             commas[0] = new Comma(this, new int[] { 0, 5, -2 });
-            pumps[0] = new Pump(commas[0]);
+            pumps[0] = new Pump(commas[0], new int[] 
+            {9, 3, 24, 14, 4, 25, 19 });
             commas[1] = new Comma(this, new int[] { 4, -1, 0 });
             pumps[1] = new Pump(commas[1]);
             commas[2] = new Comma(this, new int[] { 3, 7, 0 });
@@ -35,16 +36,21 @@ namespace meantone
             commas[9] = new Comma(this, new int[] {-1, 8, 0 });
             pumps[9] = new Pump(commas[9]);
                // , new int[] {0, 18, 8, 29, 19, 6, 27, 17, 30, 20, 10 });
-            PumpStructure a = new PumpStructureSimple(this, 1);
-            PumpStructure b = new PumpStructureBig(this, 9);
-            pumpStructure = new PumpStructureSum(this, a, b);
+            //PumpStructure a = new PumpStructureSimple(this, 1);
+            //PumpStructure b = new PumpStructureBig(this, 9);
+            pumpStructure = new PumpStructureSimple(this, 0);
 
-           /*
+           
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
             }
-           */
+            
+            for (int i = 0; i < 19; i++)
+            {
+                scale[(5 * i) % edo] = true;
+            }
+            
 
             dichotomy = new bool[4][];
             for (int i = 0; i < 4; i++)
@@ -53,10 +59,19 @@ namespace meantone
             }
             dichotomy[0][0] = true;
             dichotomy[0][18] = true;
+            dichotomy[0][13] = true;
             dichotomy[0][8] = true;
-            dichotomy[0][10] = true;
             dichotomy[0][23] = true;
+            dichotomy[0][10] = true; 
             dichotomy[0][21] = true;
+
+            dichotomy[0][15] = true;
+            dichotomy[0][16] = true;
+            dichotomy[0][25] = true;
+            dichotomy[0][6] = true;
+            dichotomy[0][24] = true;
+            dichotomy[0][7] = true;
+
 
             dichotomy[1][0] = true;
             dichotomy[1][6] = true;
@@ -134,6 +149,9 @@ namespace meantone
             {
                 dp = -dp;
             }
+            if (dp % edo == 0)
+                return 100.0;
+
             if (dichotomy[0][dp % edo])
                 return 0.0;
             return 5000.0;
@@ -161,7 +179,10 @@ namespace meantone
                 default:
                     break;
             }
-            if (dichotomy[phase][dp % edo])
+            if (dp % edo == 0)
+                return 100.0;
+
+            if (dichotomy[0][dp % edo])
                 return 0.0;
             return 5000.0;
         }

@@ -178,37 +178,37 @@ namespace meantone
 
         public double rcost(Vector v)
         {
+            double result = 0.0;
             double total = 0.0;
-
             foreach (KeyValuePair<Vertex, Parallel> there in before)
             {
-
                 total += v.adjacence(there.Key.vector);
             }
-
             total = correction(total);
 
             foreach (KeyValuePair<Vertex, Parallel>  there in after)
             {
                 total += v.adjacence(there.Key.vector);
             }
-
             total = correction(total);
+            result += total;
 
+            double vtot = 0.0;
             foreach (Vertex there in vertical)
             {
-                total += ocost(v, there);
-                total = correction(total);
-                total += v.vertical_concordance(there.vector, measure.location);
-                total = correction(total);
+                vtot += ocost(v, there);
+                vtot = correction(vtot);
+                vtot += v.vertical_concordance(there.vector, measure.location);
+                vtot = correction(vtot);
                 if (v.octave_equivalent(there.vector))
                 {
-                    total += 7.5;
+                    vtot += 7.5;
                 }
             }
-            total = correction(total);
+            vtot = correction(vtot);
+            result += vtot;
 
-            return total;
+            return result ;
         }
 
         public double pitch_cost(Vector v, bool individual)
@@ -274,7 +274,7 @@ namespace meantone
                     }
             }
            
-            double result =  200.0 * total;
+            double result =  3.0 * total;
             if(individual)
             {
                 result *= 4.0;
@@ -282,9 +282,27 @@ namespace meantone
             return result * 2.0 / (double)(measure.voice.work.map.dimension);
         }
 
+        public double compute_cost(Vector v, bool individual)
+        {
+            double result = 0.0;
+            double sc = scost(v);
+            sc = correction(sc);
+            result += sc;
+            double rc = rcost(v);
+            rc = correction(rc);
+            result += (individual ? 2.0 : 1.0) * rc;
+            double ic = interval_cost(v, individual);
+            ic = correction(ic);
+            result += ic;
+            double pc = pitch_cost(v, individual);
+            pc = correction(pc);
+            result += pc;
+
+            return result;
+        }
         public double cost(Vector v)
         {
-            return scost(v) + rcost(v) + interval_cost(v, false) + pitch_cost(v, false);
+            return compute_cost(v, false);
         }
 
         double correction(double c)
@@ -297,16 +315,7 @@ namespace meantone
 
         public double dcost(Vector v)
         {
-            double sc = scost(v);
-            sc = correction(sc);
-            double rc = rcost(v);
-            rc = correction(rc);
-            double ic = interval_cost(v, true);
-            ic = correction(ic);
-            double pc = pitch_cost(v, true);
-            pc = correction(pc);
-
-            return sc + 2.0 * rc + ic + pc;
+            return compute_cost(v, true);
         }
 
         public Vector jostle(double temperature)
