@@ -383,12 +383,12 @@ namespace meantone
             double d = duration * measure.shrink();
             double cstarttime = s + start * measure.shrink();
             double starttime = cstarttime + measure.voice.work.tweak_time(cstarttime);
-            double endtime = cstarttime + d + measure.voice.work.tweak_time(cstarttime + d);
+            //double endtime = cstarttime + d + measure.voice.work.tweak_time(cstarttime + d);
 
             string score = string.Format("i{0} {1} {2} {3} {4}",
                vi + 1 /*instrument*/,
                starttime,
-                0.95 * (endtime - starttime),
+                0.9 * d,
                 vector.frequency(),
                 amplitude / 5.0);
             file.WriteLine(score);

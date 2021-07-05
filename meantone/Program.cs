@@ -59,7 +59,7 @@ namespace meantone
                 }
                 */
                 temp = 140.0;
-                work.jostle(temp, 1000);
+                work.jostle(temp, 1600);
                 //work.jostle(5000.0, 1500);
 
                 bfrac = work.bfrac();
