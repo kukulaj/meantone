@@ -47,22 +47,27 @@ namespace meantone
             sequence_count = row_size * work.measure_count;
             sequence = new Measure[sequence_count];
 
+            /*
             int pace = 1;
             for (int pi = 0; pi < vi; pi++)
             {
                 pace *= 2;
             }
-
+            */
 
 
             if (true)
             {
                 for (int i = 0; i < sequence_count; i++)
                 {
-                    int j = i / row_size;
-                    int ri = i % row_size;
-                    int rj = ((j * pace) / row_size) % row;
-                    sequence[i] = measures[ri + rj*row_size];
+                    
+                   int j = i / row_size;
+                   int ri = i % row_size;
+
+                    /*
+                   int rj = ((j * pace) / row_size) % row;
+                   */
+                    sequence[i] = measures[(ri + ((j + 2 * voice + 2)/row_size) *row_size ) % measure_count];
                     //sequence[i] = measures[(i % row + ((i/row) * pace) / row) % measure_count];
                     /*
                     sequence[4 * i] = measures[i];

@@ -132,6 +132,11 @@ namespace meantone
                 phase = 1;
             }
             */
+            if (dp % edo == 0)
+            {
+                return 100.0;
+            }
+
             if (dichotomy[phase, dp % edo])
                 return 0.0;
             return 5000.0;
