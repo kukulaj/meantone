@@ -12,13 +12,21 @@ namespace meantone
             commas = new Comma[3];
             pumps = new Pump[3];
             commas[0] = new Comma(this, new int[] { 5, -6, 0 });
-            pumps[0] = new Pump(commas[0]);
+            int[] path = new int[6];
+            for(int i=0; i<6; i++)
+            {
+                path[i] = (i * 14 + 56) % edo;
+            }
+            
+            pumps[0] = new Pump(commas[0], path);
+
+
             commas[1] = new Comma(this, new int[] { 8, 1, 0 });
             pumps[1] = new Pump(commas[1],
                 new int[] { 48, 17, 39, 22, 44, 13, 35, 4, 26 });
             commas[2] = new Comma(this, new int[] { 3, 7, 0 });
             pumps[2] = new Pump(commas[2]);
-            pumpStructure = new PumpStructureSimple(this, 1);
+            pumpStructure = new PumpStructureSimple(this, 0);
             //PumpStructure b53 = new PumpStructureBig(this, 2);
             //pumpStructure = new PumpStructureSum(this, a53, b53);
 
@@ -77,6 +85,11 @@ namespace meantone
                 phase = 2;
             }
              */
+             if(dp%edo == 0)
+            {
+                return 100.0;
+            }
+
             if (dichotomy[phase, dp % edo])
                 return 0.0;
             return 5000.0;
