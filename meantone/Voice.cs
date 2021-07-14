@@ -44,7 +44,7 @@ namespace meantone
 
 
             int row = measure_count / row_size;
-            sequence_count = 4 * work.measure_count;
+            sequence_count = work.measure_count;
             sequence = new Measure[sequence_count];
 
             /*
@@ -60,14 +60,14 @@ namespace meantone
             {
                 for (int i = 0; i < sequence_count; i++)
                 {
-                    
-                   int j = i / row_size;
-                   int ri = i % row_size;
+                    sequence[i] = measures[i];
+                   //int j = i / row_size;
+                   //int ri = i % row_size;
 
                     /*
                    int rj = ((j * pace) / row_size) % row;
                    */
-                    sequence[i] = measures[(ri + ((j + voice + 1)/4) *row_size ) % measure_count];
+                    //sequence[i] = measures[(ri + ((j + voice + 1)/4) *row_size ) % measure_count];
                     //sequence[i] = measures[(i % row + ((i/row) * pace) / row) % measure_count];
                     /*
                     sequence[4 * i] = measures[i];
