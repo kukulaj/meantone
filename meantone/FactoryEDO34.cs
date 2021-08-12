@@ -11,21 +11,32 @@ namespace meantone
         public FactoryEDO34(Type_Map map, bool[] pinc) : base(34, map, pinc)
         {
             
-            commas = new Comma[2];
-            pumps = new Pump[3];
+            commas = new Comma[3];
+            pumps = new Pump[4];
             commas[0] = new Comma(this, new int[] { 4, 2, 0 });
             pumps[0] = new Pump(commas[0], new int[] { 23, 9, 20, 6, 26, 3 });
             commas[1] = new Comma(this, new int[] { 5, -6, 0 });
             pumps[1] = new Pump(commas[1]);
             pumps[2] = new Pump(commas[0], new int[] { 0, 20, 6, 17, 3, 23 });
-            pumpStructure = new PumpStructureSimple(this, 0);
 
-            /*
+            int[] path = new int[9];
+            for (int i = 0; i < 9; i++)
+            {
+                path[i] = (10 + i * 11) % 34;
+            }
+            commas[2] = new Comma(this, new int[] { -1, 8, 0 });
+            pumps[3] = new Pump(commas[0], path );
+            pumpStructure = new PumpStructureSimple(this, 3);
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
             }
-            */
+
+            for(int i = 0; i<19; i++)
+            {
+                scale[(i * 11) % edo] = true;
+            }
+            
             /*
             scale[0] = true;
             scale[3] = true;
@@ -35,11 +46,13 @@ namespace meantone
             scale[23] = true;
             */
 
+            /*
             scale = new bool[17];
             for (int i = 0; i < 6; i++)
             {
                 scale[(20 * i) % 17] = true;
             }
+            */
 
             dichotomy = new bool[1, edo];
             dichotomy[0, 0] = true;
