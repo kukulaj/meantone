@@ -7,6 +7,8 @@ namespace meantone
 {
     public class Vertex
     {
+        public static double parallelism;
+
         HashSet<Vertex> vertical;
         HashSet<Vertex> acrossi;
         HashSet<Vertex> acrossp;
@@ -274,7 +276,7 @@ namespace meantone
                     }
             }
            
-            double result =  50.0 * total;
+            double result =  parallelism * total;
             if(individual)
             {
                 result *= 4.0;

@@ -26,9 +26,10 @@ namespace meantone
             {
                 work.voices[vi].freeze = fmode;
             }
-            
-            double temp = 20.0;
-            double target = 0.088;
+
+            Vertex.parallelism = 0.0;
+            double temp = 10.0;
+            double target = 0.095;
             for (int iter = 0; iter < 1; iter++)
             {
                 //work.voices[freeze].freeze = !fmode;
@@ -116,6 +117,17 @@ namespace meantone
                     bounce++;
                     Console.WriteLine(string.Format("bounce = {0};", bounce));
                 }
+
+                Vertex.parallelism = 1.0;
+                double pf = work.align_count();
+                while (pf < 0.4)
+                {
+                    work.jostle(temp, 800);
+                    work.bfrac();
+                    pf = work.align_count();
+                    Vertex.parallelism *= 2.0;
+                }
+
 
                 /*
                 for(int vi=0; vi < work.voice_count; vi++)

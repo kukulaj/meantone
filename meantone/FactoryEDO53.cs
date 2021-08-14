@@ -56,7 +56,11 @@ namespace meantone
             dichotomy[0,17] = true;
             dichotomy[0,39] = true;
             dichotomy[0,36] = true;
-            
+            dichotomy[0, 48] = true;
+            dichotomy[0, 5] = true;
+            dichotomy[0, 44] = true;
+            dichotomy[0, 9] = true;
+
             dichotomy[1, 0] = true;           
             dichotomy[1, 14] = true;
             dichotomy[1, 17] = true;
