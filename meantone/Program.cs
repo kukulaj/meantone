@@ -29,7 +29,7 @@ namespace meantone
 
             Vertex.parallelism = 0.0;
             double temp = 10.0;
-            double target = 0.14;
+            double target = 0.13;
             for (int iter = 0; iter < 1; iter++)
             {
                 //work.voices[freeze].freeze = !fmode;
@@ -78,7 +78,7 @@ namespace meantone
                 {
                     if (up)
                     {
-                        const double upper_lim = 3000.0;
+                        const double upper_lim = 4000.0;
                         while (temp < upper_lim && bfrac > target)
                         {
                             temp = temp / (1.0 - move);
