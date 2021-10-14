@@ -13,7 +13,7 @@ namespace meantone
             pumps = new Pump[4];
             commas[0] = new Comma(this, new int[] { 8, 1, 0 });
             pumps[0] = new Pump(commas[0], new int[]
-            {27, 7, 105, 85, 65 });
+            {89, 40, 109, 60, 11, 80, 31, 100, 51 });
             commas[1] = new Comma(this, new int[] { 2, 15, 0 });
             pumps[1] = new Pump(commas[1]);
             commas[2] = new Comma(this, new int[] { 6, -14, 0 });
@@ -34,14 +34,14 @@ namespace meantone
             //PumpStructure a118 = new PumpStructureSimple(this, 1);
             //PumpStructure b118 = new PumpStructureBig(this, 2);
             //pumpStructure = new PumpStructureSum(this, a118, b118);
-            pumpStructure = new PumpStructureSimple(this, 3);
+            pumpStructure = new PumpStructureSimple(this, 0);
 
             
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
             }
-            for (int i = 0; i < 29; i++)
+            for (int i = 0; i < 17; i++)
             {
                 scale[(69 * i) % edo] = true;
             }
