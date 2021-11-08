@@ -26,6 +26,10 @@ namespace meantone
 
             int ofs = 26 * 36;
             pumps[2] = new Pump(commas[2], new int[]
+                { 129, 74, 3, 103, 48, 148, 77, 22, 122, 67, 167, 96});
+
+
+            /*
                 {
                     (0+ofs)%edo,
                     (126+ofs)%edo,
@@ -35,7 +39,8 @@ namespace meantone
                     (7+ofs)%edo,
                     (78+ofs)%edo,
                     (33+ofs)%edo,
-                }); ;
+                }); 
+            */
             commas[3] = new Comma(this, new int[] { 9, 0, -9 });
             pumps[3] = new Pump(commas[3]);
             commas[4] = new Comma(this, new int[] { -8, -1, 0 });
@@ -67,7 +72,7 @@ namespace meantone
             //  PumpStructure a171 = new PumpStructureBig(this, 4);
             // PumpStructure b171 = new PumpStructureSimple(this, 1);
             // pumpStructure = new PumpStructureSum(this, a171, b171);
-            pumpStructure = new PumpStructureTwo(this, 0, 1);
+            pumpStructure = new PumpStructureSimple(this, 2);
 
             /*
             scale = new bool[19];
@@ -105,9 +110,9 @@ namespace meantone
             scale[154] = true;
             */
             
-            for (int i = 0; i < 31; i++)
+            for (int i = 0; i < 53; i++)
             {
-                scale[(11 * i) % edo] = true;
+                scale[(100 * i) % edo] = true;
             }
             
 
