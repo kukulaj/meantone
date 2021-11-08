@@ -142,7 +142,7 @@ namespace meantone
 
             if(!v.inScale())
             {
-                result += 20000;
+                result += 30000;
             }
 
             return result;

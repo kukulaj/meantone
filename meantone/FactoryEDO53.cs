@@ -9,8 +9,8 @@ namespace meantone
         private bool[,] dichotomy;
         public FactoryEDO53(Type_Map map, bool[] pinc) : base(53, map, pinc)
         {
-            commas = new Comma[3];
-            pumps = new Pump[3];
+            commas = new Comma[4];
+            pumps = new Pump[5];
             commas[0] = new Comma(this, new int[] { 5, -6, 0 });
             int[] path = new int[6];
             for(int i=0; i<6; i++)
@@ -26,7 +26,14 @@ namespace meantone
                 new int[] { 48, 17, 39, 22, 44, 13, 35, 4, 26 });
             commas[2] = new Comma(this, new int[] { 3, 7, 0 });
             pumps[2] = new Pump(commas[2]);
-            pumpStructure = new PumpStructureSimple(this, 0);
+
+            commas[3] = new Comma(this, new int[] {-2, -2, 1 });
+            pumps[3] = new Pump(commas[3],
+               new int[] { 0, 31, 48, 26, 43 });
+            pumps[4] = new Pump(commas[3],
+               new int[] {36, 14,  24, 2, 19 });
+
+            pumpStructure = new PumpStructureTwo(this, 3, 4);
             //PumpStructure b53 = new PumpStructureBig(this, 2);
             //pumpStructure = new PumpStructureSum(this, a53, b53);
 
@@ -43,9 +50,9 @@ namespace meantone
                 scale[i] = false;
             }
 
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 21; i++)
             {
-                scale[(14 * i) % edo] = true;
+                scale[(12 * i) % edo] = true;
             }
             
             dichotomy = new bool[3,edo];
@@ -53,9 +60,18 @@ namespace meantone
             dichotomy[0,31] = true;
             dichotomy[0,22] = true;
             dichotomy[0,14] = true;
-            dichotomy[0,17] = true;
             dichotomy[0,39] = true;
+            dichotomy[0,17] = true;
             dichotomy[0,36] = true;
+
+            dichotomy[0, 10] = true;
+            dichotomy[0, 43] = true;
+            dichotomy[0, 26] = true;
+            dichotomy[0, 27] = true;
+            dichotomy[0, 12] = true;
+            dichotomy[0, 41] = true;
+
+
             //dichotomy[0, 48] = true;
             //dichotomy[0, 5] = true;
             //dichotomy[0, 44] = true;

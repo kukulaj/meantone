@@ -10,8 +10,8 @@ namespace meantone
 
         public FactoryEDO31(Type_Map map, bool[] pinc) : base(31, map, pinc)
         {
-            commas = new Comma[10];
-            pumps = new Pump[10];
+            commas = new Comma[11];
+            pumps = new Pump[11];
 
 
             commas[0] = new Comma(this, new int[] { 0, 5, -2 });
@@ -24,7 +24,7 @@ namespace meantone
             commas[3] = new Comma(this, new int[] { 1, 0, 3 });
             pumps[3] = new Pump(commas[3]);
             commas[4] = new Comma(this, new int[] { 2, 2, -1 });
-            pumps[4] = new Pump(commas[4]);
+            pumps[4] = new Pump(commas[4],new int[] {0, 18, 28, 15, 25 });
             commas[5] = new Comma(this, new int[] { 3, 1, -2, -1 });
             pumps[5] = new Pump(commas[5]);
             commas[6] = new Comma(this, new int[] { 4, -3, -1, 1 });
@@ -35,10 +35,13 @@ namespace meantone
             pumps[8] = new Pump(commas[8]);
             commas[9] = new Comma(this, new int[] {-1, 8, 0 });
             pumps[9] = new Pump(commas[9]);
-               // , new int[] {0, 18, 8, 29, 19, 6, 27, 17, 30, 20, 10 });
+            // , new int[] {0, 18, 8, 29, 19, 6, 27, 17, 30, 20, 10 });
+
+            commas[10] = new Comma(this, new int[] { 1,5, 1 });
+            pumps[10] = new Pump(commas[9], new int[] {0, 21, 11, 1, 14, 4, 25 } );
             //PumpStructure a = new PumpStructureSimple(this, 1);
             //PumpStructure b = new PumpStructureBig(this, 9);
-            pumpStructure = new PumpStructureSimple(this, 0);
+            pumpStructure = new PumpStructureTwo(this, 4, 10);
 
            
             for (int i = 0; i < edo; i++)
@@ -46,9 +49,9 @@ namespace meantone
                 scale[i] = false;
             }
             
-            for (int i = 0; i < 19; i++)
+            for (int i = 0; i < 22; i++)
             {
-                scale[(5 * i) % edo] = true;
+                scale[(7 * i) % edo] = true;
             }
             
 

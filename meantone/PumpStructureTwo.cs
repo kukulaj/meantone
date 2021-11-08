@@ -21,7 +21,7 @@ namespace meantone
             int rsize = factory.map.row_size;
             int chunk = factory.map.size / rsize;
 
-            int big = loc / chunk;
+            int big = (loc / rsize)  % rsize;
             int small = loc % rsize;
 
             if (big < rsize / 4)
