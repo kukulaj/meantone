@@ -16,10 +16,12 @@ namespace meantone
             //comma5[0] = -19;
             //comma7[0] = 0;
             commas[0] = new Comma(this, new int[] { 1, 2, -4 });
-            pumps[0] = new Pump(commas[0]);
+            pumps[0] = new Pump(commas[0], new int[]
+            {0, 33, 66, 99, 154, 38, 71 });
             commas[1] = new Comma(this, new int[] { 0, 3, 5 });
             pumps[1] = new Pump(commas[1], new int[]
-            {44, 66, 88, 110, 132, 154, 5, 27, 49, 71, 93, 115 });
+                {0, 33, 66, 99, 44, 77, 22, 55 });
+            //{44, 66, 88, 110, 132, 154, 5, 27, 49, 71, 93, 115 });
             commas[2] = new Comma(this, new int[] { 7, -4, -1 });
 
             int ofs = 26 * 36;
@@ -65,7 +67,7 @@ namespace meantone
             //  PumpStructure a171 = new PumpStructureBig(this, 4);
             // PumpStructure b171 = new PumpStructureSimple(this, 1);
             // pumpStructure = new PumpStructureSum(this, a171, b171);
-            pumpStructure = new PumpStructureSimple(this, 6);
+            pumpStructure = new PumpStructureTwo(this, 0, 1);
 
             /*
             scale = new bool[19];
@@ -81,6 +83,7 @@ namespace meantone
                 scale[i] = false;
             }
 
+            /*
             scale[0] = true;
             scale[6] = true;
             scale[16] = true;
@@ -100,13 +103,13 @@ namespace meantone
             scale[138] = true;
             scale[148] = true;
             scale[154] = true;
-
-            /*
-            for (int i = 0; i < 79; i++)
-            {
-                scale[(26 * i) % edo] = true;
-            }
             */
+            
+            for (int i = 0; i < 31; i++)
+            {
+                scale[(11 * i) % edo] = true;
+            }
+            
 
             /*
             scale[0] = true;
