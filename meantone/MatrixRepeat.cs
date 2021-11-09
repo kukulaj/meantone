@@ -38,7 +38,7 @@ namespace meantone
                     int i = fi % map.row_size;
                     sequence[fi] = path[frow[i]];
                     fi++;
-                    if (map.rand.NextDouble() < 0.3)
+                    if (map.rand.NextDouble() < 0.2)
                     {
                         frow[i]++;
                     }
@@ -48,7 +48,7 @@ namespace meantone
                     int i = bi % map.row_size;
                     sequence[bi] = path[brow[i]];
                     bi--;
-                    if (map.rand.NextDouble() < 0.3)
+                    if (map.rand.NextDouble() < 0.2)
                     {
                         brow[i]++;
                     }
