@@ -86,11 +86,12 @@ namespace meantone
             }
             */
 
-            
+            /*
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
             }
+            */
 
             /*
             scale[0] = true;
@@ -113,12 +114,12 @@ namespace meantone
             scale[148] = true;
             scale[154] = true;
             */
-            
+            /*
             for (int i = 0; i < 53; i++)
             {
                 scale[(100 * i) % edo] = true;
             }
-            
+            */
 
             /*
             scale[0] = true;

@@ -29,7 +29,7 @@ namespace meantone
 
             Vertex.parallelism = 0.0;
             double temp = 10.0;
-            double target = 0.055;
+            double target = 0.088;
             for (int iter = 0; iter < 1; iter++)
             {
                 //work.voices[freeze].freeze = !fmode;
@@ -41,8 +41,8 @@ namespace meantone
                 }
 
                 //target = target * 0.97;
-                //temp = 1000000.0;
-                //work.jostle(temp, 300);
+                temp = 1000000.0;
+                work.jostle(temp, 1000);
                 double bfrac = work.bfrac();
                 double afrac = work.align_count();
                 //temp = 140.0 - 5.0 * (double)iter;
@@ -69,17 +69,17 @@ namespace meantone
                 //bfrac = 0.0;
 
                 double move = 0.02;
-                int effort = 1600;
+                int effort = 400;
                 //double target = 0.1;
 
-                bool up = true;
+                bool up = false;
                 int bounce = 0;
                 while (bounce < 1)
                 {
                     if (up)
                     {
                         const double upper_lim = 10000.0;
-                        while (temp < upper_lim && afrac > target)
+                        while (temp < upper_lim && bfrac > target)
                         {
                             temp = temp / (1.0 - move);
                             work.jostle(temp, effort);
@@ -88,14 +88,14 @@ namespace meantone
                         }
                         if(temp >= upper_lim)
                         {
-                            target = 0.03 +afrac * 0.97;
+                            target = 0.03 +bfrac * 0.97;
                             Console.WriteLine(string.Format("new target: {0}", target));
                         }
                     }
                     else
                     {
-                        const double lower_lim = 30.0;
-                        while (temp > lower_lim && afrac < target)
+                        const double lower_lim = 300.0;
+                        while (temp > lower_lim && bfrac < target)
                         {
                             temp *= (1.0 - move);
                             work.jostle(temp, effort);
@@ -105,7 +105,7 @@ namespace meantone
                         }
                         if(temp <= lower_lim)
                         {
-                            target = afrac * 0.95;
+                            target = bfrac * 0.95;
                             Console.WriteLine(string.Format("new target: {0}", target));
                         }
                          
@@ -118,14 +118,15 @@ namespace meantone
                     Console.WriteLine(string.Format("bounce = {0};", bounce));
                 }
 
+               
                 Vertex.parallelism = 1.0;
                 double pf = work.align_count();
                 while (pf < 0.4)
                 {
-                    work.jostle(temp, 800);
+                    work.jostle(temp, 1200);
                     work.bfrac();
                     pf = work.align_count();
-                    Vertex.parallelism *= 2.0;
+                    Vertex.parallelism *= 1.5;
                 }
 
 
