@@ -59,6 +59,7 @@ namespace meantone
             Rhythm root = ostick2.silence(min_dur, 0.0, 0.0, 2, min_dur/1.5);
             root = root.vary(min_dur, 0);
             root = root.vary(min_dur, 0);
+            root = root.vary(min_dur, 0);
 
             Rhythm[] rows = new Rhythm[measure_count];
             rows[0] = root;
