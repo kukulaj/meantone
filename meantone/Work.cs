@@ -29,14 +29,14 @@ namespace meantone
             trace = new System.IO.StreamWriter(tfs);
 
             //vectorFactory = new GeneralFactory(generators, intervals);
-            bool[] primes = new bool[4];
+            bool[] primes = new bool[3];
             primes[0] = true;
             primes[1] = true;
             primes[2] = true;
-            primes[3] = true;
+            //primes[3] = true;
             //primes[5] = true;
 
-            vectorFactory = new FactoryEDO171( map, primes);
+            vectorFactory = new FactoryEDO53( map, primes);
             vectorFactory.show_pattern();
             vectorFactory.scaleSearch();
             rand = map.rand;
@@ -60,11 +60,11 @@ namespace meantone
             root = root.vary(min_dur, 0);
             root = root.vary(min_dur, 0);
 
-            Rhythm[] rows = new Rhythm[map.row_size];
-            for (int ri = 0; ri < rows.Length; ri++)
+            Rhythm[] rows = new Rhythm[measure_count];
+            rows[0] = root;
+            for (int ri = 1; ri < rows.Length; ri++)
             {
-                Rhythm rroot = root.vary(min_dur, 0);
-                rows[ri] = rroot;
+                rows[ri] = rows[ri-1].vary(min_dur, 0);
             }
 
             voices = new Voice[voice_count];

@@ -44,7 +44,7 @@ namespace meantone
             scale[11] = true;
             */
 
-            
+            /*
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
@@ -55,6 +55,8 @@ namespace meantone
                 scale[(12 * i) % edo] = true;
             }
             
+            */
+
             dichotomy = new bool[3,edo];
             dichotomy[0,0] = true;
             dichotomy[0,31] = true;
@@ -64,13 +66,14 @@ namespace meantone
             dichotomy[0,17] = true;
             dichotomy[0,36] = true;
 
+            /*
             dichotomy[0, 10] = true;
             dichotomy[0, 43] = true;
             dichotomy[0, 26] = true;
             dichotomy[0, 27] = true;
             dichotomy[0, 12] = true;
             dichotomy[0, 41] = true;
-
+            */
 
             //dichotomy[0, 48] = true;
             //dichotomy[0, 5] = true;

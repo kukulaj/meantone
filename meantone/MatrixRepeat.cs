@@ -13,10 +13,11 @@ namespace meantone
             Rhythm root = roots[0].vary(min_dur, vi);
 
             Rhythm[] path = new Rhythm[measure_count / map.row_size];
-            path[0] = root;
-            for (int i = 1; i < path.Length; i++)
-            { 
-                path[i] = path[i-1].vary(min_dur, vi);
+           // path[0] = root;
+            for (int i = 0; i < path.Length; i++)
+            {
+                //path[i] = path[i-1].vary(min_dur, vi);
+                path[i] = roots[i].vary(min_dur, vi);
             }
 
             int[] frow = new int[map.row_size];
@@ -38,7 +39,7 @@ namespace meantone
                     int i = fi % map.row_size;
                     sequence[fi] = path[frow[i]];
                     fi++;
-                    if (map.rand.NextDouble() < 0.14)
+                    if (map.rand.NextDouble() < 0.25)
                     {
                         frow[i]++;
                     }
@@ -48,7 +49,7 @@ namespace meantone
                     int i = bi % map.row_size;
                     sequence[bi] = path[brow[i]];
                     bi--;
-                    if (map.rand.NextDouble() < 0.14)
+                    if (map.rand.NextDouble() < 0.25)
                     {
                         brow[i]++;
                     }
