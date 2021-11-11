@@ -18,6 +18,7 @@ namespace meantone
 
             pumpStructure = new PumpStructureSimple(this, 0);
 
+            /*
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
@@ -27,6 +28,7 @@ namespace meantone
             {
                 scale[(5 + 7 * i) % edo] = true;
             }
+            */
 
             dichotomy = new bool[1, edo];
             dichotomy[0, 0] = true;
