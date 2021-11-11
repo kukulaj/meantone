@@ -36,7 +36,7 @@ namespace meantone
             //pumpStructure = new PumpStructureSum(this, a118, b118);
             pumpStructure = new PumpStructureSimple(this, 0);
 
-            
+            /*
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
@@ -45,6 +45,7 @@ namespace meantone
             {
                 scale[(69 * i) % edo] = true;
             }
+            */
             /*
             for (int i = 0; i < 42; i++)
             {
