@@ -17,7 +17,7 @@ namespace meantone
             for (int i = 0; i < path.Length; i++)
             {
                 //path[i] = path[i-1].vary(min_dur, vi);
-                path[i] = roots[i].vary(min_dur, vi);
+                path[i] = roots[i].vary(min_dur, vi).vary(min_dur, vi);
             }
 
             int[] frow = new int[map.row_size];
