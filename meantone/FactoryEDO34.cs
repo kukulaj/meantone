@@ -27,6 +27,7 @@ namespace meantone
             commas[2] = new Comma(this, new int[] { -1, 8, 0 });
             pumps[3] = new Pump(commas[0], path );
             pumpStructure = new PumpStructureSimple(this, 3);
+            /*
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
@@ -36,7 +37,7 @@ namespace meantone
             {
                 scale[(i * 11) % edo] = true;
             }
-            
+            */
             /*
             scale[0] = true;
             scale[3] = true;
@@ -62,8 +63,8 @@ namespace meantone
             dichotomy[0, 23] = true;
             dichotomy[0, 14] = true;
             dichotomy[0, 20] = true;
-            dichotomy[0, 31] = true;
-            dichotomy[0, 3] = true;
+           // dichotomy[0, 31] = true;
+            // dichotomy[0, 3] = true;
             dichotomy[0, 28] = true;
             dichotomy[0, 6] = true;
         }
