@@ -18,12 +18,12 @@ namespace meantone
                 path[i] = (i * 14 + 56) % edo;
             }
             
-            pumps[0] = new Pump(commas[0], path);
+            pumps[0] = new Pump(commas[0]);
 
 
             commas[1] = new Comma(this, new int[] { 8, 1, 0 });
-            pumps[1] = new Pump(commas[1],
-                new int[] { 48, 17, 39, 22, 44, 13, 35, 4, 26 });
+            pumps[1] = new Pump(commas[1]);
+                //new int[] { 48, 17, 39, 22, 44, 13, 35, 4, 26 });
             commas[2] = new Comma(this, new int[] { 3, 7, 0 });
             pumps[2] = new Pump(commas[2]);
 
@@ -33,7 +33,7 @@ namespace meantone
             pumps[4] = new Pump(commas[3],
                new int[] {36, 14,  24, 2, 19 });
 
-            pumpStructure = new PumpStructureTwo(this, 3, 4);
+            pumpStructure = new PumpStructureTwoAcross(this, 1, 0);
             //PumpStructure b53 = new PumpStructureBig(this, 2);
             //pumpStructure = new PumpStructureSum(this, a53, b53);
 
