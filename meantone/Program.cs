@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5254));
+            Type_Map map = new Type_Map(new Random(5255));
 
             Work work;
 
@@ -29,7 +29,7 @@ namespace meantone
 
             Vertex.parallelism = 0.0;
             double temp = 10.0;
-            double target = 0.13;
+            double target = 0.105;
             for (int iter = 0; iter < 1; iter++)
             {
                 //work.voices[freeze].freeze = !fmode;
@@ -69,7 +69,7 @@ namespace meantone
                 //bfrac = 0.0;
 
                 double move = 0.02;
-                int effort = 1800;
+                int effort = 1850;
                 //double target = 0.1;
 
                 bool up = false;
@@ -94,7 +94,7 @@ namespace meantone
                     }
                     else
                     {
-                        const double lower_lim = 300.0;
+                        const double lower_lim = 325.0;
                         while (temp > lower_lim && bfrac < target)
                         {
                             temp *= (1.0 - move);
@@ -121,7 +121,7 @@ namespace meantone
                
                 Vertex.parallelism = 1.0;
                 double pf = work.align_count();
-                double pinc = 1.4;
+                double pinc = 1.3;
                 while (pf < 0.4)
                 {
                     work.jostle(temp, 1200);

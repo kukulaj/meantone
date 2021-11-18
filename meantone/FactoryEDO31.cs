@@ -67,14 +67,17 @@ namespace meantone
             dichotomy[0][23] = true;
             dichotomy[0][10] = true; 
             dichotomy[0][21] = true;
-
+            dichotomy[0][5] = true;
+            dichotomy[0][26] = true;
+ 
+            /*
             dichotomy[0][15] = true;
             dichotomy[0][16] = true;
             dichotomy[0][25] = true;
             dichotomy[0][6] = true;
             dichotomy[0][24] = true;
             dichotomy[0][7] = true;
-
+            */
 
             dichotomy[1][0] = true;
             dichotomy[1][6] = true;
