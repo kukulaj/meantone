@@ -18,6 +18,7 @@ namespace meantone
             {5, 18, 10, 4, 17, 11 });
             pumpStructure = new PumpStructureSimple(this, 1);
 
+            /*
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
@@ -27,6 +28,7 @@ namespace meantone
             {
                 scale[(6 * i) % edo] = true;
             }
+            */
 
             dichotomy = new bool[1, edo];
             dichotomy[0, 0] = true;
@@ -36,6 +38,8 @@ namespace meantone
             dichotomy[0, 13] = true;
             dichotomy[0, 5] = true;
             dichotomy[0, 14] = true;
+            dichotomy[0, 3] = true;
+            dichotomy[0, 16] = true;
         }
 
         public override double vertical_interval_cost(int dp, int loc)
