@@ -335,12 +335,14 @@ namespace meantone
             int delta = 1;
             for(int k = 0; k < level; k++)
             {
-                delta *= 2;
+                delta *= 3;
             }
 
             s = aaba(level - 1, i, file, s);
             s = aaba(level - 1, i, file, s);
-            s = aaba(level - 1, i+delta, file, s);
+            s = aaba(level - 1, i + delta, file, s);
+            s = aaba(level - 1, i + delta, file, s);
+            s = aaba(level - 1, i + 2 * delta, file, s);
             s = aaba(level - 1, i, file, s);
 
             return s;
