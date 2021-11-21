@@ -69,7 +69,7 @@ namespace meantone
                 //bfrac = 0.0;
 
                 double move = 0.02;
-                int effort = 1850;
+                int effort = 1000;
                 //double target = 0.1;
 
                 bool up = false;
@@ -190,7 +190,8 @@ namespace meantone
             file.WriteLine("f6 0 4096 10 1 0.3 0.3 0.3 0.3");
             file.WriteLine("f7 0 4096 10 1 0.6 0.2 0.1 0.3");
 
-            work.play(file);
+            //work.play(file);
+            work.aaba(5, file);
 
             file.Close();
 

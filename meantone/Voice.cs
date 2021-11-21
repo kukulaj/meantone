@@ -322,6 +322,30 @@ namespace meantone
                 measures[i].amplitudes();
             }
         }
+        
+        public double aaba(int level, int i,  StreamWriter file, double s)
+        {
+
+            if (level == 0)
+            {
+                s = sequence[i].play(file, s);
+                return s;
+            }
+
+            int delta = 1;
+            for(int k = 0; k < level; k++)
+            {
+                delta *= 2;
+            }
+
+            s = aaba(level - 1, i, file, s);
+            s = aaba(level - 1, i, file, s);
+            s = aaba(level - 1, i+delta, file, s);
+            s = aaba(level - 1, i, file, s);
+
+            return s;
+        }
+
 
 
         public double play(StreamWriter file, int reps)
