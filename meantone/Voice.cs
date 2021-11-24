@@ -42,11 +42,11 @@ namespace meantone
                 measures[i].temp_factor = 1.0; // - 0.15 * Math.Cos(2.0 * Math.PI * ((double)(i)) / ((double)map.size));
             }
 
-
+            
             int row = measure_count / row_size;
             sequence_count = work.measure_count;
             sequence = new Measure[sequence_count];
-
+            
             /*
             int pace = 1;
             for (int pi = 0; pi < vi; pi++)
@@ -58,6 +58,8 @@ namespace meantone
 
             if (true)
             {
+                //spiny_seq();
+                
                 for (int i = 0; i < sequence_count; i++)
                 {
                     sequence[i] = measures[i];
@@ -174,6 +176,38 @@ namespace meantone
             */
             // }
 
+        }
+
+        public int spiny_row(int r, int s, ref double t, StreamWriter file)
+        {
+            int rows = measure_count / map.row_size;
+
+            int j = s;
+            for (int i = 0; i < rows; i++)
+            {
+                t = sequence[r + i* map.row_size].play(file, t);
+               
+                j++;
+                t = sequence[r + i* map.row_size].play(file, t);
+                
+                j++;
+            }
+            return j;
+        }
+
+        public void spiny_seq(StreamWriter file)
+        {
+            int row_size = map.row_size;
+            int rows = measure_count / row_size;
+            double t = 0.0;
+            
+            int s = 0;
+            for(int r = 1; r < row_size; r++)
+            {
+                s = spiny_row(0, s, ref t, file);
+                s = spiny_row(r, s, ref t, file);
+            }
+            s = spiny_row(0, s, ref t, file);
         }
 
         public void align(Measure[] mmatrix, Measure[] pmatrix)

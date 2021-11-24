@@ -393,6 +393,16 @@ namespace meantone
             return result;
         }
 
+        public void spiny_seq(StreamWriter file)
+        {
+            for (int i = 0; i < voice_count; i++)
+            {
+                if (!voices[i].mute)
+                {
+                    voices[i].spiny_seq(file);
+                }
+            }
+        }
         public void aaba(int level, StreamWriter file)
         {
             for (int i = 0; i < voice_count; i++)

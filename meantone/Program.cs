@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5256));
+            Type_Map map = new Type_Map(new Random(5257));
 
             Work work;
 
@@ -191,7 +191,8 @@ namespace meantone
             file.WriteLine("f7 0 4096 10 1 0.6 0.2 0.1 0.3");
 
             //work.play(file);
-            work.aaba(4, file);
+            //work.aaba(4, file);
+            work.spiny_seq(file);
 
             file.Close();
 
