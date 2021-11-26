@@ -29,14 +29,14 @@ namespace meantone
             trace = new System.IO.StreamWriter(tfs);
 
             //vectorFactory = new GeneralFactory(generators, intervals);
-            bool[] primes = new bool[3];
+            bool[] primes = new bool[4];
             primes[0] = true;
             primes[1] = true;
             primes[2] = true;
-            //primes[3] = true;
+            primes[3] = true;
             //primes[5] = true;
 
-            vectorFactory = new FactoryEDO53( map, primes);
+            vectorFactory = new FactoryEDO31( map, primes);
             vectorFactory.show_pattern();
             vectorFactory.scaleSearch();
             rand = map.rand;
@@ -402,6 +402,40 @@ namespace meantone
                     voices[i].spiny_seq(file);
                 }
             }
+        }
+
+        public double spiny_row(int j, double t, StreamWriter file)
+        {
+            double tmax = 0.0;
+            for (int i = 0; i < voice_count; i++)
+            {
+                if (!voices[i].mute)
+                {
+                    double tv = voices[i].spiny_row(j, t, file);
+                    if (tv > tmax) 
+                    {
+                        tmax = tv;
+                    }
+                }
+            }
+            return tmax;
+        }
+
+        public double chain_row(int j, double t, StreamWriter file)
+        {
+            double tmax = 0.0;
+            for (int i = 0; i < voice_count; i++)
+            {
+                if (!voices[i].mute)
+                {
+                    double tv = voices[i].chain_row(j, t, file);
+                    if (tv > tmax)
+                    {
+                        tmax = tv;
+                    }
+                }
+            }
+            return tmax;
         }
         public void aaba(int level, StreamWriter file)
         {

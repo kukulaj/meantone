@@ -178,21 +178,29 @@ namespace meantone
 
         }
 
-        public int spiny_row(int r, int s, ref double t, StreamWriter file)
+        public double chain_row(int r, double t, StreamWriter file)
         {
             int rows = measure_count / map.row_size;
 
-            int j = s;
             for (int i = 0; i < rows; i++)
             {
-                t = sequence[r + i* map.row_size].play(file, t);
-               
-                j++;
-                t = sequence[r + i* map.row_size].play(file, t);
-                
-                j++;
+                t = sequence[r + i * map.row_size].play(file, t);
+                t = sequence[r + ((i + rows - 1)%rows) * map.row_size].play(file, t);
+                t = sequence[r + i * map.row_size].play(file, t);
             }
-            return j;
+            return t;
+        }
+
+        public double spiny_row(int r, double t, StreamWriter file)
+        {
+            int rows = measure_count / map.row_size;
+           
+            for (int i = 0; i < rows; i++)
+            {
+                t = sequence[r + i * map.row_size].play(file, t);
+                t = sequence[r + i* map.row_size].play(file, t);    
+            }
+            return t;
         }
 
         public void spiny_seq(StreamWriter file)
@@ -201,13 +209,12 @@ namespace meantone
             int rows = measure_count / row_size;
             double t = 0.0;
             
-            int s = 0;
             for(int r = 1; r < row_size; r++)
             {
-                s = spiny_row(0, s, ref t, file);
-                s = spiny_row(r, s, ref t, file);
+                t = spiny_row(0, t, file);
+                t = spiny_row(r, t, file);
             }
-            s = spiny_row(0, s, ref t, file);
+            t = spiny_row(0, t, file);
         }
 
         public void align(Measure[] mmatrix, Measure[] pmatrix)

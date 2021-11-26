@@ -29,7 +29,7 @@ namespace meantone
 
             Vertex.parallelism = 0.0;
             double temp = 10.0;
-            double target = 0.105;
+            double target = 0.125;
             for (int iter = 0; iter < 1; iter++)
             {
                 //work.voices[freeze].freeze = !fmode;
@@ -122,7 +122,7 @@ namespace meantone
                 Vertex.parallelism = 1.0;
                 double pf = work.align_count();
                 double pinc = 1.3;
-                while (pf < 0.4)
+                while (pf < 0.32)
                 {
                     work.jostle(temp, 1200);
                     work.bfrac();
@@ -131,7 +131,8 @@ namespace meantone
                 }
                 Vertex.parallelism /= pinc;
 
-                work.jostle(temp * 0.8, 2000);
+                temp *= 0.8;
+                work.jostle(temp, 2000);
                 work.bfrac();
                 work.align_count();
 
@@ -192,8 +193,58 @@ namespace meantone
 
             //work.play(file);
             //work.aaba(4, file);
-            work.spiny_seq(file);
+            double t = 0.0;
 
+            t = work.spiny_row(0, t, file);
+
+
+            temp *= 1.1;
+            work.jostle(temp, 2000);
+            work.bfrac();
+            work.align_count();
+            t = work.spiny_row(1, t, file);
+
+            temp *= 1.1;
+            work.jostle(temp, 2000);
+            work.bfrac();
+            work.align_count();
+            t = work.chain_row(2, t, file);
+            temp *= 1.1;
+            work.jostle(temp, 2000);
+            work.bfrac();
+            work.align_count();
+            t = work.chain_row(3, t, file);
+            temp *= 1.1;
+            work.jostle(temp, 2000);
+            work.bfrac();
+            work.align_count();
+            t = work.spiny_row(4, t, file);
+            temp *= 0.9;
+            work.jostle(temp, 2000);
+            work.bfrac();
+            work.align_count();
+            t = work.spiny_row(5, t, file);
+            temp *= 0.9;
+            work.jostle(temp, 2000);
+            work.bfrac();
+            work.align_count();
+            t = work.chain_row(6, t, file);
+            temp *= 0.9;
+            work.jostle(temp, 2000);
+            work.bfrac();
+            work.align_count();
+            t = work.chain_row(7, t, file);
+            temp *= 0.9;
+            work.jostle(temp, 2000);
+            work.bfrac();
+            work.align_count();
+            t = work.spiny_row(8, t, file);
+            temp *= 0.9;
+            work.jostle(temp, 2000);
+            work.bfrac();
+            work.align_count();
+            t = work.spiny_row(9, t, file);
+             
             file.Close();
 
             work.intevalHistograms();
