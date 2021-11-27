@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5257));
+            Type_Map map = new Type_Map(new Random(5258));
 
             Work work;
 
@@ -29,7 +29,7 @@ namespace meantone
 
             Vertex.parallelism = 0.0;
             double temp = 10.0;
-            double target = 0.125;
+            double target = 0.16;
             for (int iter = 0; iter < 1; iter++)
             {
                 //work.voices[freeze].freeze = !fmode;
@@ -42,7 +42,7 @@ namespace meantone
 
                 //target = target * 0.97;
                 temp = 1000000.0;
-                work.jostle(temp, 1000);
+                work.jostle(temp, 800);
                 double bfrac = work.bfrac();
                 double afrac = work.align_count();
                 //temp = 140.0 - 5.0 * (double)iter;
@@ -194,56 +194,24 @@ namespace meantone
             //work.play(file);
             //work.aaba(4, file);
             double t = 0.0;
+            for (int i = 0; i < map.row_size; i++)
+            {
+               
+                if ((i%5) < 3)
+                {
+                    t = work.spiny_row(i, t, file);
+                }
+                else 
+                {
+                    t = work.chain_row(i, t, file);
+                }
 
-            t = work.spiny_row(0, t, file);
-
-
-            temp *= 1.1;
-            work.jostle(temp, 2000);
-            work.bfrac();
-            work.align_count();
-            t = work.spiny_row(1, t, file);
-
-            temp *= 1.1;
-            work.jostle(temp, 2000);
-            work.bfrac();
-            work.align_count();
-            t = work.chain_row(2, t, file);
-            temp *= 1.1;
-            work.jostle(temp, 2000);
-            work.bfrac();
-            work.align_count();
-            t = work.chain_row(3, t, file);
-            temp *= 1.1;
-            work.jostle(temp, 2000);
-            work.bfrac();
-            work.align_count();
-            t = work.spiny_row(4, t, file);
-            temp *= 0.9;
-            work.jostle(temp, 2000);
-            work.bfrac();
-            work.align_count();
-            t = work.spiny_row(5, t, file);
-            temp *= 0.9;
-            work.jostle(temp, 2000);
-            work.bfrac();
-            work.align_count();
-            t = work.chain_row(6, t, file);
-            temp *= 0.9;
-            work.jostle(temp, 2000);
-            work.bfrac();
-            work.align_count();
-            t = work.chain_row(7, t, file);
-            temp *= 0.9;
-            work.jostle(temp, 2000);
-            work.bfrac();
-            work.align_count();
-            t = work.spiny_row(8, t, file);
-            temp *= 0.9;
-            work.jostle(temp, 2000);
-            work.bfrac();
-            work.align_count();
-            t = work.spiny_row(9, t, file);
+                temp *= (i < map.row_size / 2) ? 1.1 : 0.9;    
+                 
+                work.jostle(temp, 2000);
+                work.bfrac();
+                work.align_count();
+            }
              
             file.Close();
 
