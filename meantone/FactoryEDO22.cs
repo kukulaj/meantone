@@ -28,14 +28,14 @@ namespace meantone
             //PumpStructure b53 = new PumpStructureBig(this, 2);
             //pumpStructure = new PumpStructureSum(this, a53, b53);
 
-            
+            /*
             scale = new bool[11];
             scale[0] = true;
             scale[3] = true;
             scale[5] = true;
             scale[7] = true;
             scale[9] = true;
-
+            */
             /*
             for (int i = 0; i < edo; i++)
             {
@@ -55,12 +55,15 @@ namespace meantone
             dichotomy[0, 7] = true;
             dichotomy[0, 6] = true;
             dichotomy[0, 16] = true;
+            dichotomy[0, 4] = true;
+            dichotomy[0, 18] = true;
+
             //dichotomy[0, 48] = true;
             //dichotomy[0, 5] = true;
             //dichotomy[0, 44] = true;
             //dichotomy[0, 9] = true;
 
-            
+
 
         }
 

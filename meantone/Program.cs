@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5258));
+            Type_Map map = new Type_Map(new Random(5259));
 
             Work work;
 
@@ -197,7 +197,7 @@ namespace meantone
             for (int i = 0; i < map.row_size; i++)
             {
                
-                if ((i%5) < 3)
+                if ((i%2) < 1)
                 {
                     t = work.spiny_row(i, t, file);
                 }
