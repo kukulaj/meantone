@@ -49,14 +49,17 @@ namespace meantone
             */
             dichotomy = new bool[3, edo];
             dichotomy[0, 0] = true;
-            dichotomy[0, 13] = true;
-            dichotomy[0, 9] = true;
-            dichotomy[0, 15] = true;
-            dichotomy[0, 7] = true;
-            dichotomy[0, 6] = true;
-            dichotomy[0, 16] = true;
-            dichotomy[0, 4] = true;
-            dichotomy[0, 18] = true;
+            dichotomy[0, 13] = true; // 3:2
+            dichotomy[0, 9] = true;  // 4:3
+            dichotomy[0, 15] = true; // 8:5
+            dichotomy[0, 7] = true;  // 5:4
+            dichotomy[0, 6] = true;  // 6:5
+            dichotomy[0, 16] = true; // 5:3
+            dichotomy[0, 4] = true;  // 9:8 = 8:7
+            dichotomy[0, 18] = true; // 16:9 = 7:4
+            dichotomy[0, 11] = true; // 7:5 = 10:7
+            dichotomy[0, 5] = true; // 7:6
+            dichotomy[0, 17] = true; // 12:7
 
             //dichotomy[0, 48] = true;
             //dichotomy[0, 5] = true;
