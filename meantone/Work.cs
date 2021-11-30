@@ -36,7 +36,7 @@ namespace meantone
             primes[3] = true;
             //primes[5] = true;
 
-            vectorFactory = new FactoryEDO22( map, primes);
+            vectorFactory = new FactoryEDO171( map, primes);
             vectorFactory.show_pattern();
             vectorFactory.scaleSearch();
             rand = map.rand;
@@ -421,6 +421,22 @@ namespace meantone
             return tmax;
         }
 
+        public double braid_row(int j, double t, StreamWriter file)
+        {
+            double tmax = 0.0;
+            for (int i = 0; i < voice_count; i++)
+            {
+                if (!voices[i].mute)
+                {
+                    double tv = voices[i].braid_row(j, t, file);
+                    if (tv > tmax)
+                    {
+                        tmax = tv;
+                    }
+                }
+            }
+            return tmax;
+        }
         public double chain_row(int j, double t, StreamWriter file)
         {
             double tmax = 0.0;

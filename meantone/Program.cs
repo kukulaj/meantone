@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5260));
+            Type_Map map = new Type_Map(new Random(5261));
 
             Work work;
 
@@ -199,14 +199,14 @@ namespace meantone
                
                 if ((i%2) < 1)
                 {
-                    t = work.spiny_row(i, t, file);
+                    t = work.braid_row(i, t, file);
                 }
                 else 
                 {
-                    t = work.chain_row(i, t, file);
+                    t = work.braid_row(i, t, file);
                 }
 
-                temp *= (i < map.row_size / 2) ? 1.1 : 0.9;    
+                temp *= (i < map.row_size / 2) ? 1.05 : 0.95;    
                  
                 work.jostle(temp, 2000);
                 work.bfrac();

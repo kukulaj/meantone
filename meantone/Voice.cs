@@ -178,6 +178,24 @@ namespace meantone
 
         }
 
+        public double braid_row(int r, double t, StreamWriter file)
+        {
+            int rows = measure_count / map.row_size;
+
+            t = sequence[r].play(file, t);
+            t = sequence[r].play(file, t);
+            for (int i = 1; i < rows; i++)
+            {
+                t = sequence[r + i * map.row_size].play(file, t);
+                t = sequence[r + ((i + rows - 1) % rows) * map.row_size].play(file, t);
+                t = sequence[r + ((i + rows - 1) % rows) * map.row_size].play(file, t);
+                t = sequence[r + i * map.row_size].play(file, t);
+            }
+            t = sequence[r + (rows-1)*map.row_size].play(file, t);
+            t = sequence[r + (rows - 1) * map.row_size].play(file, t);
+            return t;
+        }
+
         public double chain_row(int r, double t, StreamWriter file)
         {
             int rows = measure_count / map.row_size;
