@@ -38,22 +38,26 @@ namespace meantone
             scale[32] = true;
             scale[52] = true;
             scale[55] = true;
+            scale[66] = true;
             scale[87] = true;
             scale[98] = true;
             scale[110] = true;
+            scale[122] = true;
             scale[142] = true;
-            scale[145] = true;
+            scale[153] = true;
             scale[156] = true;
             scale[176] = true;
             scale[197] = true;
             scale[208] = true;
             scale[229] = true;
-            scale[232] = true;
+            scale[240] = true;
             scale[252] = true;
+            scale[263] = true;
             scale[284] = true;
             scale[287] = true;
             scale[298] = true;
             scale[310] = true;
+            scale[321] = true;
 
             /*
             for (int i = 0; i < 24; i++)
