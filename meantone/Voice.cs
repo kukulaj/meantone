@@ -10,7 +10,7 @@ namespace meantone
         public Work work;
         public Type_Map map;
         public Measure[] measures;
-        Measure[] sequence;
+        public Measure[] sequence;
         int measure_count;
         int sequence_count;
         public int vi;

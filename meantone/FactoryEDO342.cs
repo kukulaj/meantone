@@ -27,11 +27,35 @@ namespace meantone
             PumpStructure b342 = new PumpStructureBig(this, 2);
             pumpStructure = new PumpStructureSimple(this, 2);
 
-            /*
+            
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
             }
+
+            scale[0] = true;
+            scale[11] = true;
+            scale[32] = true;
+            scale[52] = true;
+            scale[55] = true;
+            scale[87] = true;
+            scale[98] = true;
+            scale[110] = true;
+            scale[142] = true;
+            scale[145] = true;
+            scale[156] = true;
+            scale[176] = true;
+            scale[197] = true;
+            scale[208] = true;
+            scale[229] = true;
+            scale[232] = true;
+            scale[252] = true;
+            scale[284] = true;
+            scale[287] = true;
+            scale[298] = true;
+            scale[310] = true;
+
+            /*
             for (int i = 0; i < 24; i++)
             {
                 scale[(71 * i) % edo] = true;

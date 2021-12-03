@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5263));
+            Type_Map map = new Type_Map(new Random(5265));
 
             Work work;
 
@@ -29,7 +29,7 @@ namespace meantone
 
             Vertex.parallelism = 0.0;
             double temp = 10.0;
-            double target = 0.025;
+            double target = 0.07;
             for (int iter = 0; iter < 1; iter++)
             {
                 //work.voices[freeze].freeze = !fmode;
@@ -41,8 +41,8 @@ namespace meantone
                 }
 
                 //target = target * 0.97;
-                //temp = 1000000.0;
-                //work.jostle(temp, 800);
+                temp = 1000000.0;
+                work.jostle(temp, 2000);
                 double bfrac = work.bfrac();
                 double afrac = work.align_count();
                 //temp = 140.0 - 5.0 * (double)iter;
@@ -72,14 +72,14 @@ namespace meantone
                 int effort = 1200;
                 //double target = 0.1;
 
-                bool up = true;
+                bool up = false;
                 int bounce = 0;
                 while (bounce < 1)
                 {
                     if (up)
                     {
                         const double upper_lim = 1000.0;
-                        while (temp < upper_lim && afrac > target)
+                        while (temp < upper_lim && bfrac > target)
                         {
                             temp = temp / (1.0 - move);
                             work.jostle(temp, effort);
@@ -88,14 +88,14 @@ namespace meantone
                         }
                         if(temp >= upper_lim)
                         {
-                            target = 0.03 +afrac * 0.97;
+                            target = 0.03 +bfrac * 0.97;
                             Console.WriteLine(string.Format("new target: {0}", target));
                         }
                     }
                     else
                     {
                         const double lower_lim = 325.0;
-                        while (temp > lower_lim && afrac < target)
+                        while (temp > lower_lim && bfrac < target)
                         {
                             temp *= (1.0 - move);
                             work.jostle(temp, effort);
@@ -105,7 +105,7 @@ namespace meantone
                         }
                         if(temp <= lower_lim)
                         {
-                            target = afrac * 0.95;
+                            target = bfrac * 0.95;
                             Console.WriteLine(string.Format("new target: {0}", target));
                         }
                          
@@ -194,6 +194,33 @@ namespace meantone
             //work.play(file);
             //work.aaba(4, file);
             double t = 0.0;
+
+            int j = 0;
+            while(j < work.measure_count)
+            {
+                double tmax = t;
+                for (int vi = 0; vi < work.voice_count; vi++)
+                {
+                    double tt = work.voices[vi].sequence[j].play(file, t);
+                    if (tt > tmax)
+                    {
+                        tmax = tt;
+                    }
+                }
+
+                double move = work.rand.NextDouble();
+                if (move < 0.1111 && j > 0)
+                {
+                    j--;
+                }
+                else if(move > 0.55555)
+                {
+                    j++;
+                }
+
+                t = tmax;
+            }
+            /*
             for (int i = 0; i < map.row_size; i++)
             {
                
@@ -212,7 +239,7 @@ namespace meantone
                 work.bfrac();
                 work.align_count();
             }
-             
+             */
             file.Close();
 
             work.intevalHistograms();
