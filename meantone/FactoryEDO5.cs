@@ -37,11 +37,11 @@ namespace meantone
             map = pmap;
            
             primes = new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59};
-            range = new int[] { 10, 6, 4, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1};
+            range = new int[] { 11, 6, 4, 3, 3, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1};
             pcnt = primes.Length;
             coord = new int[pcnt];
             cost = new double[pcnt];
-            double bc = 0.2;
+            double bc = 0.15;
             for(int i = 0; i < pcnt; i++)
             {
                 cost[i] = bc;
