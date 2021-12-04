@@ -20,15 +20,15 @@ namespace meantone
             pumps[1] = new Pump(commas[1], new int[]
             {0, 142, 284, 84, 226, 26, 168, 310, 110 });
             commas[2] = new Comma(this, new int[] { -4, -3, -2, 2});
-            pumps[2] = new Pump(commas[2]);
-            //{0, 71, 142, 213, 284, 13 });
+            pumps[2] = new Pump(commas[2], new int[]
+            {0, 142, 32, 98,240, 55, 197, 87, 153, 310, 110});
 
             commas[3] = new Comma(this, new int[] { 3, 0, 0, -6 });
             pumps[3] = new Pump(commas[3]);
 
             PumpStructure a342 = new PumpStructureSimple(this, 1);
             PumpStructure b342 = new PumpStructureBig(this, 2);
-            pumpStructure = new PumpStructureSimple(this, 3);
+            pumpStructure = new PumpStructureSimple(this, 2);
 
             /*
             scale = new bool[114];
@@ -47,7 +47,7 @@ namespace meantone
             scale[0] = true;
             scale[11] = true;
             scale[32] = true;
-            scale[52] = true;
+            scale[44] = true;
             scale[55] = true;
             scale[66] = true;
             scale[87] = true;
@@ -57,7 +57,7 @@ namespace meantone
             scale[142] = true;
             scale[153] = true;
             scale[174] = true;
-            scale[177] = true;
+            scale[186] = true;
             scale[197] = true;
             scale[208] = true;
             scale[229] = true;
