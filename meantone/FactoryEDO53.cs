@@ -22,8 +22,8 @@ namespace meantone
 
 
             commas[1] = new Comma(this, new int[] { 8, 1, 0 });
-            pumps[1] = new Pump(commas[1]);
-                //new int[] { 48, 17, 39, 22, 44, 13, 35, 4, 26 });
+            pumps[1] = new Pump(commas[1],
+               new int[] { 9, 40, 18, 49, 27, 5, 36, 14, 45 });
             commas[2] = new Comma(this, new int[] { 3, 7, 0 });
             pumps[2] = new Pump(commas[2]);
 
@@ -33,7 +33,7 @@ namespace meantone
             pumps[4] = new Pump(commas[3],
                new int[] {36, 14,  24, 2, 19 });
 
-            pumpStructure = new PumpStructureTwoAcross(this, 1, 0);
+            pumpStructure = new PumpStructureSimple(this, 1);
             //PumpStructure b53 = new PumpStructureBig(this, 2);
             //pumpStructure = new PumpStructureSum(this, a53, b53);
 
@@ -44,18 +44,18 @@ namespace meantone
             scale[11] = true;
             */
 
-            /*
+            
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
             }
 
-            for (int i = 0; i < 21; i++)
+            for (int i = 0; i < 17; i++)
             {
-                scale[(12 * i) % edo] = true;
+                scale[(31 * i) % edo] = true;
             }
             
-            */
+            
 
             dichotomy = new bool[3,edo];
             dichotomy[0,0] = true;
