@@ -91,12 +91,15 @@ namespace meantone
             }
             */
 
-            /*
+            
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
             }
-            */
+            for (int i = 0; i < 47; i++)
+            {
+                scale[(11 * i) % scale.Length] = true;
+            }
 
             /*
             scale[0] = true;
@@ -143,8 +146,8 @@ namespace meantone
             scale[143] = true;
             scale[154] = true;
      */
-                   
-    }
+
+        }
         private void build_dichotomy(int odd_limit)
         {
             dichotomy = new bool[edo];
