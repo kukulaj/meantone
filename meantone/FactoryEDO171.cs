@@ -6,9 +6,11 @@ namespace meantone
 {
     public class FactoryEDO171 : FactoryEDO5
     {
-        private bool[,] dichotomy;
+        private bool[] dichotomy;
         public FactoryEDO171(Type_Map map, bool[] pinc) : base(171, map, pinc)
         {
+            build_dichotomy(9);
+
             commas = new Comma[10];
             pumps = new Pump[10];
 
@@ -16,8 +18,10 @@ namespace meantone
             //comma5[0] = -19;
             //comma7[0] = 0;
             commas[0] = new Comma(this, new int[] { 1, 2, -4 });
-            pumps[0] = new Pump(commas[0], new int[]
-            {0, 33, 66, 99, 154, 38, 71 });
+            pumps[0] = new Pump(commas[0]
+              //  , new int[]
+            //{0, 33, 66, 99, 154, 38, 71 }
+            );
             commas[1] = new Comma(this, new int[] { 0, 3, 5 });
             pumps[1] = new Pump(commas[1], new int[]
                 {0, 33, 66, 99, 44, 77, 22, 55 });
@@ -53,10 +57,11 @@ namespace meantone
                 {0, 55, 88, 143, 27, 127, 11, 44, 99, 154, 83, 116});
 
             commas[6] = new Comma(this, new int[] { 1, 5, 1 });
-            pumps[6] = new Pump(commas[6], new int[]
+            pumps[6] = new Pump(commas[6]
+                //,  new int[]
                //{110, 165, 49, 104, 159, 43}
                // { 0, 116, 61, 132, 77, 22, 138}
-               {129, 74, 19, 135, 35, 151, 96 }
+               //{129, 74, 19, 135, 35, 151, 96 }
                 );
 
             commas[7] = new Comma(this, new int[] { 36, -12, 1 });
@@ -73,10 +78,10 @@ namespace meantone
             pumps[9] = new Pump(commas[9], new int[]
                 {66, 99, 132, 165, 27, 60, 93, 126, 159, 21});
 
-            //  PumpStructure a171 = new PumpStructureBig(this, 4);
-            // PumpStructure b171 = new PumpStructureSimple(this, 1);
-            // pumpStructure = new PumpStructureSum(this, a171, b171);
-            pumpStructure = new PumpStructureTwo(this, 2, 6);
+            PumpStructure a171 = new PumpStructureBig(this, 0);
+            PumpStructure b171 = new PumpStructureSimple(this, 6);
+           pumpStructure = new PumpStructureSum(this, a171, b171);
+            //pumpStructure = new PumpStructureTwo(this, 0, 6);
 
             /*
             scale = new bool[19];
@@ -138,21 +143,30 @@ namespace meantone
             scale[143] = true;
             scale[154] = true;
      */
-            dichotomy = new bool[1, edo];
-            dichotomy[0, 0] = true;
-            dichotomy[0, 55] = true;
-            dichotomy[0, 116] = true;
-            dichotomy[0, 100] = true;
-            dichotomy[0, 71] = true;
-            dichotomy[0, 45] = true;
-            dichotomy[0, 126] = true;
-            dichotomy[0, 38] = true;
-            dichotomy[0, 133] = true;
-            dichotomy[0, 83] = true;
-            dichotomy[0, 88] = true;
-            dichotomy[0, 138] = true;
-            dichotomy[0, 33] = true;            
+                   
     }
+        private void build_dichotomy(int odd_limit)
+        {
+            dichotomy = new bool[edo];
+
+            dichotomy[0] = true;
+
+            for (int odd = 3; odd <= odd_limit; odd += 2)
+            {
+                for (int odd2 = 1; odd2 < odd; odd2 += 2)
+                {
+                    double c = ((double)edo) * Math.Log(((double)odd) / ((double)odd2)) / Math.Log(2);
+                    int k = (int)(0.5 + c);
+                    k = k % edo;
+                    Console.WriteLine(string.Format("{0} consonant", k));
+                    dichotomy[k] = true;
+                    dichotomy[edo - k] = true;
+                }
+
+            }
+        }
+
+       
         public override double vertical_interval_cost(int dp, int loc)
         {
             if (dp < 0)
@@ -160,19 +174,13 @@ namespace meantone
                 dp = -dp;
             }
 
-            int phase = 0;
-            /*
-            if ((loc+1) % map.row_size == 0)
-            {
-                phase = 1;
-            }
-            */
+           
             if (dp % edo == 0)
             {
                 return 100.0;
             }
 
-            if (dichotomy[phase, dp % edo])
+            if (dichotomy[ dp % edo])
                 return 0.0;
             return 5000.0;
         }
