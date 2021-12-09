@@ -67,6 +67,8 @@ namespace meantone
             // dichotomy[0, 3] = true;
             dichotomy[0, 28] = true;
             dichotomy[0, 6] = true;
+            dichotomy[0, 29] = true;
+            dichotomy[0, 5] = true;
         }
 
         public override double vertical_interval_cost(int dp, int loc)
