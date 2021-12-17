@@ -40,6 +40,8 @@ namespace meantone
             {
                 measures[i] = new Measure(this, map, i);
                 measures[i].temp_factor = 1.0; // - 0.15 * Math.Cos(2.0 * Math.PI * ((double)(i)) / ((double)map.size));
+                measures[i].temp_factor = 1.25
+                    - 0.5 * (double)(i % map.row_size) / (double)(map.row_size);
             }
 
             
