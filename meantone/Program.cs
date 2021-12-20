@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5278));
+            Type_Map map = new Type_Map(new Random(5279));
 
             Work work;
 
@@ -29,7 +29,7 @@ namespace meantone
 
             Vertex.parallelism = 0.0;
             double temp = 10.0;
-            double target = 0.095;
+            double target = 0.115;
             for (int iter = 0; iter < 1; iter++)
             {
                 //work.voices[freeze].freeze = !fmode;
@@ -209,11 +209,11 @@ namespace meantone
                 }
 
                 double move = work.rand.NextDouble();
-                if (move < 0.125 && j > 0)
+                if (move < 0.1125 && j > 0)
                 {
                     j--;
                 }
-                else if(move > 0.56125)
+                else if(move > 0.525)
                 {
                     j++;
                 }
