@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5279));
+            Type_Map map = new Type_Map(new Random(5280));
 
             Work work;
 
@@ -26,10 +26,11 @@ namespace meantone
             {
                 work.voices[vi].freeze = fmode;
             }
+            work.voices[3].freeze = true;
 
             Vertex.parallelism = 0.0;
             double temp = 10.0;
-            double target = 0.115;
+            double target = 0.10;
             for (int iter = 0; iter < 1; iter++)
             {
                 //work.voices[freeze].freeze = !fmode;
@@ -41,8 +42,8 @@ namespace meantone
                 }
 
                 //target = target * 0.97;
-                temp = 1000000.0;
-                work.jostle(temp, 2000);
+                //temp = 1000000.0;
+                //work.jostle(temp, 2000);
                 double bfrac = work.bfrac();
                 double afrac = work.align_count();
                 //temp = 140.0 - 5.0 * (double)iter;
@@ -72,13 +73,13 @@ namespace meantone
                 int effort = 1200;
                 //double target = 0.1;
 
-                bool up = false;
+                bool up = true;
                 int bounce = 0;
                 while (bounce < 1)
                 {
                     if (up)
                     {
-                        const double upper_lim = 800.0;
+                        const double upper_lim = 900.0;
                         while (temp < upper_lim && bfrac > target)
                         {
                             temp = temp / (1.0 - move);
@@ -191,10 +192,12 @@ namespace meantone
             file.WriteLine("f6 0 4096 10 1 0.3 0.3 0.3 0.3");
             file.WriteLine("f7 0 4096 10 1 0.6 0.2 0.1 0.3");
 
-            //work.play(file);
+            work.play(file);
             //work.aaba(4, file);
-            double t = 0.0;
 
+            /*
+            double t = 0.0;
+             
             int j = 0;
             while(j < work.measure_count)
             {
@@ -220,6 +223,7 @@ namespace meantone
 
                 t = tmax;
             }
+            */
             /*
             for (int i = 0; i < map.row_size; i++)
             {

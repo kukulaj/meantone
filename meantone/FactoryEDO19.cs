@@ -16,19 +16,29 @@ namespace meantone
             commas[1] = new Comma(this, new int[] { 1, -5, 0 });
             pumps[1] = new Pump(commas[1], new int[] 
             {5, 18, 10, 4, 17, 11 });
-            pumpStructure = new PumpStructureSimple(this, 1);
+            //pumpStructure = new PumpStructureSimple(this, 1);
 
-            /*
+            pumpStructure = new PumpStructureArray(this, new int[,]
+                {{12,  0, 10,  8,  6,  4,  2, 14, 16 },
+                 {8,  16, 14,  2, 10, 12,  0,  6,  4 },
+                 {4,   2,  6,  0, 14, 16, 10, 12,  8 },
+                 {16, 14,  4, 12,  2,  0,  6,  8, 10 },
+                 {2,   6,  8, 14,  4, 10, 12, 16,  0 },
+                 {10, 12,  0,  6, 16,  8, 14,  4,  2 },
+                 {14, 10, 12,  4,  8,  2, 16,  0,  6},
+                 {6,   4,  2, 16,  0, 14,  8, 10, 12 },
+                 {0,   8, 16, 10, 12,  6,  4,  2, 14 } });
+            
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
             }
 
-            for (int i = 0; i < 13; i++)
+            for (int i = 0; i < 9; i++)
             {
-                scale[(6 * i) % edo] = true;
+                scale[(2 * i) % edo] = true;
             }
-            */
+            
 
             dichotomy = new bool[1, edo];
             dichotomy[0, 0] = true;
