@@ -20,7 +20,9 @@ namespace meantone
         public double[] intervals;
         public double[] best;
         public bool[] scale;
-        
+
+        private bool[] sdichotomy;
+
         public int icnt;
         
         public int[] comma3;
@@ -83,6 +85,12 @@ namespace meantone
             for (int i = 0; i < icnt; i++)
             {
                 intervals[i] = 0.00001;
+            }
+
+            sdichotomy = new bool[edo];
+            for(int i = 0; i < edo; i++)
+            {
+                sdichotomy[i] = true;
             }
 
             bool done = false;
@@ -456,14 +464,11 @@ namespace meantone
             }
             return 1000.0;
         }
-        public virtual double vertical_interval_cost(int dp)
+        public virtual double vertical_interval_cost(int dp, int loc)
         {
-            return interval_cost(dp);
+            return vertical_interval_cost(dp);
         }
-        public virtual double vertical_interval_cost(int dp, int phase)
-        {
-            return interval_cost(dp);
-        }
+        
 
         public override Vector randomVector(Random rand, int root)
         {
@@ -605,5 +610,42 @@ namespace meantone
             sfile.Close();
         }
 
+        public virtual double vertical_interval_cost(int dp)
+        {
+            if (dp < 0)
+            {
+                dp = -dp;
+            }
+
+            if (dp % edo == 0)
+            {
+                return 85.0;
+            }
+
+            if (sdichotomy[dp % edo])
+                return 0.0;
+            return 5000.0;
+        }
+        protected void build_dichotomy(int odd_limit)
+        {
+            sdichotomy = new bool[edo];
+
+            sdichotomy[0] = true;
+
+            for (int odd = 3; odd <= odd_limit; odd += 2)
+            {
+                for (int odd2 = 1; odd2 < odd; odd2 += 2)
+                {
+                    double c = ((double)edo) * Math.Log(((double)odd) / ((double)odd2)) / Math.Log(2);
+                    int k = (int)(0.5 + c);
+                    k = k % edo;
+                    Console.WriteLine(string.Format("{0} consonant", k));
+                    sdichotomy[k] = true;
+                    sdichotomy[edo - k] = true;
+                }
+
+            }
+
+        }
     }
 }

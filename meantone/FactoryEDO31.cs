@@ -43,17 +43,19 @@ namespace meantone
             //PumpStructure b = new PumpStructureBig(this, 9);
             pumpStructure = new PumpStructureTwo(this, 4, 10);
 
-           /*
-            for (int i = 0; i < edo; i++)
-            {
-                scale[i] = false;
-            }
-            
-            for (int i = 0; i < 22; i++)
-            {
-                scale[(7 * i) % edo] = true;
-            }
-            */
+            /*
+             for (int i = 0; i < edo; i++)
+             {
+                 scale[i] = false;
+             }
+
+             for (int i = 0; i < 22; i++)
+             {
+                 scale[(7 * i) % edo] = true;
+             }
+             */
+
+            build_dichotomy(9);
 
             dichotomy = new bool[4][];
             for (int i = 0; i < 4; i++)
@@ -149,6 +151,7 @@ namespace meantone
             */
         }
 
+        /*
         public override double vertical_interval_cost(int dp)
         {
             if (dp < 0)
@@ -162,7 +165,8 @@ namespace meantone
                 return 0.0;
             return 5000.0;
         }
-
+        */
+        /*
         public override double vertical_interval_cost(int dp, int loc)
         {
             if (dp < 0)
@@ -192,5 +196,6 @@ namespace meantone
                 return 0.0;
             return 5000.0;
         }
+        */
     }
 }
