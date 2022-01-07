@@ -38,7 +38,7 @@ namespace meantone
             }
             */
 
-            
+            /*
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
@@ -69,7 +69,7 @@ namespace meantone
             scale[298] = true;
             scale[310] = true;
             scale[331] = true;
-
+            */
             /*
             for (int i = 0; i < 24; i++)
             {
