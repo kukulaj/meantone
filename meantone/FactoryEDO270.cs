@@ -9,7 +9,7 @@ namespace meantone
 
         public FactoryEDO270(Type_Map map, bool[] pinc) : base(270, map, pinc)
         {
-            build_dichotomy(11);
+            build_dichotomy(13);
             commas = new Comma[1];
             pumps = new Pump[1];
             commas[0] = new Comma(this, new int[] { 2, 2, 1, 3 });
