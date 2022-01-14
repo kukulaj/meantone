@@ -18,6 +18,7 @@ namespace meantone
         public StreamWriter trace;
         public Type_Map map;
         public string file_prefix;
+        public double rcost;
 
 
         public Work(Type_Map m)
@@ -33,11 +34,11 @@ namespace meantone
             primes[0] = true;
             primes[1] = true;
             primes[2] = true;
-            primes[3] = true;
-            primes[4] = true;
-            primes[5] = true;
+            //primes[3] = true;
+            //primes[4] = true;
+            //primes[5] = true;
 
-            vectorFactory = new FactoryEDO270( map, primes);
+            vectorFactory = new FactoryEDO118( map, primes);
             vectorFactory.show_pattern();
             vectorFactory.scaleSearch();
             rand = map.rand;
@@ -254,6 +255,7 @@ namespace meantone
                 System.Console.WriteLine(string.Format("{0} should be {1}", ccost, checkit2));
             }
 
+            rcost = checkit2;
             return tdel;
         }
 

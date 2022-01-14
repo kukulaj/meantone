@@ -36,9 +36,9 @@ namespace meantone
             //PumpStructure a118 = new PumpStructureSimple(this, 1);
             //PumpStructure b118 = new PumpStructureBig(this, 2);
             //pumpStructure = new PumpStructureSum(this, a118, b118);
-            pumpStructure = new PumpStructureSimple(this, 0);
+            pumpStructure = new PumpStructureRandom(this);
 
-            
+            /*
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
@@ -47,7 +47,8 @@ namespace meantone
             {
                 scale[(69 * i) % edo] = true;
             }
-            
+            */
+
             /*
             for (int i = 0; i < 42; i++)
             {
@@ -90,6 +91,8 @@ namespace meantone
 
         public override double vertical_interval_cost(int dp, int loc)
         {
+            return interval_cost(dp);
+
             if (dp < 0)
             {
                 dp = -dp;

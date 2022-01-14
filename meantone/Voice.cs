@@ -29,6 +29,7 @@ namespace meantone
             vi = voice;
             root = (3 * vi) / 4;
             rootlf = -0.1 + 0.5 * (double)vi;
+            
             temp_factor = 1.0;
             measure_count = work.measure_count;
             measures = new Measure[measure_count];
@@ -40,8 +41,8 @@ namespace meantone
             {
                 measures[i] = new Measure(this, map, i);
                 measures[i].temp_factor = 1.0; // - 0.15 * Math.Cos(2.0 * Math.PI * ((double)(i)) / ((double)map.size));
-                measures[i].temp_factor = 1.25
-                    - 0.5 * (double)(i % map.row_size) / (double)(map.row_size);
+               // measures[i].temp_factor = 1.25
+                //    - 0.5 * (double)(i % map.row_size) / (double)(map.row_size);
             }
 
             

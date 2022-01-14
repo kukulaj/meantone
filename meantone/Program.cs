@@ -8,13 +8,14 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5290));
+            Type_Map map = new Type_Map(new Random(5292));
 
             Work work;
 
             work = new Work(map);
             work.check();
-      
+            work.amplitudes();
+
             double cost = work.cost();
             Console.WriteLine(string.Format("initial cost {0}", cost));
             work.bfrac();
@@ -26,11 +27,12 @@ namespace meantone
             {
                 work.voices[vi].freeze = fmode;
             }
-            work.voices[0].freeze = true;
+            //work.voices[0].freeze = true;
 
             Vertex.parallelism = 0.0;
             double temp = 10.0;
-            double target = 0.021;
+            double target = 0.9;
+            int windex = 0;
             for (int iter = 0; iter < 1; iter++)
             {
                 //work.voices[freeze].freeze = !fmode;
@@ -42,8 +44,8 @@ namespace meantone
                 }
 
                 //target = target * 0.97;
-                //temp = 1000000.0;
-                //work.jostle(temp, 2000);
+                temp = 1000000.0;
+                work.jostle(temp, 4000);
                 double bfrac = work.bfrac();
                 double afrac = work.align_count();
                 //temp = 140.0 - 5.0 * (double)iter;
@@ -69,11 +71,11 @@ namespace meantone
                
                 //bfrac = 0.0;
 
-                double move = 0.02;
-                int effort = 1200;
+                double move = 0.015;
+                int effort = 2000;
                 //double target = 0.1;
 
-                bool up = true;
+                bool up = false;
                 int bounce = 0;
                 while (bounce < 1)
                 {
@@ -87,15 +89,19 @@ namespace meantone
                             bfrac = work.bfrac();
                             afrac = work.align_count();
                         }
-                        if(temp >= upper_lim)
+                        if (temp >= upper_lim)
                         {
-                            target = 0.03 +bfrac * 0.97;
+                            target = 0.03 + bfrac * 0.97;
                             Console.WriteLine(string.Format("new target: {0}", target));
                         }
                     }
                     else
                     {
-                        const double lower_lim = 450.0;
+                        const double lower_lim = 2.0;
+
+                        bool w1 = false;
+                        double wcost = 0.0;
+
                         while (temp > lower_lim && bfrac < target)
                         {
                             temp *= (1.0 - move);
@@ -103,6 +109,40 @@ namespace meantone
                             bfrac = work.bfrac();
                             afrac = work.align_count();
                             //effort = (108 * effort) / 100;
+
+                            double rcost = work.rcost;
+                            if ((!w1 || rcost < 0.8 * wcost) && temp < 5000.0)
+                            {
+                                w1 = true;
+                                wcost = rcost;
+                                windex++;
+
+                                StreamWriter wfile = new StreamWriter(work.file_prefix 
+                                    + "score"
+                                    +string.Format("{0}", windex)
+                                    +".txt");
+
+                                // work.voices[0].mute = true;
+
+                                wfile.WriteLine("f1 0 4096 10 1");
+                                wfile.WriteLine("f2 0 4096 10 1 0.5 0.3 0.25 0.2 0.167 0.14 0.125 .111");
+                                wfile.WriteLine("f3 0 4096 10 1 0.3 0.5 0.25 0.2 0.167 0.14 0.125 .111");
+                                wfile.WriteLine("f4 0 4096 10 1 0.3 0.4 0.4 ");
+                                wfile.WriteLine("f5 0 4096 10 1 0.5 0.3 ");
+                                wfile.WriteLine("f6 0 4096 10 1 0.3 0.3 0.3 0.3");
+                                wfile.WriteLine("f7 0 4096 10 1 0.6 0.2 0.1 0.3");
+
+                                work.play(wfile);
+                                wfile.Close();
+
+                            }
+
+
+
+                                    
+
+
+
                         }
                         if(temp <= lower_lim)
                         {
@@ -119,7 +159,7 @@ namespace meantone
                     Console.WriteLine(string.Format("bounce = {0};", bounce));
                 }
 
-               
+               /*
                 Vertex.parallelism = 1.0;
                 double pf = work.align_count();
                 double pinc = 1.3;
@@ -136,7 +176,7 @@ namespace meantone
                 work.jostle(temp, 2000);
                 work.bfrac();
                 work.align_count();
-
+               */
                 /*
                 for(int vi=0; vi < work.voice_count; vi++)
                 {
