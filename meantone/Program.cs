@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5292));
+            Type_Map map = new Type_Map(new Random(5293));
 
             Work work;
 
@@ -45,7 +45,7 @@ namespace meantone
 
                 //target = target * 0.97;
                 temp = 1000000.0;
-                work.jostle(temp, 4000);
+                //work.jostle(temp, 4000);
                 double bfrac = work.bfrac();
                 double afrac = work.align_count();
                 //temp = 140.0 - 5.0 * (double)iter;
@@ -72,7 +72,7 @@ namespace meantone
                 //bfrac = 0.0;
 
                 double move = 0.015;
-                int effort = 2000;
+                int effort = 100;
                 //double target = 0.1;
 
                 bool up = false;

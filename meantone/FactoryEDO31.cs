@@ -41,7 +41,7 @@ namespace meantone
             pumps[10] = new Pump(commas[9], new int[] {0, 21, 11, 1, 14, 4, 25 } );
             //PumpStructure a = new PumpStructureSimple(this, 1);
             //PumpStructure b = new PumpStructureBig(this, 9);
-            pumpStructure = new PumpStructureTwo(this, 4, 10);
+            pumpStructure = new PumpStructureRandom(this);
 
             /*
              for (int i = 0; i < edo; i++)
@@ -150,52 +150,55 @@ namespace meantone
             scale[13] = true;
             */
         }
-
-        /*
-        public override double vertical_interval_cost(int dp)
-        {
-            if (dp < 0)
-            {
-                dp = -dp;
-            }
-            if (dp % edo == 0)
-                return 100.0;
-
-            if (dichotomy[0][dp % edo])
-                return 0.0;
-            return 5000.0;
-        }
-        */
-        /*
         public override double vertical_interval_cost(int dp, int loc)
         {
-            if (dp < 0)
-            {
-                dp = -dp;
-            }
-            int phase = 3;
-            switch(loc%6)
-            {
-                case 1:
-                case 4:
-                    phase = 0;
-                    break;
-                case 2:
-                    phase = 1;
-                    break;
-                case 3:
-                    phase = 2;
-                    break;
-                default:
-                    break;
-            }
-            if (dp % edo == 0)
-                return 100.0;
-
-            if (dichotomy[0][dp % edo])
-                return 0.0;
-            return 5000.0;
+            return interval_cost(dp);
         }
-        */
-    }
+            /*
+            public override double vertical_interval_cost(int dp)
+            {
+                if (dp < 0)
+                {
+                    dp = -dp;
+                }
+                if (dp % edo == 0)
+                    return 100.0;
+
+                if (dichotomy[0][dp % edo])
+                    return 0.0;
+                return 5000.0;
+            }
+            */
+            /*
+            public override double vertical_interval_cost(int dp, int loc)
+            {
+                if (dp < 0)
+                {
+                    dp = -dp;
+                }
+                int phase = 3;
+                switch(loc%6)
+                {
+                    case 1:
+                    case 4:
+                        phase = 0;
+                        break;
+                    case 2:
+                        phase = 1;
+                        break;
+                    case 3:
+                        phase = 2;
+                        break;
+                    default:
+                        break;
+                }
+                if (dp % edo == 0)
+                    return 100.0;
+
+                if (dichotomy[0][dp % edo])
+                    return 0.0;
+                return 5000.0;
+            }
+            */
+        }
 }
