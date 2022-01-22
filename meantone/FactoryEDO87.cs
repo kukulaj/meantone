@@ -25,7 +25,7 @@ namespace meantone
             pumps[5] = new Pump(commas[5],
                // new int[] {0, 28, 45, 19, 66, 15, 51 });
                new int[] { 0, 28, 45, 19, 66, 15, 51 });
-            pumpStructure = new PumpStructureSimple(this, 5);
+            pumpStructure = new PumpStructureRandom(this);
             //PumpStructure b87 = new PumpStructureBig(this, 3);
             //pumpStructure = new PumpStructureSum(this, a87, b87);
 
@@ -56,6 +56,8 @@ namespace meantone
         }
         public override double vertical_interval_cost(int dp, int loc)
         {
+            return interval_cost(dp);
+
             if (dp < 0)
             {
                 dp = -dp;
