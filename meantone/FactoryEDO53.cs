@@ -33,7 +33,7 @@ namespace meantone
             pumps[4] = new Pump(commas[3],
                new int[] {36, 14,  24, 2, 19 });
 
-            pumpStructure = new PumpStructureSimple(this, 1);
+            pumpStructure = new PumpStructureRandom(this);
             //PumpStructure b53 = new PumpStructureBig(this, 2);
             //pumpStructure = new PumpStructureSum(this, a53, b53);
 
@@ -44,7 +44,7 @@ namespace meantone
             scale[11] = true;
             */
 
-            
+            /*
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
@@ -54,7 +54,7 @@ namespace meantone
             {
                 scale[(31 * i) % edo] = true;
             }
-            
+            */
             
 
             dichotomy = new bool[3,edo];
@@ -98,6 +98,7 @@ namespace meantone
 
         public override double vertical_interval_cost(int dp, int loc)
         {
+            return interval_cost(dp);
             if (dp < 0)
             {
                 dp = -dp;
