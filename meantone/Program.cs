@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5301));
+            Type_Map map = new Type_Map(new Random(5302));
 
             Work work;
 
@@ -18,6 +18,7 @@ namespace meantone
 
             double cost = work.cost();
             Console.WriteLine(string.Format("initial cost {0}", cost));
+            StreamWriter logfile = new StreamWriter(work.file_prefix + "log.txt");
             work.bfrac();
             work.histogram();
             int freeze = 0;
@@ -45,7 +46,7 @@ namespace meantone
 
                 //target = target * 0.97;
                 temp = 1000000.0;
-                //work.jostle(temp, 4000);
+                work.jostle(temp, 8000);
                 double bfrac = work.bfrac();
                 double afrac = work.align_count();
                 //temp = 140.0 - 5.0 * (double)iter;
@@ -111,6 +112,9 @@ namespace meantone
                             //effort = (108 * effort) / 100;
 
                             double rcost = work.rcost;
+
+                            logfile.WriteLine(string.Format("{0} {1}", temp, rcost));
+
                             if ((!w1 || rcost < 0.8 * wcost) && temp < 5000.0)
                             {
                                 w1 = true;
@@ -215,6 +219,8 @@ namespace meantone
             work.chords(cfile);
             cfile.Close();
             */
+
+            logfile.Close();
 
             work.amplitudes();
 

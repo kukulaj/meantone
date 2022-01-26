@@ -24,7 +24,7 @@ namespace meantone
             pumps[1] = new Pump(commas[1], path1);
 
 
-            pumpStructure = new PumpStructureSimple(this, 1);
+            pumpStructure = new PumpStructureRandom(this);
             //PumpStructure b53 = new PumpStructureBig(this, 2);
             //pumpStructure = new PumpStructureSum(this, a53, b53);
 
@@ -72,6 +72,7 @@ namespace meantone
 
         public override double vertical_interval_cost(int dp, int loc)
         {
+            return interval_cost(dp);
             if (dp < 0)
             {
                 dp = -dp;
