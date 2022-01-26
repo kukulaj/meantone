@@ -26,7 +26,7 @@ namespace meantone
             }
             commas[2] = new Comma(this, new int[] { -1, 8, 0 });
             pumps[3] = new Pump(commas[0], path );
-            pumpStructure = new PumpStructureSimple(this, 3);
+            pumpStructure = new PumpStructureRandom(this);
             /*
             for (int i = 0; i < edo; i++)
             {
@@ -73,6 +73,7 @@ namespace meantone
 
         public override double vertical_interval_cost(int dp, int loc)
         {
+            return interval_cost(dp);
             if (dp < 0)
             {
                 dp = -dp;

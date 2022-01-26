@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5302));
+            Type_Map map = new Type_Map(new Random(5303));
 
             Work work;
 
@@ -16,9 +16,11 @@ namespace meantone
             work.check();
             work.amplitudes();
 
+            Meter meter = new Meter(work);
+
             double cost = work.cost();
             Console.WriteLine(string.Format("initial cost {0}", cost));
-            StreamWriter logfile = new StreamWriter(work.file_prefix + "log.txt");
+          
             work.bfrac();
             work.histogram();
             int freeze = 0;
@@ -32,7 +34,7 @@ namespace meantone
 
             Vertex.parallelism = 0.0;
             double temp = 10.0;
-            double target = 0.9;
+            meter.Set_Target(0.09);
             int windex = 0;
             for (int iter = 0; iter < 1; iter++)
             {
@@ -47,8 +49,8 @@ namespace meantone
                 //target = target * 0.97;
                 temp = 1000000.0;
                 work.jostle(temp, 8000);
-                double bfrac = work.bfrac();
-                double afrac = work.align_count();
+                meter.Step(temp);
+                
                 //temp = 140.0 - 5.0 * (double)iter;
                 // temp = 3000.0;
                 //work.bfrac();
@@ -67,53 +69,47 @@ namespace meantone
                 //work.jostle(temp, 8000);
                 //work.jostle(5000.0, 1500);
 
-                bfrac = work.bfrac();
-                afrac = work.align_count();
-               
-                //bfrac = 0.0;
+                
 
                 double move = 0.015;
-                int effort = 100;
+                int effort = 300;
                 //double target = 0.1;
 
                 bool up = false;
+                meter.Set_Up(up);
                 int bounce = 0;
-                while (bounce < 1)
+                while (bounce < 2)
                 {
+                    bool hit = false;
                     if (up)
                     {
-                        const double upper_lim = 650.0;
-                        while (temp < upper_lim && bfrac > target)
+                        const double upper_lim = 3000.0;
+                        while (temp < upper_lim && !hit)
                         {
                             temp = temp / (1.0 - move);
                             work.jostle(temp, effort);
-                            bfrac = work.bfrac();
-                            afrac = work.align_count();
+                            hit = meter.Step(temp);
                         }
                         if (temp >= upper_lim)
                         {
-                            target = 0.03 + bfrac * 0.97;
-                            Console.WriteLine(string.Format("new target: {0}", target));
+                            meter.Adjust_Target();
                         }
                     }
                     else
                     {
-                        const double lower_lim = 2.0;
+                        const double lower_lim = 1.0;
 
                         bool w1 = false;
                         double wcost = 0.0;
 
-                        while (temp > lower_lim && bfrac < target)
+                        while (temp > lower_lim && !hit)
                         {
                             temp *= (1.0 - move);
                             work.jostle(temp, effort);
-                            bfrac = work.bfrac();
-                            afrac = work.align_count();
+                            hit = meter.Step(temp);
                             //effort = (108 * effort) / 100;
 
                             double rcost = work.rcost;
-
-                            logfile.WriteLine(string.Format("{0} {1}", temp, rcost));
 
                             if ((!w1 || rcost < 0.8 * wcost) && temp < 5000.0)
                             {
@@ -141,23 +137,17 @@ namespace meantone
 
                             }
 
-
-
-                                    
-
-
-
                         }
                         if(temp <= lower_lim)
                         {
-                            target = bfrac * 0.95;
-                            Console.WriteLine(string.Format("new target: {0}", target));
+                            meter.Adjust_Target();
                         }
                          
                     }
                         
                     up = !up;
-                    effort = (2 * effort) ;
+                    meter.Set_Up(up);
+                    effort = (12 * effort) / 10 ;
                     move *= 0.9;
                     bounce++;
                     Console.WriteLine(string.Format("bounce = {0};", bounce));
@@ -220,7 +210,7 @@ namespace meantone
             cfile.Close();
             */
 
-            logfile.Close();
+            meter.Close();
 
             work.amplitudes();
 
