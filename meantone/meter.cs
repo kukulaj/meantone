@@ -12,12 +12,12 @@ namespace meantone
         Boundary bound;
         bool up;
         int calls;
-        double[] old_capacity;
-        double avg_capacity;
+         
         int capi;
         int capacity_decrease;
         double[] old_temp;
         double[] old_cost;
+        double[] old_capacity;
         int blen;
         StreamWriter logfile;
         double target;
@@ -26,12 +26,13 @@ namespace meantone
         {
             work = w;
             logfile = new StreamWriter(work.file_prefix + "log.txt");
-            blen = 51;
-            old_capacity = new double[blen];
+            blen = 100;
+             
             old_cost = new double[blen];
             old_temp = new double[blen];
+            old_capacity = new double[blen];
 
-            avg_capacity = 0.0;
+          
             capi = 0;
             
             bound = Boundary.HeatCapacity;
@@ -48,8 +49,7 @@ namespace meantone
         public void Set_Up(bool pup)
         {
             up = pup;
-            calls = 0;
-            capi = 0;
+             
             capacity_decrease = 0;
         }
         public void Set_Target(double t)
@@ -81,43 +81,61 @@ namespace meantone
         {
             bool result = false;
             bool cresult = false;
-
+            
             old_temp[capi] = temp;
             old_cost[capi] = work.rcost;
+            double slope = 0.0;
 
-            int next_capi = (capi + 1) % old_capacity.Length;
-            if (calls > old_capacity.Length + 5)
+            int prev_capi = (capi + old_temp.Length - 1) % old_temp.Length;
+            if (calls > 1)
             {
-                double capacity = 0.0;
-                capacity = (old_cost[capi] - old_cost[next_capi]) 
-                    / (old_temp[capi] - old_temp[next_capi]);
-                Console.WriteLine(string.Format("heat capacity {0} -> {1}",
-                    avg_capacity, capacity));
+                old_capacity[capi] = (old_cost[capi] - old_cost[prev_capi])
+                    /(old_temp[capi] - old_temp[prev_capi]);
+            }
 
-                if (capacity < 0.8 * old_capacity[next_capi])
+
+            int next_capi = (capi + 1) % old_temp.Length;
+            if (calls > old_temp.Length + 3)
+            {
+                double st2 = 0.0;
+                double sc = 0.0;
+                double sct = 0.0;
+                double st = 0.0;
+
+                for(int i = 0; i < old_temp.Length; i++)
+                {
+                    st2 += old_temp[i] * old_temp[i];
+                    st += old_temp[i];
+                    sc += old_capacity[i];
+                    sct += old_capacity[i] * old_temp[i];
+                }
+                double n = (double)(old_temp.Length);
+
+                double intersect = (sc * st2 - st * sct) / (n * st2 - st * st);
+                slope = (n * sct - st * sc) / (n * st2 - st * st);
+                Console.WriteLine(string.Format("capacity = {0}; interect = {1}; slope = {2}",
+                    old_capacity[capi], intersect, slope));
+
+                if ((up && slope < -10.0) || (!up && slope > 10.0))
                 {
                     capacity_decrease++;
-                    if (capacity_decrease > 8)
+                    if (capacity_decrease > 18)
                     {
                         cresult = true;
                     }
                 }
-                else
+                else 
                 {
                     capacity_decrease = 0;
                 }
-
-                double weight = 0.9;
-                avg_capacity = weight * avg_capacity + (1.0 - weight) * capacity;
-                old_capacity[capi] = avg_capacity;
-                capi = next_capi;
             }
+            capi = next_capi;
             calls++;
 
             double bfrac = work.bfrac();
             double afrac = work.align_count();
 
-            logfile.WriteLine(string.Format("{0} {1} {2}", temp, work.rcost, avg_capacity));
+            logfile.WriteLine(string.Format("{0} {1} {2}", temp, work.rcost, slope));
 
             switch (bound)
             {
@@ -128,7 +146,7 @@ namespace meantone
                     result = up ? (afrac < target) : (afrac > target);
                     break;
                 case Boundary.HeatCapacity:
-                    result = cresult;
+                    result = cresult; 
                     break;
             }         
 

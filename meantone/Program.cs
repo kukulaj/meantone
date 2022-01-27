@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5303));
+            Type_Map map = new Type_Map(new Random(5305));
 
             Work work;
 
@@ -33,7 +33,7 @@ namespace meantone
             //work.voices[0].freeze = true;
 
             Vertex.parallelism = 0.0;
-            double temp = 10.0;
+            double temp = 20.0;
             meter.Set_Target(0.09);
             int windex = 0;
             for (int iter = 0; iter < 1; iter++)
@@ -42,19 +42,30 @@ namespace meantone
 
                 for (int vi = 0; vi < work.voice_count; vi++)
                 {
-                    Console.WriteLine(string.Format("freeze[[0] = {1}",
+                    Console.WriteLine(string.Format("freeze[{0}] = {1}",
                         vi, work.voices[vi].freeze));
                 }
 
                 //target = target * 0.97;
                 temp = 1000000.0;
-                work.jostle(temp, 8000);
-                meter.Step(temp);
-                
+                work.jostle(temp, 1000);
+                double ocost = work.rcost;
+                work.jostle(temp, 1000);
+                double ncost = work.rcost;
+                while (ncost > ocost)
+                {
+                    ocost = ncost;
+                    work.jostle(temp, 1000);
+                    ncost = work.rcost;
+                }
+
+
+                //meter.Step(temp);
+
                 //temp = 140.0 - 5.0 * (double)iter;
                 // temp = 3000.0;
                 //work.bfrac();
-                
+
                 /*
                 while (afrac > 0.36)
                 {
@@ -69,16 +80,16 @@ namespace meantone
                 //work.jostle(temp, 8000);
                 //work.jostle(5000.0, 1500);
 
-                
+
 
                 double move = 0.015;
-                int effort = 300;
+                int effort = 200;
                 //double target = 0.1;
 
                 bool up = false;
                 meter.Set_Up(up);
                 int bounce = 0;
-                while (bounce < 2)
+                while (bounce < 7)
                 {
                     bool hit = false;
                     if (up)
