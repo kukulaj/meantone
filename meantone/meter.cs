@@ -26,7 +26,7 @@ namespace meantone
         {
             work = w;
             logfile = new StreamWriter(work.file_prefix + "log.txt");
-            blen = 100;
+            blen = 80;
              
             old_cost = new double[blen];
             old_temp = new double[blen];
@@ -152,7 +152,7 @@ namespace meantone
                 if ((up && slope < -5.0) || (!up && slope > 5.0))
                 {
                     capacity_decrease++;
-                    if (capacity_decrease > 10)
+                    if (capacity_decrease > 3)
                     {
                         cresult = true;
                     }
