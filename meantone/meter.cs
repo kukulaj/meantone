@@ -81,9 +81,10 @@ namespace meantone
         {
             bool result = false;
             bool cresult = false;
-            
+            double cost = work.rcost;
+
             old_temp[capi] = temp;
-            old_cost[capi] = work.rcost;
+            old_cost[capi] = cost;
             double slope = 0.0;
 
             int prev_capi = (capi + old_temp.Length - 1) % old_temp.Length;
@@ -98,28 +99,60 @@ namespace meantone
             if (calls > old_temp.Length + 3)
             {
                 double st2 = 0.0;
+                double st3 = 0.0;
+                double st4 = 0.0;
                 double sc = 0.0;
                 double sct = 0.0;
+                double sct2 = 0.0;
                 double st = 0.0;
 
-                for(int i = 0; i < old_temp.Length; i++)
+                for(int i = 0; i < old_temp.Length; i++)            
                 {
-                    st2 += old_temp[i] * old_temp[i];
                     st += old_temp[i];
-                    sc += old_capacity[i];
-                    sct += old_capacity[i] * old_temp[i];
+                    st2 += old_temp[i] * old_temp[i];
+                    st3 += old_temp[i] * old_temp[i] * old_temp[i];
+                    st4 += old_temp[i] * old_temp[i] * old_temp[i] * old_temp[i];
+                   
+                    sc += old_cost[i];
+                    sct += old_cost[i] * old_temp[i];
+                    sct2 += old_cost[i] * old_temp[i] * old_temp[i];
                 }
                 double n = (double)(old_temp.Length);
 
-                double intersect = (sc * st2 - st * sct) / (n * st2 - st * st);
-                slope = (n * sct - st * sc) / (n * st2 - st * st);
-                Console.WriteLine(string.Format("capacity = {0}; interect = {1}; slope = {2}",
-                    old_capacity[capi], intersect, slope));
+                double cl = n * sct - sc * st;
+                double cm = st * st - n * st2; 
+                double cn = st2*st - n * st3;
+                double cp = n * sct2 - sc * st2;
+                //double cq = st * st2 - n * st3;
+                double cr = st2 * st2 - n * st4;
 
-                if ((up && slope < -10.0) || (!up && slope > 10.0))
+                double cc =  (cm * cp - cn * cl)/ (cn * cn - cm * cr);
+                double cb = (-cl - cn * cc) / cm;
+                double ca = (sc - cb * st - cc * st2) / n;
+
+                double check1 = sc - n * ca - cb * st - cc * st2;
+                double check2 = sct -  ca * st  - cb * st2 - cc * st3;
+                double check3 = sct2 - ca * st2 - cb * st3 - cc * st4;
+
+                /*
+                if (check1 * check1 + check2 * check2 + check3 * check3 > 20.0)
+                {
+                    double check4 = cl + cb * cm + cc * cn;
+                    double check5 = cp + cb * cn + cc * cr;
+                    Console.WriteLine("oops");
+                }
+                */
+
+                slope = cc;
+                double model = cc * temp * temp + cb * temp + ca;
+                 
+                Console.WriteLine(string.Format("capacity = {0}; model = {1}; slope = {2}",
+                    old_capacity[capi], model, slope));
+
+                if ((up && slope < -5.0) || (!up && slope > 5.0))
                 {
                     capacity_decrease++;
-                    if (capacity_decrease > 18)
+                    if (capacity_decrease > 10)
                     {
                         cresult = true;
                     }
