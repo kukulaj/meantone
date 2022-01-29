@@ -164,7 +164,7 @@ namespace meantone
                     Console.WriteLine(string.Format("bounce = {0};", bounce));
                 }
 
-               /*
+               
                 Vertex.parallelism = 1.0;
                 double pf = work.align_count();
                 double pinc = 1.3;
@@ -181,7 +181,7 @@ namespace meantone
                 work.jostle(temp, 2000);
                 work.bfrac();
                 work.align_count();
-               */
+               
                 /*
                 for(int vi=0; vi < work.voice_count; vi++)
                 {
