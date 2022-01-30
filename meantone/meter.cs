@@ -26,7 +26,7 @@ namespace meantone
         {
             work = w;
             logfile = new StreamWriter(work.file_prefix + "log.txt");
-            blen = 80;
+            blen = 50;
              
             old_cost = new double[blen];
             old_temp = new double[blen];
