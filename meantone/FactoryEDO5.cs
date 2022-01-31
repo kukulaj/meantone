@@ -47,7 +47,7 @@ namespace meantone
             for(int i = 0; i < pcnt; i++)
             {
                 cost[i] = bc;
-                bc = 1.2 * (bc + 0.4);
+                bc = 1.2 * (bc + 0.1);
             }
 
             pstep = new int[pcnt];

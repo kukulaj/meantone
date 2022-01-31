@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5310));
+            Type_Map map = new Type_Map(new Random(5311));
 
             Work work;
 
@@ -33,7 +33,7 @@ namespace meantone
             //work.voices[0].freeze = true;
 
             Vertex.parallelism = 0.0;
-            double temp = 20.0;
+            double temp = 3.0;
             meter.Set_Target(0.09);
             int windex = 0;
             for (int iter = 0; iter < 1; iter++)
@@ -47,6 +47,7 @@ namespace meantone
                 }
 
                 //target = target * 0.97;
+                /*
                 temp = 1000000.0;
                 work.jostle(temp, 1000);
                 double ocost = work.rcost;
@@ -58,7 +59,17 @@ namespace meantone
                     work.jostle(temp, 1000);
                     ncost = work.rcost;
                 }
-
+                */
+                work.jostle(temp, 1000);
+                double ocost = work.rcost;
+                work.jostle(temp, 1000);
+                double ncost = work.rcost;
+                while (ncost > ocost)
+                {
+                    ocost = ncost;
+                    work.jostle(temp, 1000);
+                    ncost = work.rcost;
+                }
 
                 //meter.Step(temp);
 
@@ -86,10 +97,10 @@ namespace meantone
                 int effort = 20;
                 //double target = 0.1;
 
-                bool up = false;
+                bool up = true;
                 meter.Set_Up(up);
                 int bounce = 0;
-                while (bounce < 12)
+                while (bounce < 11)
                 {
                     bool hit = false;
                     if (up)
@@ -108,7 +119,7 @@ namespace meantone
                     }
                     else
                     {
-                        const double lower_lim = 1.0;
+                        const double lower_lim = 0.2;
 
                         bool w1 = false;
                         double wcost = 0.0;
@@ -164,7 +175,7 @@ namespace meantone
                     Console.WriteLine(string.Format("bounce = {0};", bounce));
                 }
 
-               /*
+               
                 Vertex.parallelism = 1.0;
                 double pf = work.align_count();
                 double pinc = 1.3;
@@ -181,7 +192,7 @@ namespace meantone
                 work.jostle(temp, 2000);
                 work.bfrac();
                 work.align_count();
-               */
+               
 
                 /*
                 for(int vi=0; vi < work.voice_count; vi++)

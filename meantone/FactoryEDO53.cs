@@ -11,8 +11,8 @@ namespace meantone
         private bool[,] dichotomy;
         public FactoryEDO53(Type_Map map, bool[] pinc) : base(53, map, pinc)
         {
-            commas = new Comma[4];
-            pumps = new Pump[5];
+            commas = new Comma[5];
+            pumps = new Pump[6];
             commas[0] = new Comma(this, new int[] { 5, -6, 0 });
             int[] path = new int[6];
             for(int i=0; i<6; i++)
@@ -35,7 +35,11 @@ namespace meantone
             pumps[4] = new Pump(commas[3],
                new int[] {36, 14,  24, 2, 19 });
 
-            pumpStructure = new PumpStructureRandom(this);
+            commas[4] = new Comma(this, new int[] { 1, 1, 0, 0, 3 });
+            pumps[5] = new Pump(commas[4]);
+               
+
+            pumpStructure = new PumpStructureSimple(this, 5);
             //PumpStructure b53 = new PumpStructureBig(this, 2);
             //pumpStructure = new PumpStructureSum(this, a53, b53);
 
@@ -153,6 +157,8 @@ namespace meantone
 
         public override bool inScale(int pitch, int loc)
         {
+            return true;
+
             bool result = true;
             switch ((loc / 27) % 27)
             {
