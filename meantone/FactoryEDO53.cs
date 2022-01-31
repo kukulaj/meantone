@@ -6,6 +6,7 @@ namespace meantone
 {
     class FactoryEDO53 : FactoryEDO5
     {
+        private bool[] schismatic;
         private bool[] hanson;
         private bool[] diatonic;
         private bool[,] dichotomy;
@@ -39,7 +40,7 @@ namespace meantone
             pumps[5] = new Pump(commas[4]);
                
 
-            pumpStructure = new PumpStructureSimple(this, 5);
+            pumpStructure = new PumpStructureRandom(this);
             //PumpStructure b53 = new PumpStructureBig(this, 2);
             //pumpStructure = new PumpStructureSum(this, a53, b53);
 
@@ -72,12 +73,14 @@ namespace meantone
             {
                 scale[i] = false;
             }
+            */
 
+            schismatic = new bool[53];
             for (int i = 0; i < 17; i++)
             {
-                scale[(31 * i) % edo] = true;
+                schismatic[(31 * i) % edo] = true;
             }
-            */
+            
 
 
             dichotomy = new bool[3,edo];
@@ -157,7 +160,7 @@ namespace meantone
 
         public override bool inScale(int pitch, int loc)
         {
-            return true;
+            return inAScale(schismatic, pitch);
 
             bool result = true;
             switch ((loc / 27) % 27)
