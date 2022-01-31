@@ -121,15 +121,9 @@ namespace meantone
             return i;
         }
 
-        public override bool inScale()
+        public override bool inScale(int loc)
         {
-            int period = factory.scale.Length; 
-            int rem = pitch % period;
-            if (rem < 0)
-            {
-                rem = rem + period;
-            }
-            return factory.scale[rem];
+            return factory.inScale(pitch, loc);
         }
 
     }

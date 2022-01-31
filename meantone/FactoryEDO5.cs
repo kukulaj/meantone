@@ -647,5 +647,18 @@ namespace meantone
             }
 
         }
+
+        public virtual bool inScale(int pitch, int loc)
+        {
+            int period = scale.Length;
+            int rem = pitch % period;
+            if (rem < 0)
+            {
+                rem = rem + period;
+            }
+            return scale[rem];
+        }
+
+
     }
 }

@@ -6,6 +6,8 @@ namespace meantone
 {
     class FactoryEDO53 : FactoryEDO5
     {
+        private bool[] hanson;
+        private bool[] diatonic;
         private bool[,] dichotomy;
         public FactoryEDO53(Type_Map map, bool[] pinc) : base(53, map, pinc)
         {
@@ -37,6 +39,23 @@ namespace meantone
             //PumpStructure b53 = new PumpStructureBig(this, 2);
             //pumpStructure = new PumpStructureSum(this, a53, b53);
 
+            hanson= new bool[53];
+            diatonic = new bool[53];
+
+            diatonic[0] = true;
+            diatonic[9] = true;
+            diatonic[17] = true;
+            diatonic[22] = true;
+            diatonic[31] = true;
+            diatonic[40] = true;
+            diatonic[48] = true;
+
+            for (int i = 0; i < 19; i++)
+            { 
+                hanson[(i*14)%53] = true;
+            }
+
+
             /*
             scale = new bool[14];
             scale[0] = true;
@@ -55,7 +74,7 @@ namespace meantone
                 scale[(31 * i) % edo] = true;
             }
             */
-            
+
 
             dichotomy = new bool[3,edo];
             dichotomy[0,0] = true;
@@ -120,5 +139,57 @@ namespace meantone
                 return 0.0;
             return 5000.0;
         }
+
+        private  bool inAScale(bool[] aScale, int pitch)
+        {
+            int period = aScale.Length;
+            int rem = pitch % period;
+            if (rem < 0)
+            {
+                rem = rem + period;
+            }
+            return aScale[rem];
+        }
+
+        public override bool inScale(int pitch, int loc)
+        {
+            bool result = true;
+            switch ((loc / 27) % 27)
+            {
+                case 0:
+                    result = inAScale(diatonic, pitch);
+                    break;
+                case 7:
+                case 8:
+                    result = inAScale(diatonic, pitch - 28);
+                    break;
+                case 15:
+                case 16:
+                    result = inAScale(diatonic, pitch-3);
+                    break;
+                case 23:
+                case 24:
+                case 25:
+                case 26:
+                    result = inAScale(diatonic, pitch);
+                    break;
+                
+                case 1:
+                case 6:
+                case 9:
+                case 14:
+                case 17:
+                case 22:
+                    result = true;
+                    break;
+                default:
+                    result = inAScale(hanson, pitch);
+                    break;
+
+            }
+            return result;
+        }
+            
+    
     }
 }

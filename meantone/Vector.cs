@@ -64,7 +64,7 @@ namespace meantone
             return new Interval();
         }
 
-        public virtual bool inScale()
+        public virtual bool inScale(int loc)
         {
             return true;
         }

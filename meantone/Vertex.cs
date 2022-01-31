@@ -140,7 +140,7 @@ namespace meantone
             double df = v.log_frequency() - measure.voice.rootlf;
             double result = 2000.0 * df * df * df * df;
 
-            if(!v.inScale())
+            if(!v.inScale(measure.location))
             {
                 result += 30000;
             }
