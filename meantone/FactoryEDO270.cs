@@ -10,15 +10,10 @@ namespace meantone
         public FactoryEDO270(Type_Map map, bool[] pinc) : base(270, map, pinc)
         {
             synthetic = new bool[27];
-            synthetic[0] = true;
-            synthetic[3] = true;
-            synthetic[6] = true;
-            synthetic[10] = true;
-            synthetic[13] = true;
-            synthetic[16] = true;
-            synthetic[20] = true;
-            synthetic[23] = true;
-           
+            for(int i = 0; i < 11; i++)
+            {
+                synthetic[(i * 10) % synthetic.Length] = true;
+            }
 
 
             build_dichotomy(13);
