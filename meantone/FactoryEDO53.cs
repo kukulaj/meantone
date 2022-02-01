@@ -6,6 +6,7 @@ namespace meantone
 {
     class FactoryEDO53 : FactoryEDO5
     {
+        private bool[] amity;
         private bool[] schismatic;
         private bool[] hanson;
         private bool[] diatonic;
@@ -80,8 +81,12 @@ namespace meantone
             {
                 schismatic[(31 * i) % edo] = true;
             }
-            
 
+            amity = new bool[53];
+            for (int i = 0; i < 18; i++)
+            {
+                amity[(15 * i) % edo] = true;
+            }
 
             dichotomy = new bool[3,edo];
             dichotomy[0,0] = true;
@@ -160,7 +165,7 @@ namespace meantone
 
         public override bool inScale(int pitch, int loc)
         {
-            return inAScale(schismatic, pitch);
+            return inAScale(amity, pitch);
 
             bool result = true;
             switch ((loc / 27) % 27)
