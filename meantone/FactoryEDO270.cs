@@ -6,9 +6,21 @@ namespace meantone
 {
     public class FactoryEDO270 : FactoryEDO5
     {
-
+        bool[] synthetic;
         public FactoryEDO270(Type_Map map, bool[] pinc) : base(270, map, pinc)
         {
+            synthetic = new bool[27];
+            synthetic[0] = true;
+            synthetic[3] = true;
+            synthetic[6] = true;
+            synthetic[10] = true;
+            synthetic[13] = true;
+            synthetic[16] = true;
+            synthetic[20] = true;
+            synthetic[23] = true;
+           
+
+
             build_dichotomy(13);
             commas = new Comma[4];
             pumps = new Pump[4];
@@ -30,5 +42,25 @@ namespace meantone
         {
             return interval_cost(dp);
         }
+
+        private bool inAScale(bool[] aScale, int pitch)
+        {
+            int period = aScale.Length;
+            int rem = pitch % period;
+            if (rem < 0)
+            {
+                rem = rem + period;
+            }
+            return aScale[rem];
+        }
+
+        public override bool inScale(int pitch, int loc)
+        {
+            return inAScale(synthetic, pitch);
+        }
+
+        }
+
+
+
     }
-}
