@@ -9,7 +9,7 @@ namespace meantone
         private bool[] dichotomy;
         public FactoryEDO171(Type_Map map, bool[] pinc) : base(171, map, pinc)
         {
-            build_dichotomy(9);
+            build_dichotomy2(9);
 
             commas = new Comma[10];
             pumps = new Pump[10];
@@ -80,7 +80,7 @@ namespace meantone
 
             PumpStructure a171 = new PumpStructureBig(this, 0);
             PumpStructure b171 = new PumpStructureSimple(this, 6);
-           pumpStructure = new PumpStructureSum(this, a171, b171);
+           pumpStructure = new PumpStructureRandom(this);
             //pumpStructure = new PumpStructureTwo(this, 0, 6);
 
             /*
@@ -91,7 +91,7 @@ namespace meantone
             }
             */
 
-            
+            /*
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
@@ -100,7 +100,7 @@ namespace meantone
             {
                 scale[(11 * i) % scale.Length] = true;
             }
-
+            */
             /*
             scale[0] = true;
             scale[6] = true;
@@ -148,7 +148,7 @@ namespace meantone
      */
 
         }
-        private void build_dichotomy(int odd_limit)
+        private void build_dichotomy2(int odd_limit)
         {
             dichotomy = new bool[edo];
 
@@ -172,6 +172,7 @@ namespace meantone
        
         public override double vertical_interval_cost(int dp, int loc)
         {
+            return interval_cost(dp);
             if (dp < 0)
             {
                 dp = -dp;
