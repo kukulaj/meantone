@@ -26,7 +26,7 @@ namespace meantone
         {
             work = w;
             logfile = new StreamWriter(work.file_prefix + "log.txt");
-            blen = 40;
+            blen = 35;
              
             old_cost = new double[blen];
             old_temp = new double[blen];
@@ -149,7 +149,7 @@ namespace meantone
                 Console.WriteLine(string.Format("capacity = {0}; model = {1}; slope = {2}",
                     old_capacity[capi], model, slope));
 
-                if ((up && slope < -10.0) || (!up && slope > 10.0))
+                if ((up && slope < -50.0) || (!up && slope > 50.0))
                 {
                     capacity_decrease++;
                     if (capacity_decrease > 3)

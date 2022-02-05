@@ -85,7 +85,7 @@ namespace meantone
 
             
             scale = new bool[19];
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 8; i++)
             {
                 scale[(7 * i) % scale.Length] = true;
             }
