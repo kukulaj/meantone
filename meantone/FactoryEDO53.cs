@@ -165,7 +165,7 @@ namespace meantone
 
         public override bool inScale(int pitch, int loc)
         {
-            return inAScale(amity, pitch);
+            return inAScale(hanson, pitch);
 
             bool result = true;
             switch ((loc / 27) % 27)
