@@ -130,6 +130,8 @@ namespace meantone
             {
                 case 0:
                 case 8:
+                    result = inAScale(chromatic, pitch);
+                    /*
                     switch(col)
                     {
                         case 2:
@@ -145,9 +147,14 @@ namespace meantone
                             result = inAScale(diatonic, pitch);
                             break;
                     }
+                    */
                     break;
-                case 1:
-                case 7:
+                case 2:
+                    result = inAScale(chromatic, pitch - 6);
+                    break;
+                case 4:
+                    result = inAScale(chromatic, pitch - 4);
+                    /*
                     switch (col)
                     {
                         case 2:
@@ -163,9 +170,12 @@ namespace meantone
                             result = inAScale(chromatic, pitch);
                             break;
                     }
+                    */
                     break;
 
-                case 4:
+                case 6:
+                    result = inAScale(chromatic, pitch - 2);
+                    /*
                     switch (col)
                     {
                         case 1:
@@ -183,9 +193,10 @@ namespace meantone
                             result = inAScale(diatonic, pitch-4);
                             break;
                     }
+                    */
                     break;
                 default:
-                    result = inAScale(negri, pitch);
+                    result = inAScale(negri, pitch-17);
                     break;
             }
             return result;
