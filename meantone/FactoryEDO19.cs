@@ -7,6 +7,9 @@ namespace meantone
     public class FactoryEDO19 : FactoryEDO5
     {
         private bool[,] dichotomy;
+        bool[] diatonic;
+        bool[] chromatic;
+        bool[] negri;
         public FactoryEDO19(Type_Map map, bool[] pinc) : base(19, map, pinc)
         {
             commas = new Comma[3];
@@ -19,7 +22,7 @@ namespace meantone
             commas[2] = new Comma(this, new int[] { 3, 4 });
             pumps[2] = new Pump(commas[1], new int[]
             {0, 6, 12, 4, 10, 2, 8 });
-            pumpStructure = new PumpStructureSimple(this, 1);
+            pumpStructure = new PumpStructureRandom(this);
 
             /*
             pumpStructure = new PumpStructureArray(this, new int[,]
@@ -56,6 +59,29 @@ namespace meantone
             dichotomy[0, 14] = true;
             dichotomy[0, 3] = true;
             dichotomy[0, 16] = true;
+
+
+            diatonic = new bool[19];
+            for(int i = 0; i < 7; i++)
+            {
+                diatonic[(11 * i)%19] = true;
+            }
+
+
+            chromatic = new bool[19];
+            for (int i = 0; i < 12; i++)
+            {
+                chromatic[(11 * i)%19] = true;
+            }
+
+
+            negri = new bool[19];
+            for (int i = 0; i < 10; i++)
+            {
+                negri[(2 * i)%19] = true;
+            }
+
+
         }
 
         public override double vertical_interval_cost(int dp, int loc)
@@ -82,5 +108,88 @@ namespace meantone
                 return 0.0;
             return 5000.0;
         }
+
+        private bool inAScale(bool[] aScale, int pitch)
+        {
+            int period = aScale.Length;
+            int rem = pitch % period;
+            if (rem < 0)
+            {
+                rem = rem + period;
+            }
+            return aScale[rem];
+        }
+
+        public override bool inScale(int pitch, int loc)
+        {
+
+            bool result = true;
+            int col = (loc / 9) % 9;
+
+            switch ((loc / 81) % 9)
+            {
+                case 0:
+                case 8:
+                    switch(col)
+                    {
+                        case 2:
+                        case 4:
+                        case 7:
+                            result = inAScale(diatonic, pitch-11);
+                            break;
+                        case 5:
+                        case 6:
+                            result = inAScale(diatonic, pitch - 3);
+                            break;
+                        default:
+                            result = inAScale(diatonic, pitch);
+                            break;
+                    }
+                    break;
+                case 1:
+                case 7:
+                    switch (col)
+                    {
+                        case 2:
+                        case 4:
+                        case 7:
+                            result = inAScale(chromatic, pitch - 11);
+                            break;
+                        case 5:
+                        case 6:
+                            result = inAScale(chromatic, pitch - 3);
+                            break;
+                        default:
+                            result = inAScale(chromatic, pitch);
+                            break;
+                    }
+                    break;
+
+                case 4:
+                    switch (col)
+                    {
+                        case 1:
+                        case 7:
+                            result = inAScale(diatonic, pitch - 12);
+                            break;
+                        case 3:
+                        case 5:
+                            result = inAScale(diatonic, pitch - 15);
+                            break;
+                        case 4:
+                            result = inAScale(diatonic, pitch - 7);
+                            break;
+                        default:
+                            result = inAScale(diatonic, pitch-4);
+                            break;
+                    }
+                    break;
+                default:
+                    result = inAScale(negri, pitch);
+                    break;
+            }
+            return result;
+        }
+
     }
 }
