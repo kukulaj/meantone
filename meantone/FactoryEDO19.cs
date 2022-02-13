@@ -126,10 +126,10 @@ namespace meantone
             bool result = true;
             int col = (loc / 9) % 9;
 
-            switch ((loc / 81) % 9)
+            switch (loc % 8)
             {
                 case 0:
-                case 8:
+                //case 8:
                     result = inAScale(chromatic, pitch);
                     /*
                     switch(col)
