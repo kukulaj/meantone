@@ -126,11 +126,11 @@ namespace meantone
             bool result = true;
             int col = (loc / 9) % 9;
 
-            switch (loc % 8)
+            switch ((loc % 8)/2)
             {
                 case 0:
                 //case 8:
-                    result = inAScale(chromatic, pitch);
+                    result = inAScale(negri, pitch);
                     /*
                     switch(col)
                     {
@@ -149,11 +149,11 @@ namespace meantone
                     }
                     */
                     break;
-                case 2:
-                    result = inAScale(chromatic, pitch - 6);
+                case 1:
+                    result = inAScale(negri, pitch - 11);
                     break;
-                case 4:
-                    result = inAScale(chromatic, pitch - 4);
+                case 2:
+                    result = inAScale(negri, pitch - 3);
                     /*
                     switch (col)
                     {
@@ -173,8 +173,8 @@ namespace meantone
                     */
                     break;
 
-                case 6:
-                    result = inAScale(chromatic, pitch - 2);
+                case 3:
+                    result = inAScale(negri, pitch - 14);
                     /*
                     switch (col)
                     {
@@ -195,9 +195,9 @@ namespace meantone
                     }
                     */
                     break;
-                default:
-                    result = inAScale(negri, pitch-17);
-                    break;
+                //default:
+                  //  result = inAScale(negri, pitch-17);
+                 //   break;
             }
             return result;
         }

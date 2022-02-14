@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5324));
+            Type_Map map = new Type_Map(new Random(5325));
 
             Work work;
 
@@ -49,7 +49,7 @@ namespace meantone
                 //target = target * 0.97;
                 
                 
-                temp = 1000000.0;
+                temp = 1300000.0;
                 work.jostle(temp, 1000);
                 double ocost = work.rcost;
                 work.jostle(temp, 1000);
