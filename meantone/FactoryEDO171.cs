@@ -19,7 +19,7 @@ namespace meantone
             //comma7[0] = 0;
             commas[0] = new Comma(this, new int[] { 1, 2, -4 });
             pumps[0] = new Pump(commas[0]
-              //  , new int[]
+            //  , new int[]
             //{0, 33, 66, 99, 154, 38, 71 }
             );
             commas[1] = new Comma(this, new int[] { 0, 3, 5 });
@@ -59,9 +59,9 @@ namespace meantone
             commas[6] = new Comma(this, new int[] { 1, 5, 1 });
             pumps[6] = new Pump(commas[6]
                 //,  new int[]
-               //{110, 165, 49, 104, 159, 43}
-               // { 0, 116, 61, 132, 77, 22, 138}
-               //{129, 74, 19, 135, 35, 151, 96 }
+                //{110, 165, 49, 104, 159, 43}
+                // { 0, 116, 61, 132, 77, 22, 138}
+                //{129, 74, 19, 135, 35, 151, 96 }
                 );
 
             commas[7] = new Comma(this, new int[] { 36, -12, 1 });
@@ -80,16 +80,16 @@ namespace meantone
 
             PumpStructure a171 = new PumpStructureBig(this, 0);
             PumpStructure b171 = new PumpStructureSimple(this, 6);
-           pumpStructure = new PumpStructureRandom(this);
+            pumpStructure = new PumpStructureRandom(this);
             //pumpStructure = new PumpStructureTwo(this, 0, 6);
 
-            
+
             scale = new bool[19];
             for (int i = 0; i < 8; i++)
             {
                 scale[(7 * i) % scale.Length] = true;
             }
-            
+
 
             /*
             for (int i = 0; i < edo; i++)
@@ -169,7 +169,7 @@ namespace meantone
             }
         }
 
-       
+
         public override double vertical_interval_cost(int dp, int loc)
         {
             return interval_cost(dp);
@@ -178,15 +178,36 @@ namespace meantone
                 dp = -dp;
             }
 
-           
+
             if (dp % edo == 0)
             {
                 return 100.0;
             }
 
-            if (dichotomy[ dp % edo])
+            if (dichotomy[dp % edo])
                 return 0.0;
             return 5000.0;
+        }
+        private bool inAScale(bool[] aScale, int pitch)
+        {
+            int period = aScale.Length;
+            int rem = pitch % period;
+            if (rem < 0)
+            {
+                rem = rem + period;
+            }
+            return aScale[rem];
+        }
+
+        public override bool inScale(int pitch, int loc)
+        {
+
+            bool result = true;
+
+
+            result = inAScale(scale, pitch - 100 * ((loc % 24) / 3));
+
+            return result;
         }
     }
 }
