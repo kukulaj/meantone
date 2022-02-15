@@ -4,9 +4,11 @@ using System.Text;
 
 namespace meantone
 {
+   
     public class FactoryEDO12 : FactoryEDO5
     {
         private bool[,] dichotomy;
+        bool[] augmented;
         public FactoryEDO12(Type_Map map, bool[] pinc) : base(12, map, pinc)
         {
             commas = new Comma[2];
@@ -29,6 +31,10 @@ namespace meantone
                 scale[(5 + 7 * i) % edo] = true;
             }
             */
+
+            augmented = new bool[4];
+            augmented[0] = true;
+            augmented[1] = true;
 
             dichotomy = new bool[1, edo];
             dichotomy[0, 0] = true;
@@ -66,6 +72,46 @@ namespace meantone
             if (dichotomy[phase, dp % edo])
                 return 0.0;
             return 5000.0;
+        }
+        private bool inAScale(bool[] aScale, int pitch)
+        {
+            int period = aScale.Length;
+            int rem = pitch % period;
+            if (rem < 0)
+            {
+                rem = rem + period;
+            }
+            return aScale[rem];
+        }
+
+        public override bool inScale(int pitch, int loc)
+        {
+
+            bool result = true;
+            int col = (loc / 9) % 9;
+
+            switch ((loc % 8) / 2)
+            {
+                case 0:
+                    
+                    result = inAScale(augmented, pitch);
+                    
+                    break;
+                case 1:
+                    result = inAScale(augmented, pitch - 7);
+                    break;
+                case 2:
+                    result = inAScale(augmented, pitch - 2);
+                    
+                    break;
+
+                case 3:
+                    result = inAScale(augmented, pitch - 9);
+                   
+                    break;
+                   
+            }
+            return result;
         }
     }
 }
