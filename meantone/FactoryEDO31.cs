@@ -49,9 +49,9 @@ namespace meantone
                  scale[i] = false;
              }
 
-             for (int i = 0; i < 12; i++)
+             for (int i = 0; i < 13; i++)
              {
-                 scale[(7 * i) % edo] = true;
+                 scale[(10 * i) % edo] = true;
              }
              
 
@@ -154,51 +154,72 @@ namespace meantone
         {
             return interval_cost(dp);
         }
-            /*
-            public override double vertical_interval_cost(int dp)
+        /*
+        public override double vertical_interval_cost(int dp)
+        {
+            if (dp < 0)
             {
-                if (dp < 0)
-                {
-                    dp = -dp;
-                }
-                if (dp % edo == 0)
-                    return 100.0;
-
-                if (dichotomy[0][dp % edo])
-                    return 0.0;
-                return 5000.0;
+                dp = -dp;
             }
-            */
-            /*
-            public override double vertical_interval_cost(int dp, int loc)
-            {
-                if (dp < 0)
-                {
-                    dp = -dp;
-                }
-                int phase = 3;
-                switch(loc%6)
-                {
-                    case 1:
-                    case 4:
-                        phase = 0;
-                        break;
-                    case 2:
-                        phase = 1;
-                        break;
-                    case 3:
-                        phase = 2;
-                        break;
-                    default:
-                        break;
-                }
-                if (dp % edo == 0)
-                    return 100.0;
+            if (dp % edo == 0)
+                return 100.0;
 
-                if (dichotomy[0][dp % edo])
-                    return 0.0;
-                return 5000.0;
-            }
-            */
+            if (dichotomy[0][dp % edo])
+                return 0.0;
+            return 5000.0;
         }
+        */
+        /*
+        public override double vertical_interval_cost(int dp, int loc)
+        {
+            if (dp < 0)
+            {
+                dp = -dp;
+            }
+            int phase = 3;
+            switch(loc%6)
+            {
+                case 1:
+                case 4:
+                    phase = 0;
+                    break;
+                case 2:
+                    phase = 1;
+                    break;
+                case 3:
+                    phase = 2;
+                    break;
+                default:
+                    break;
+            }
+            if (dp % edo == 0)
+                return 100.0;
+
+            if (dichotomy[0][dp % edo])
+                return 0.0;
+            return 5000.0;
+        }
+        */
+        private bool inAScale(bool[] aScale, int pitch)
+        {
+            int period = aScale.Length;
+            int rem = pitch % period;
+            if (rem < 0)
+            {
+                rem = rem + period;
+            }
+            return aScale[rem];
+        }
+
+        public override bool inScale(int pitch, int loc)
+        {
+
+            bool result = true;
+
+
+            result = inAScale(scale, pitch - 18 * ((loc % 4) ));
+
+            return result;
+        }
+    }
 }
