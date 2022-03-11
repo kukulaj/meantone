@@ -32,7 +32,7 @@ namespace meantone
             //vectorFactory = new GeneralFactory(generators, intervals);
             bool[] primes = new bool[6];
             primes[0] = true;
-            //primes[1] = true;
+            primes[1] = true;
             primes[2] = true;
             primes[3] = true;
             //primes[4] = true;

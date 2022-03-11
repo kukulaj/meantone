@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5333));
+            Type_Map map = new Type_Map(new Random(5334));
 
             Work work;
 
@@ -164,7 +164,7 @@ namespace meantone
                     
                     up = !up;
                     meter.Set_Up(up);
-                    effort = (13 * effort) / 10 ;
+                    effort = (14 * effort) / 10 ;
                     
                     move *= 0.9;
                     bounce++;
