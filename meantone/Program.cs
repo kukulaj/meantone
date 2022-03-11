@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5332));
+            Type_Map map = new Type_Map(new Random(5333));
 
             Work work;
 
@@ -49,17 +49,10 @@ namespace meantone
                 //target = target * 0.97;
                 
                 
-                temp = 1300000.0;
-                work.jostle(temp, 1000);
-                double ocost = work.rcost;
-                work.jostle(temp, 1000);
-                double ncost = work.rcost;
-                while (ncost > ocost)
-                {
-                    ocost = ncost;
-                    work.jostle(temp, 1000);
-                    ncost = work.rcost;
-                }
+                temp = 2000000.0;
+                
+                work.equilibrate(temp, 100);
+                
                 
                 /*
                 work.jostle(temp, 1000);
@@ -96,7 +89,7 @@ namespace meantone
 
 
                 double move = 0.015;
-                int effort = 45;
+                int effort = 20;
                 //double target = 0.1;
 
                 bool up = false;
@@ -111,7 +104,7 @@ namespace meantone
                         while (temp < upper_lim && !hit)
                         {
                             temp = temp / (1.0 - move);
-                            work.jostle(temp, effort);
+                            work.equilibrate(temp, effort);
                             hit = meter.Step(temp);
                         }
                         if (temp >= upper_lim)
@@ -129,7 +122,7 @@ namespace meantone
                         while (temp > lower_lim && !hit)
                         {
                             temp *= (1.0 - move);
-                            work.jostle(temp, effort);
+                            work.equilibrate(temp, effort);
                             hit = meter.Step(temp);
                             //effort = (108 * effort) / 100;
 
@@ -168,10 +161,11 @@ namespace meantone
                         }
                          
                     }
-                        
+                    
                     up = !up;
                     meter.Set_Up(up);
                     effort = (13 * effort) / 10 ;
+                    
                     move *= 0.9;
                     bounce++;
                     Console.WriteLine(string.Format("bounce = {0};", bounce));
@@ -181,7 +175,7 @@ namespace meantone
                 Vertex.parallelism = 1.0;
                 double pf = work.align_count();
                 double pinc = 1.3;
-                while (pf < 0.32)
+                while (pf < 0.07)
                 {
                     work.jostle(temp, 1200);
                     work.bfrac();

@@ -138,7 +138,7 @@ namespace meantone
         public double scost(Vector v)
         {
             double df = v.log_frequency() - measure.voice.rootlf;
-            double result = 2000.0 * df * df * df * df;
+            double result = 4000.0 * df * df * df * df;
 
             if(!v.inScale(measure.location))
             {

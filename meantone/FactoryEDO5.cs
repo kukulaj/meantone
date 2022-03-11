@@ -39,7 +39,7 @@ namespace meantone
             map = pmap;
            
             primes = new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59};
-            range = new int[] { 16, 9, 7, 4, 3, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1};
+            range = new int[] { 36, 18, 12, 8, 4, 3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1};
             pcnt = primes.Length;
             coord = new int[pcnt];
             cost = new double[pcnt];

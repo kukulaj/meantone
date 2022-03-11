@@ -32,13 +32,13 @@ namespace meantone
             //vectorFactory = new GeneralFactory(generators, intervals);
             bool[] primes = new bool[6];
             primes[0] = true;
-            primes[1] = true;
+            //primes[1] = true;
             primes[2] = true;
-            //primes[3] = true;
+            primes[3] = true;
             //primes[4] = true;
             //primes[5] = true;
 
-            vectorFactory = new FactoryEDO53( map, primes);
+            vectorFactory = new FactoryEDO441( map, primes);
             vectorFactory.show_pattern();
             vectorFactory.scaleSearch();
             rand = map.rand;
@@ -171,6 +171,32 @@ namespace meantone
             return 0.06 * result;
         }
 
+        public double equilibrate(double temp, int effort)
+        {
+            double result = 0.0;
+            double ccost = cost();
+            double lcost = ccost;
+            double hcost = ccost;
+
+            bool moved = true;
+            while(moved)
+            {
+                moved = false;
+                result += jostle(temp, effort);
+                ccost = cost();
+                if (ccost > hcost)
+                {
+                    moved = true;
+                    hcost = ccost;
+                }
+                if (ccost < lcost)
+                {
+                    moved = true;
+                    lcost = ccost;
+                }
+            }
+            return result;
+        }
 
         public double jostle(double temp, int effort)
         {
