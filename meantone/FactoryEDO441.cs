@@ -37,9 +37,9 @@ namespace meantone
             bool result = true;
 
 
-            result = inAScale(scale, pitch 
-                - 356 * ((loc /4) % 10) 
-                - 142 * (((loc+2)/4) %10));
+            result = inAScale(scale, pitch
+                - 57 * (loc % 10));
+               
            
             return result;
         }
