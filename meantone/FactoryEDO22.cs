@@ -36,17 +36,17 @@ namespace meantone
             scale[7] = true;
             scale[9] = true;
             */
-            /*
+            
             for (int i = 0; i < edo; i++)
             {
                 scale[i] = false;
             }
 
-            for (int i = 0; i < 13; i++)
+            for (int i = 0; i < 10; i++)
             {
-                scale[(5 * i) % edo] = true;
+                scale[(7 * i) % edo] = true;
             }
-            */
+            
             dichotomy = new bool[3, edo];
             dichotomy[0, 0] = true;
             dichotomy[0, 13] = true; // 3:2
@@ -93,6 +93,29 @@ namespace meantone
             if (dichotomy[phase, dp % edo])
                 return 0.0;
             return 5000.0;
+        }
+        private bool inAScale(bool[] aScale, int pitch)
+        {
+            int period = aScale.Length;
+            int rem = pitch % period;
+            if (rem < 0)
+            {
+                rem = rem + period;
+            }
+            return aScale[rem];
+        }
+
+        public override bool inScale(int pitch, int loc)
+        {
+
+            bool result = true;
+
+
+            result = inAScale(scale, pitch
+                - 20 * ((loc/4) % 4));
+
+
+            return result;
         }
     }
 }

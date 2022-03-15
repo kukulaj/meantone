@@ -149,7 +149,7 @@ namespace meantone
                 Console.WriteLine(string.Format("capacity = {0}; model = {1}; slope = {2}",
                     old_capacity[capi], model, slope));
 
-                if ((up && slope < -15.0) || (!up && slope > 40.0))
+                if ((up && slope < -8.0) || (!up && slope > 30.0))
                 {
                     capacity_decrease++;
                     if (capacity_decrease > 3)
