@@ -42,9 +42,9 @@ namespace meantone
                 scale[i] = false;
             }
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 14; i++)
             {
-                scale[(7 * i) % edo] = true;
+                scale[(5 * i) % edo] = true;
             }
             
             dichotomy = new bool[3, edo];
@@ -112,7 +112,7 @@ namespace meantone
 
 
             result = inAScale(scale, pitch
-                - 20 * ((loc/4) % 4));
+                - 6 * (loc % 5));
 
 
             return result;
