@@ -8,7 +8,9 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            Type_Map map = new Type_Map(new Random(5337));
+            int seed = 7007;
+            Type_Map map = new Type_Map(new Random(seed));
+            map.type = map.rand.Next(3);
 
             Work work;
 
@@ -49,9 +51,9 @@ namespace meantone
                 //target = target * 0.97;
                 
                 
-                temp = 2000000.0;
+                temp = 1500000.0;
                 
-                work.equilibrate(temp, 100);
+                work.equilibrate(temp, 300);
                 
                 
                 /*
@@ -89,7 +91,7 @@ namespace meantone
 
 
                 double move = 0.015;
-                int effort = 20;
+                int effort = 25;
                 //double target = 0.1;
 
                 bool up = false;
@@ -104,7 +106,7 @@ namespace meantone
                         while (temp < upper_lim && !hit)
                         {
                             temp = temp / (1.0 - move);
-                            work.equilibrate(temp, effort);
+                            work.equilibrate(temp, effort + (int)(meter.capacity/500.0));
                             hit = meter.Step(temp);
                         }
                         if (temp >= upper_lim)
@@ -122,7 +124,7 @@ namespace meantone
                         while (temp > lower_lim && !hit)
                         {
                             temp *= (1.0 - move);
-                            work.equilibrate(temp, effort);
+                            work.equilibrate(temp, effort + (int)(meter.capacity / 500.0));
                             hit = meter.Step(temp);
                             //effort = (108 * effort) / 100;
 
@@ -164,18 +166,18 @@ namespace meantone
                     
                     up = !up;
                     meter.Set_Up(up);
-                    effort = (14 * effort) / 10 ;
+                    effort = (17 * effort) / 10 ;
                     
                     move *= 0.9;
                     bounce++;
                     Console.WriteLine(string.Format("bounce = {0};", bounce));
                 }
 
-               
+               /*
                 Vertex.parallelism = 1.0;
                 double pf = work.align_count();
                 double pinc = 1.3;
-                while (pf < 0.07)
+                while (pf < 0.25)
                 {
                     work.jostle(temp, 1200);
                     work.bfrac();
@@ -188,7 +190,7 @@ namespace meantone
                 work.jostle(temp, 2000);
                 work.bfrac();
                 work.align_count();
-               
+               */
 
                 /*
                 for(int vi=0; vi < work.voice_count; vi++)
@@ -246,6 +248,7 @@ namespace meantone
             file.WriteLine("f5 0 4096 10 1 0.5 0.3 ");
             file.WriteLine("f6 0 4096 10 1 0.3 0.3 0.3 0.3");
             file.WriteLine("f7 0 4096 10 1 0.6 0.2 0.1 0.3");
+            file.WriteLine(string.Format("; seed = {0}. type = {1}", seed, map.type));
 
             work.play(file);
             //work.aaba(4, file);

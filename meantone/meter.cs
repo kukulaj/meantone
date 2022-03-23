@@ -21,7 +21,7 @@ namespace meantone
         int blen;
         StreamWriter logfile;
         double target;
-
+        public double capacity;
         public Meter(Work w)
         {
             work = w;
@@ -145,11 +145,13 @@ namespace meantone
 
                 slope = cc;
                 double model = cc * temp * temp + cb * temp + ca;
+                capacity = 2.0 * temp * cc + cb;
                  
-                Console.WriteLine(string.Format("capacity = {0}; model = {1}; slope = {2}",
-                    old_capacity[capi], model, slope));
+                Console.WriteLine(string.Format(
+                    "capacity = {0}; model = {1}; mcap = {2}; slope = {3}",
+                    old_capacity[capi], model, capacity, slope));
 
-                if ((up && slope < -8.0) || (!up && slope > 30.0))
+                if ((up && slope < -7.0) || (!up && slope > 12.0))
                 {
                     capacity_decrease++;
                     if (capacity_decrease > 3)

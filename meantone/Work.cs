@@ -19,7 +19,7 @@ namespace meantone
         public Type_Map map;
         public string file_prefix;
         public double rcost;
-
+       
 
         public Work(Type_Map m)
         {
@@ -38,7 +38,7 @@ namespace meantone
             //primes[4] = true;
             //primes[5] = true;
 
-            vectorFactory = new FactoryEDO22( map, primes);
+            vectorFactory = new FactoryEDO53( map, primes);
             vectorFactory.show_pattern();
             vectorFactory.scaleSearch();
             rand = map.rand;

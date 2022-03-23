@@ -165,7 +165,22 @@ namespace meantone
 
         public override bool inScale(int pitch, int loc)
         {
-            return inAScale(schismatic, pitch - ((loc)%6) * 14);
+            int move = 0; 
+            switch(map.type)
+            {
+                case 1:
+                    move = 14;
+                    break;
+                case 2:
+                    move = -14;
+                    break;
+                default:
+                    move = 0;
+                    break;
+            }
+
+
+            return inAScale(schismatic, pitch - (loc % 6) * move);
 
             bool result = true;
             switch ((loc / 27) % 27)

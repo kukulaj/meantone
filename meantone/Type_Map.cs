@@ -19,19 +19,19 @@ namespace meantone
         public Random rand;
         int drange;
         public string file_prefix;
-
+        public int type = 0;
         public Type_Map(Random r)
         {
             file_prefix = @"C:\Users\James\Documents\tuning\meantone\";
-            row_size = 5;
-            dimension = 4;
+            row_size = 6;
+            dimension = 3;
             size = 1;
             for (int i = 0; i < dimension; i++)
             {
                 size = size * row_size;
             }
 
-            duration = 8.3;
+            duration = 6.7;
 
             drange = 4;
             rand = r;
