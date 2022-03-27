@@ -34,11 +34,11 @@ namespace meantone
             primes[0] = true;
             primes[1] = true;
             primes[2] = true;
-            primes[3] = true;
+            //primes[3] = true;
             //primes[4] = true;
             //primes[5] = true;
 
-            vectorFactory = new FactoryEDO31( map, primes);
+            vectorFactory = new FactoryEDO7( map, primes);
             vectorFactory.show_pattern();
             vectorFactory.scaleSearch();
             rand = map.rand;
