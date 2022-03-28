@@ -122,7 +122,7 @@ namespace meantone
 
         public override bool inScale(int pitch, int loc)
         {
-
+            return true;
             bool result = true;
             int col = (loc / 9) % 9;
 
