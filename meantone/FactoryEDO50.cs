@@ -17,17 +17,17 @@ public class FactoryEDO50 : FactoryEDO5
 
         pumpStructure = new PumpStructureRandom(this);
 
-            scale = new bool[25];
-            /*
+            //scale = new bool[25];
+            
         for (int i = 0; i < edo; i++)
         {
             scale[i] = false;
         }
-            */
+            
 
-        for (int i = 0; i < 14; i++)
+        for (int i = 0; i < 19; i++)
         {
-            scale[(9 * i) % scale.Length] = true;
+            scale[(29 * i) % scale.Length] = true;
         }
 
         dichotomy = new bool[2, edo];
@@ -79,7 +79,7 @@ public class FactoryEDO50 : FactoryEDO5
             bool result = true;
 
 
-            result = inAScale(scale, pitch - 29 * ((loc % 4)));
+            result = inAScale(scale, pitch);
 
             return result;
         }
