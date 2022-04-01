@@ -24,7 +24,7 @@ namespace meantone
         {
             file_prefix = @"C:\Users\James\Documents\tuning\meantone\";
             row_size = 2;
-            dimension = 3;
+            dimension = 10;
             size = 1;
             for (int i = 0; i < dimension; i++)
             {
