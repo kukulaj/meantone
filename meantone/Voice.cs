@@ -47,7 +47,7 @@ namespace meantone
 
             
             int row = measure_count / row_size;
-            sequence_count = work.measure_count;
+            sequence_count = work.measure_count * 256;
             sequence = new Measure[sequence_count];
             
             /*
@@ -59,13 +59,36 @@ namespace meantone
             */
 
 
+
             if (true)
             {
                 //spiny_seq();
-                
-                for (int i = 0; i < sequence_count; i++)
+
+                int breps = 1;
+                for(int i = 0; i < vi; i++)
                 {
-                    sequence[i] = measures[i];
+                    breps *= 4;
+                }
+                int lreps = 256 / breps;
+
+                int si = 0;
+
+                for (int bi = 0; bi < breps; bi++)
+                {
+                    for (int mi = 0; mi < 4; mi++)
+                    {
+                        for (int li = 0; li < lreps; li++)
+                        {
+                            sequence[si] = measures[2*mi];
+                            sequence[si + 1] = measures[2 * mi + 1];
+                            si += 2;
+                        }
+                    }
+                }
+
+                //for (int i = 0; i < sequence_count; i++)
+                //{
+                //sequence[i] = measures[i];
                    //int j = i / row_size;
                    //int ri = i % row_size;
 
@@ -80,7 +103,7 @@ namespace meantone
                     sequence[(4 * i + 6) % sequence_count] = measures[i];
                     sequence[(4 * i + 7) % sequence_count ] = measures[i];
                     */
-                }
+                //}
                 for (int i = 0; i < sequence_count; i++)
                 {
                     sequence[(i + 1) % sequence_count].after(sequence[i]);

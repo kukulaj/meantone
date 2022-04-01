@@ -111,8 +111,8 @@ namespace meantone
             bool result = true;
 
 
-            result = inAScale(scale, pitch
-                - 6 * (loc % 5));
+            //result = inAScale(scale, pitch
+            //    - 6 * (loc % 5));
 
 
             return result;
