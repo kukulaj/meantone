@@ -88,6 +88,8 @@ namespace meantone
         {
 
             bool result = true;
+            return true;
+
             int col = (loc / 9) % 9;
 
             switch ((loc % 8) / 2)
