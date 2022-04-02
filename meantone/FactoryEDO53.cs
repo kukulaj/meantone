@@ -165,6 +165,7 @@ namespace meantone
 
         public override bool inScale(int pitch, int loc)
         {
+            return true;
             int move = 0; 
             switch(map.type)
             {
