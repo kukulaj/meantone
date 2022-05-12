@@ -31,7 +31,7 @@ namespace meantone
                 size = size * row_size;
             }
 
-            duration = 5.8;
+            duration = 6.2;
 
             drange = 4;
             rand = r;

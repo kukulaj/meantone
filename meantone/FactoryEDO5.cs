@@ -43,11 +43,11 @@ namespace meantone
             pcnt = primes.Length;
             coord = new int[pcnt];
             cost = new double[pcnt];
-            double bc = 0.15;
+            double bc = 0.025;
             for(int i = 0; i < pcnt; i++)
             {
                 cost[i] = bc;
-                bc = 1.2 * (bc + 0.1);
+                bc = 1.5 * (bc + 0.1);
             }
 
             pstep = new int[pcnt];
@@ -118,7 +118,7 @@ namespace meantone
 
                     double err = Math.Abs(scale - tempered);
 
-                    double c = err * err * 60.0;
+                    double c = err * err * 10.0;
                     for (int i = 0; i < pcnt; i++)
                     {
                         c += cost[i] * coord[i] * coord[i];
