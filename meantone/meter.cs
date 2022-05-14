@@ -151,7 +151,8 @@ namespace meantone
                     "capacity = {0}; model = {1}; mcap = {2}; slope = {3}",
                     old_capacity[capi], model, capacity, slope));
 
-                if ((up && slope < -8.0) || (!up && slope > 16.0))
+                if ((up && slope < -8.0 * model / 6000000.0) 
+                    || (!up && slope > 16.0 * model / 6000000.0))
                 {
                     capacity_decrease++;
                     if (capacity_decrease > 3)

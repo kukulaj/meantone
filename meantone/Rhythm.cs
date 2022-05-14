@@ -377,6 +377,21 @@ namespace meantone
             return stuck;
         }
 
+        public Rhythm split(int div)
+        {
+            Rhythm result = new Rhythm(work, duration);
+            double time = 0.0;
+            double pulse = duration / (double)div;
+            int denom = div;
+            for (int i = 0; i < div; i++)
+            {
+                Rhythm_Element ne = new Rhythm_Element(time, pulse, 1, denom);
+                 
+                result.path.Add(ne);
+                time = time + pulse;
+            }
+            return result;
+        }
         public Rhythm splinter(double min_dur,
             int max_div)
         {

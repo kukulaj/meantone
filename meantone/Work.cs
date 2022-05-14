@@ -51,7 +51,7 @@ namespace meantone
             
             Rhythm origin = new Rhythm(this, map.duration);
             origin.singleton();
-
+            /*
             double min_dur = 2.0;
             Rhythm osplit = origin.splinter(min_dur, 9);
             
@@ -62,12 +62,14 @@ namespace meantone
             root = root.vary(min_dur, 0);
             root = root.vary(min_dur, 0);
             root = root.vary(min_dur, 0);
+            */
+            Rhythm root = origin.split(map.row_size);
 
             Rhythm[] rows = new Rhythm[measure_count];
             rows[0] = root;
             for (int ri = 1; ri < rows.Length; ri++)
             {
-                rows[ri] = rows[ri-1].vary(min_dur, 0);
+                rows[ri] = rows[ri - 1]; //.vary(min_dur, 0);
             }
 
             voices = new Voice[voice_count];
