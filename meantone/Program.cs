@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            int seed = 7023;
+            int seed = 7024;
             Type_Map map = new Type_Map(new Random(seed));
             map.type = map.rand.Next(3);
 
