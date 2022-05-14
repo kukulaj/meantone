@@ -170,7 +170,7 @@ namespace meantone
                 w *= 0.93;
             }
 
-            return 0.06 * result;
+            return 0.01 * result;
         }
 
         public double equilibrate(double temp, int effort)
