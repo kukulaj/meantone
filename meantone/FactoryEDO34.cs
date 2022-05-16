@@ -73,7 +73,7 @@ namespace meantone
 
         public override double vertical_interval_cost(int dp, int loc)
         {
-            return interval_cost(dp);
+            //return interval_cost(dp);
             if (dp < 0)
             {
                 dp = -dp;
