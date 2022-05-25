@@ -82,16 +82,17 @@ namespace meantone
 
             PumpStructure a171 = new PumpStructureBig(this, 0);
             PumpStructure b171 = new PumpStructureSimple(this, 6);
-            pumpStructure = new PumpStructureSimple(this, 2);
+            //pumpStructure = new PumpStructureSimple(this, 2);
             //pumpStructure = new PumpStructureTwo(this, 0, 6);
+            pumpStructure = new PumpStructureRandom(this);
 
-
+            /*
             scale = new bool[19];
             for (int i = 0; i < 8; i++)
             {
                 scale[(7 * i) % scale.Length] = true;
             }
-
+            */
 
             /*
             for (int i = 0; i < edo; i++)
@@ -174,7 +175,7 @@ namespace meantone
 
         public override double vertical_interval_cost(int dp, int loc)
         {
-            return interval_cost(dp);
+            //return interval_cost(dp);
             if (dp < 0)
             {
                 dp = -dp;
@@ -203,7 +204,7 @@ namespace meantone
 
         public override bool inScale(int pitch, int loc)
         {
-
+            return true;
             bool result = true;
 
 
