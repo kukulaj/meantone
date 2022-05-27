@@ -56,7 +56,7 @@ namespace meantone
              
 
             build_dichotomy(9);
-
+            /*
             dichotomy = new bool[4][];
             for (int i = 0; i < 4; i++)
             {
@@ -98,7 +98,7 @@ namespace meantone
             dichotomy[3][0] = true;
             dichotomy[3][18] = true;
             dichotomy[3][13] = true;
-            /*
+            
             dichotomy[3][22] = true;
             dichotomy[3][7] = true;
             dichotomy[3][11] = true;
@@ -150,10 +150,12 @@ namespace meantone
             scale[13] = true;
             */
         }
+        /*
         public override double vertical_interval_cost(int dp, int loc)
         {
             return interval_cost(dp);
         }
+        */
         /*
         public override double vertical_interval_cost(int dp)
         {
