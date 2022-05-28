@@ -13,6 +13,7 @@ namespace meantone
         private bool[,] dichotomy;
         public FactoryEDO53(Type_Map map, bool[] pinc) : base(53, map, pinc)
         {
+            build_dichotomy(5);
             commas = new Comma[5];
             pumps = new Pump[6];
             commas[0] = new Comma(this, new int[] { 5, -6, 0 });
@@ -50,11 +51,14 @@ namespace meantone
 
             diatonic[0] = true;
             diatonic[9] = true;
+            
             diatonic[17] = true;
+            
             diatonic[22] = true;
             diatonic[31] = true;
             diatonic[40] = true;
             diatonic[48] = true;
+             
 
             for (int i = 0; i < 19; i++)
             { 
@@ -126,7 +130,7 @@ namespace meantone
             dichotomy[2,31] = true;
 
         }
-
+        /*
         public override double vertical_interval_cost(int dp, int loc)
         {
             return interval_cost(dp);
@@ -136,12 +140,12 @@ namespace meantone
             }
 
             int phase = 0;// loc % 2;
-             /*
+             
             if (loc % 12 == 11)
             {
                 phase = 2;
             }
-             */
+             
              if(dp%edo == 0)
             {
                 return 100.0;
@@ -151,6 +155,7 @@ namespace meantone
                 return 0.0;
             return 5000.0;
         }
+    */
 
         private  bool inAScale(bool[] aScale, int pitch)
         {
