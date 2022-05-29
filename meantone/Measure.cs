@@ -400,7 +400,7 @@ namespace meantone
                     }
                 }
 
-                if (m[earliesti].vertices.Length > vi[earliesti] + 2)
+                if (m[earliesti].vertices.Length > vi[earliesti] + 1)
                 {
                     vi[earliesti]++;
                     v[earliesti] = m[earliesti].vertices[vi[earliesti]];
