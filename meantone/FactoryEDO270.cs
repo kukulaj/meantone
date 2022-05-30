@@ -16,7 +16,7 @@ namespace meantone
             }
 
 
-            build_dichotomy(13);
+            build_dichotomy(11);
             commas = new Comma[4];
             pumps = new Pump[4];
             commas[0] = new Comma(this, new int[] { 2, 2, 1, 3 });
@@ -33,10 +33,13 @@ namespace meantone
 
             pumpStructure = new PumpStructureRandom(this);
         }
+
+        /*
         public override double vertical_interval_cost(int dp, int loc)
         {
             return interval_cost(dp);
         }
+        */
 
         private bool inAScale(bool[] aScale, int pitch)
         {
@@ -51,7 +54,8 @@ namespace meantone
 
         public override bool inScale(int pitch, int loc)
         {
-            return inAScale(synthetic, pitch);
+            return true;
+           // return inAScale(synthetic, pitch);
         }
 
         }
