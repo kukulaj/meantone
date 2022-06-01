@@ -43,7 +43,7 @@ namespace meantone
             //PumpStructure b = new PumpStructureBig(this, 9);
             pumpStructure = new PumpStructureRandom(this);
 
-            
+            /*
              for (int i = 0; i < edo; i++)
              {
                  scale[i] = false;
@@ -53,7 +53,7 @@ namespace meantone
              {
                  scale[(10 * i) % edo] = true;
              }
-             
+             */
 
             build_dichotomy(9);
             /*
