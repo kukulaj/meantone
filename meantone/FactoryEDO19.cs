@@ -24,6 +24,7 @@ namespace meantone
             {0, 6, 12, 4, 10, 2, 8 });
             pumpStructure = new PumpStructureRandom(this);
 
+            build_dichotomy(5);
             /*
             pumpStructure = new PumpStructureArray(this, new int[,]
                 {{12,  0, 10,  8,  6,  4,  2, 14, 16 },
@@ -48,7 +49,7 @@ namespace meantone
                 scale[(2 * i) % edo] = true;
             }
             */
-
+            /*
             dichotomy = new bool[1, edo];
             dichotomy[0, 0] = true;
             dichotomy[0, 8] = true;
@@ -80,25 +81,26 @@ namespace meantone
             {
                 negri[(2 * i)%19] = true;
             }
-
+            */
 
         }
 
+        /*
         public override double vertical_interval_cost(int dp, int loc)
         {
-            return interval_cost(dp);;
+           // return interval_cost(dp);;
             if (dp < 0)
             {
                 dp = -dp;
             }
 
             int phase = 0;// loc % 2;
-            /*
+            
            if (loc % 12 == 11)
            {
                phase = 2;
            }
-            */
+            
             if (dp % edo == 0)
             {
                 return 70.0;
@@ -108,6 +110,7 @@ namespace meantone
                 return 0.0;
             return 5000.0;
         }
+        */
 
         private bool inAScale(bool[] aScale, int pitch)
         {
