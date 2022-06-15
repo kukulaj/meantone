@@ -41,7 +41,7 @@ namespace meantone
             pumps[10] = new Pump(commas[9], new int[] {0, 21, 11, 1, 14, 4, 25 } );
             //PumpStructure a = new PumpStructureSimple(this, 1);
             //PumpStructure b = new PumpStructureBig(this, 9);
-            pumpStructure = new PumpStructureRandom(this);
+            pumpStructure = new PumpStructureNull(this);
 
             /*
              for (int i = 0; i < edo; i++)
