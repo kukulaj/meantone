@@ -23,7 +23,7 @@ namespace meantone
         public Type_Map(Random r)
         {
             file_prefix = @"C:\Users\James\Documents\tuning\meantone\";
-            row_size = 24;
+            row_size = 12;
             dimension = 2;
             size = 1;
             for (int i = 0; i < dimension; i++)
@@ -31,7 +31,7 @@ namespace meantone
                 size = size * row_size;
             }
 
-            duration = 7.2;
+            duration = 11.2;
 
             drange = 4;
             rand = r;
