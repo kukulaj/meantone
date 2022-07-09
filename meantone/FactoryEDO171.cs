@@ -84,7 +84,9 @@ namespace meantone
             PumpStructure b171 = new PumpStructureSimple(this, 6);
             //pumpStructure = new PumpStructureSimple(this, 2);
             //pumpStructure = new PumpStructureTwo(this, 0, 6);
-            pumpStructure = new PumpStructureSum(this, a171, b171);
+            pumpStructure =
+                new PumpStructureRandom(this);
+                // new PumpStructureSum(this, a171, b171);
 
             /*
             scale = new bool[19];
