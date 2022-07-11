@@ -42,7 +42,9 @@ namespace meantone
             pumps[10] = new Pump(commas[9], new int[] {0, 21, 11, 1, 14, 4, 25 } );
             PumpStructure a = new PumpStructureSimple(this, 1);
             PumpStructure b = new PumpStructureBig(this, 7);
-            pumpStructure = new PumpStructureTwo(this, 1, 9);
+            pumpStructure =
+                new PumpStructureRandom(this);
+                //new PumpStructureTwo(this, 1, 9);
 
             /*
              for (int i = 0; i < edo; i++)
@@ -56,7 +58,7 @@ namespace meantone
              }
              */
 
-            build_dichotomy(5);
+            build_dichotomy(9);
             /*
             dichotomy = new bool[4][];
             for (int i = 0; i < 4; i++)
