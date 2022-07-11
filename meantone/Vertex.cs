@@ -129,6 +129,83 @@ namespace meantone
             return true;
         }
 
+        public double across_cost()
+        {
+            return across_cost(vector, false);
+        }
+        public double across_cost(Vector v, bool individual)
+        {
+            double total = 0.0;
+            foreach (Vertex there in acrossp)
+            {
+                total += v.sameness(there.vector);
+            }
+            return (individual ? 2.0 : 1.0) * 2.0 * total / (double)(measure.voice.work.map.dimension); 
+        }
+
+        public double vertical_cost()
+        {
+            return vertical_cost(vector, false);
+        }
+        public double vertical_cost(Vector v, bool individual)
+        {
+            double result = 0.0;
+            double vtot = 0.0;
+            foreach (Vertex there in vertical)
+            {
+                vtot += ocost(v, there);
+                vtot = correction(vtot);
+                vtot += v.vertical_concordance(there.vector, measure.location);
+                vtot = correction(vtot);
+                if (v.octave_equivalent(there.vector))
+                {
+                    vtot += 7.5;
+                }
+            }
+            vtot = correction(vtot);
+            result += vtot;
+            return (individual ? 2.0 : 1.0) * result;   
+        }
+
+        public double horizontal_cost()
+        {
+            return horizontal_cost(vector, false);
+        }
+        public double horizontal_cost(Vector v, bool individual)
+        {
+            double result = 0.0;
+            double total = 0.0;
+            foreach (KeyValuePair<Vertex, Parallel> there in before)
+            {
+                total += v.adjacence(there.Key.vector);
+            }
+            total = correction(total);
+
+            foreach (KeyValuePair<Vertex, Parallel> there in after)
+            {
+                total += v.adjacence(there.Key.vector);
+            }
+            total = correction(total);
+            result += total;
+            return correction((individual ? 2.0 : 1.0) * result);
+        }
+
+        public double self_cost()
+        {
+            return self_cost(vector);
+        }
+        public double self_cost(Vector v)
+        {
+            double result = 0.0;
+            result += correction(scost(v));
+            return result;
+        }
+
+        public double parallel_cost()
+        {
+            return parallel_cost(vector, false);
+        }
+
         public double cost()
         {
             costf = cost(vector);
@@ -178,50 +255,9 @@ namespace meantone
         }
 
 
-        public double rcost(Vector v)
-        {
-            double result = 0.0;
-            double total = 0.0;
-            foreach (KeyValuePair<Vertex, Parallel> there in before)
-            {
-                total += v.adjacence(there.Key.vector);
-            }
-            total = correction(total);
+        
 
-            foreach (KeyValuePair<Vertex, Parallel>  there in after)
-            {
-                total += v.adjacence(there.Key.vector);
-            }
-            total = correction(total);
-            result += total;
-
-            double vtot = 0.0;
-            foreach (Vertex there in vertical)
-            {
-                vtot += ocost(v, there);
-                vtot = correction(vtot);
-                vtot += v.vertical_concordance(there.vector, measure.location);
-                vtot = correction(vtot);
-                if (v.octave_equivalent(there.vector))
-                {
-                    vtot += 7.5;
-                }
-            }
-            vtot = correction(vtot);
-            result += vtot;
-
-            return result ;
-        }
-
-        public double pitch_cost(Vector v, bool individual)
-        {
-            double total = 0.0;
-            foreach (Vertex there in acrossp)
-            {
-                total += v.sameness(there.vector);
-            }
-            return (individual ? 2.0 : 1.0) * 2.0 * total / (double)(measure.voice.work.map.dimension);
-        }
+        
 
         public void align_count(int[] tallies)
         {
@@ -254,7 +290,7 @@ namespace meantone
 
         }
 
-        public double interval_cost(Vector v, bool individual)
+        public double parallel_cost(Vector v, bool individual)
         {
             double total = 0.0;
 
@@ -281,24 +317,16 @@ namespace meantone
             {
                 result *= 4.0;
             }
-            return result * 2.0 / (double)(measure.voice.work.map.dimension);
+            return correction( result * 2.0 / (double)(measure.voice.work.map.dimension));
         }
 
         public double compute_cost(Vector v, bool individual)
         {
-            double result = 0.0;
-            double sc = scost(v);
-            sc = correction(sc);
-            result += sc;
-            double rc = rcost(v);
-            rc = correction(rc);
-            result += (individual ? 2.0 : 1.0) * rc;
-            double ic = interval_cost(v, individual);
-            ic = correction(ic);
-            result += ic;
-            double pc = pitch_cost(v, individual);
-            pc = correction(pc);
-            result += pc;
+            double result = self_cost(v);
+            result += horizontal_cost(v, individual);
+            result += vertical_cost(v, individual);
+            result += across_cost(v, individual);
+            result += parallel_cost(v, individual);
 
             return result;
         }
