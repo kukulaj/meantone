@@ -123,6 +123,62 @@ namespace meantone
             return ok;
         }
 
+        public double across_cost()
+        {
+            double tot = 0.0;
+            for (int i = 0; i < vertex_count; i++)
+            {
+                double vcost = vertices[i].across_cost();
+                tot += vcost;  
+            }
+            return tot;
+        }
+
+        public double vertical_cost()
+        {
+            double tot = 0.0;
+            for (int i = 0; i < vertex_count; i++)
+            {
+                double vcost = vertices[i].vertical_cost();
+                tot += vcost;
+            }
+            return tot;
+        }
+        
+        public double horizontal_cost()
+        {
+            double tot = 0.0;
+            for (int i = 0; i < vertex_count; i++)
+            {
+                double vcost = vertices[i].horizontal_cost();
+                tot += vcost;
+            }
+            return tot;
+        }
+
+        public double parallel_cost()
+        {
+            double tot = 0.0;
+            for (int i = 0; i < vertex_count; i++)
+            {
+                double vcost = vertices[i].parallel_cost();
+                tot += vcost;
+            }
+            return tot;
+        }
+
+        public double self_cost()
+        {
+            double tot = 0.0;
+            for (int i = 0; i < vertex_count; i++)
+            {
+                double vcost = vertices[i].self_cost();
+                tot += vcost;
+            }
+            return tot;
+        }
+
+
         public double cost()
         {
             double tot = 0.0;
@@ -274,8 +330,16 @@ namespace meantone
                 }
             }
 
-            System.Console.WriteLine(string.Format("temp {0}; cost {1}",
+            
+            System.Console.Write(string.Format("temp {0}; cost {1}; ",
                 temp, ccost));
+
+            System.Console.Write(string.Format("v: {0}; ", vertical_cost()));
+            System.Console.Write(string.Format("h: {0}; ", horizontal_cost()));
+            System.Console.Write(string.Format("a: {0}; ", across_cost()));
+            System.Console.Write(string.Format("p: {0}; ", parallel_cost()));
+            System.Console.Write(string.Format("s: {0}; ", self_cost()));
+            System.Console.WriteLine();
 
             double checkit2 = cost();
             if (ccost > 1.001 * checkit2 || ccost < 0.999 * checkit2)

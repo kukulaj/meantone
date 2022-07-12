@@ -140,7 +140,7 @@ namespace meantone
             {
                 total += v.sameness(there.vector);
             }
-            return (individual ? 2.0 : 1.0) * 2.0 * total / (double)(measure.voice.work.map.dimension); 
+            return  20.0 *(individual ? 2.0 : 1.0) * 2.0 * total / (double)(measure.voice.work.map.dimension); 
         }
 
         public double vertical_cost()
