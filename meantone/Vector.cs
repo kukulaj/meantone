@@ -49,7 +49,7 @@ namespace meantone
                 return 0.0;
             }
 
-            return 5.0 + concordance(v);
+            return 0.5 + concordance(v);
         }
 
         public abstract bool same_interval(Vector v, Vector w1, Vector w2);
