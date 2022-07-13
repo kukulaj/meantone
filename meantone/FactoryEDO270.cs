@@ -31,7 +31,9 @@ namespace meantone
             PumpStructure ps1 = new PumpStructureTwoAcross(this, 1, 3);
             PumpStructure ps2 = new PumpStructureTwo(this, 0, 2);
 
-            pumpStructure = new PumpStructureSum(this, ps1, ps2);
+            pumpStructure =
+                new PumpStructureRandom(this);
+                //new PumpStructureSum(this, ps1, ps2);
         }
 
         /*
