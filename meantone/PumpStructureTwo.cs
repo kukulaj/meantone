@@ -24,12 +24,12 @@ namespace meantone
             int big = (loc / rsize)  % rsize;
             int small = loc % rsize;
 
-            if (big < rsize / 4)
+            if (big < (rsize+2) / 4)
             {
                 Pump pump = factory.pumps[pi1];
                 pitch = pump.sequence[(small * pump.sequence.Length) / rsize];
             }
-            else if (big > (3 * rsize) / 4)
+            else if (big > (3 * rsize +1) / 4)
             {
                 Pump pump = factory.pumps[pi1];
                 pitch = pump.sequence[(small * pump.sequence.Length) / rsize];

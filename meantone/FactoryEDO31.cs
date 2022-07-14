@@ -25,7 +25,9 @@ namespace meantone
             commas[3] = new Comma(this, new int[] { -1, 0, -3 });
             pumps[3] = new Pump(commas[3]);
             commas[4] = new Comma(this, new int[] { 2, 2, -1 });
-            pumps[4] = new Pump(commas[4],new int[] {0, 18, 28, 15, 25 });
+            pumps[4] = new Pump(commas[4]
+               // ,new int[] {0, 18, 28, 15, 25 }
+                );
             commas[5] = new Comma(this, new int[] { 3, 1, -2, -1 });
             pumps[5] = new Pump(commas[5]);
             commas[6] = new Comma(this, new int[] { 4, -3, -1, 1 });
@@ -43,8 +45,8 @@ namespace meantone
             PumpStructure a = new PumpStructureSimple(this, 1);
             PumpStructure b = new PumpStructureBig(this, 7);
             pumpStructure =
-               // new PumpStructureRandom(this);
-                new PumpStructureTwo(this, 0, 3);
+               //new PumpStructureRandom(this);
+                new PumpStructureTwo(this, 7, 4);
 
             /*
              for (int i = 0; i < edo; i++)
