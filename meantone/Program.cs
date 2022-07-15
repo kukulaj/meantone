@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            int seed = 7056;
+            int seed = 7057;
             Type_Map map = new Type_Map(new Random(seed));
             map.type = map.rand.Next(3);
 
@@ -51,11 +51,17 @@ namespace meantone
                 //target = target * 0.97;
                 
                 
-                temp = 150.0;
+                temp = 70.0;
                 
-                work.equilibrate(temp, 2000);
-                
-                
+                work.equilibrate(temp, 20000);
+                meter.Step(temp);
+                for (temp = 60.0; temp < 72.0; temp += 1.0)
+                {
+                    work.equilibrate(temp, 20000);
+                    meter.Step(temp);
+                }
+                 
+
                 /*
                 work.jostle(temp, 1000);
                 double ocost = work.rcost;
@@ -91,13 +97,13 @@ namespace meantone
 
 
                 double move = 0.015;
-                int effort = 500;
+                int effort = 800;
                 //double target = 0.1;
 
-                bool up = false;
+                bool up = true;
                 meter.Set_Up(up);
                 int bounce = 0;
-                while (bounce < 10)
+                while (bounce < 0)
                 {
                     bool hit = false;
                     if (up)
