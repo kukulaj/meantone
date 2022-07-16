@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            int seed = 7057;
+            int seed = 7058;
             Type_Map map = new Type_Map(new Random(seed));
             map.type = map.rand.Next(3);
 
@@ -19,6 +19,7 @@ namespace meantone
             work.amplitudes();
 
             Meter meter = new Meter(work);
+            meter.BoundAlign();
 
             double cost = work.cost();
             Console.WriteLine(string.Format("initial cost {0}", cost));
@@ -36,7 +37,7 @@ namespace meantone
 
             Vertex.parallelism = 0.0;
             double temp = 3.0;
-            meter.Set_Target(0.09);
+            meter.Set_Target(0.2);
             int windex = 0;
             for (int iter = 0; iter < 1; iter++)
             {
@@ -51,14 +52,16 @@ namespace meantone
                 //target = target * 0.97;
                 
                 
-                temp = 70.0;
-                
-                work.equilibrate(temp, 20000);
-                meter.Step(temp);
-                for (temp = 60.0; temp < 72.0; temp += 1.0)
+               
+                bool up = true;
+                meter.Set_Up(up);
+                bool ahit = false;
+
+               
+                for (temp = 85.0; !ahit; temp += 1.0)
                 {
-                    work.equilibrate(temp, 20000);
-                    meter.Step(temp);
+                    work.equilibrate(temp, 2000);
+                    ahit = meter.Step(temp);
                 }
                  
 
@@ -100,8 +103,7 @@ namespace meantone
                 int effort = 800;
                 //double target = 0.1;
 
-                bool up = true;
-                meter.Set_Up(up);
+               
                 int bounce = 0;
                 while (bounce < 0)
                 {

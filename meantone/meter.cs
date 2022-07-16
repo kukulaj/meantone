@@ -40,6 +40,10 @@ namespace meantone
             calls = 0;
         }
 
+        public void BoundAlign()
+        {
+            bound = Boundary.AlignedFraction;
+        }
         public void Close()
         {
             logfile.Close();

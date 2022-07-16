@@ -80,13 +80,13 @@ namespace meantone
             pumps[9] = new Pump(commas[9], new int[]
                 {66, 99, 132, 165, 27, 60, 93, 126, 159, 21});
 
-            PumpStructure a171 = new PumpStructureBig(this, 0);
-            PumpStructure b171 = new PumpStructureSimple(this, 6);
+            PumpStructure a171 = new PumpStructureTwo(this, 0, 6);
+            PumpStructure b171 = new PumpStructureTwoAcross(this, 1, 9);
             //pumpStructure = new PumpStructureSimple(this, 2);
             //pumpStructure = new PumpStructureTwo(this, 0, 6);
             pumpStructure =
-                new PumpStructureRandom(this);
-                // new PumpStructureSum(this, a171, b171);
+                //new PumpStructureRandom(this);
+                 new PumpStructureSum(this, a171, b171);
 
             /*
             scale = new bool[19];
