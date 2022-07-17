@@ -23,8 +23,9 @@ namespace meantone
             //{0, 33, 66, 99, 154, 38, 71 }
             );
             commas[1] = new Comma(this, new int[] { 0, 3, 5 });
-            pumps[1] = new Pump(commas[1], new int[]
-                {0, 33, 66, 99, 44, 77, 22, 55 });
+            pumps[1] = new Pump(commas[1]
+               // , new int[]  {0, 33, 66, 99, 44, 77, 22, 55 }
+                );
             //{44, 66, 88, 110, 132, 154, 5, 27, 49, 71, 93, 115 });
             commas[2] = new Comma(this, new int[] { 7, -4, -1 });
 
@@ -77,8 +78,9 @@ namespace meantone
             */
 
             commas[9] = new Comma(this, new int[] { -1, 1, 9 });
-            pumps[9] = new Pump(commas[9], new int[]
-                {66, 99, 132, 165, 27, 60, 93, 126, 159, 21});
+            pumps[9] = new Pump(commas[9]
+               // , new int[]  {66, 99, 132, 165, 27, 60, 93, 126, 159, 21}
+                );
 
             PumpStructure a171 = new PumpStructureTwo(this, 0, 6);
             PumpStructure b171 = new PumpStructureTwoAcross(this, 1, 9);

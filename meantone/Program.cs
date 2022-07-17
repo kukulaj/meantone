@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            int seed = 7058;
+            int seed = 7059;
             Type_Map map = new Type_Map(new Random(seed));
             map.type = map.rand.Next(3);
 
@@ -58,9 +58,9 @@ namespace meantone
                 bool ahit = false;
 
                
-                for (temp = 85.0; !ahit; temp += 1.0)
+                for (temp = 80.0; !ahit; temp += 1.0)
                 {
-                    work.equilibrate(temp, 2000);
+                    work.equilibrate(temp, 1000);
                     ahit = meter.Step(temp);
                 }
                  
