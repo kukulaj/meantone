@@ -12,9 +12,11 @@ namespace meantone
         {
             
             commas = new Comma[3];
-            pumps = new Pump[4];
+            pumps = new Pump[5];
             commas[0] = new Comma(this, new int[] { 4, 2, 0 });
-            pumps[0] = new Pump(commas[0], new int[] { 23, 9, 20, 6, 26, 3 });
+            pumps[0] = new Pump(commas[0]
+               // , new int[] { 23, 9, 20, 6, 26, 3 }
+                );
             commas[1] = new Comma(this, new int[] { 5, -6, 0 });
             pumps[1] = new Pump(commas[1]);
             pumps[2] = new Pump(commas[0], new int[] { 0, 20, 6, 17, 3, 23 });
@@ -24,11 +26,13 @@ namespace meantone
             {
                 path[i] = (10 + i * 11) % 34;
             }
-            commas[2] = new Comma(this, new int[] { -1, 8, 0 });
+           
             pumps[3] = new Pump(commas[0], path );
+            commas[2] = new Comma(this, new int[] { 1, -8, 0 });
+            pumps[4] = new Pump(commas[2]);
             pumpStructure =
                 //new PumpStructureRandom(this);
-                new PumpStructureTwo(this, 0, 2);
+                new PumpStructureTwo(this, 0, 4);
 
             build_dichotomy(new int[] {1, 3, 5, 9 });
             /*
