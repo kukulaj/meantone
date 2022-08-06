@@ -29,7 +29,7 @@ namespace meantone
                 Pump pump = factory.pumps[pi1];
                 pitch = pump.sequence[(small * pump.sequence.Length) / rsize];
             }
-            else if (big > (3 * rsize +1) / 4)
+            else if (big >= (3 * rsize +1) / 4)
             {
                 Pump pump = factory.pumps[pi1];
                 pitch = pump.sequence[(small * pump.sequence.Length) / rsize];

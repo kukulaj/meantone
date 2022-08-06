@@ -628,14 +628,27 @@ namespace meantone
         }
         protected void build_dichotomy(int odd_limit)
         {
+            int[] odds = new int[(odd_limit+1)/2];
+            for(int oi = 0; oi < odds.Length; oi++)
+            {
+                odds[oi] = 1 + 2 * oi;
+            }
+            build_dichotomy(odds);
+
+        }
+
+        protected void build_dichotomy(int[] odds)
+        {
             sdichotomy = new bool[edo];
 
             sdichotomy[0] = true;
 
-            for (int odd = 3; odd <= odd_limit; odd += 2)
+            for (int oi = 1; oi < odds.Length; oi++)
             {
-                for (int odd2 = 1; odd2 < odd; odd2 += 2)
+                int odd = odds[oi];
+                for (int oi2 = 0; oi2 < oi; oi2++)
                 {
+                    int odd2 = odds[oi2];
                     double c = ((double)edo) * Math.Log(((double)odd) / ((double)odd2)) / Math.Log(2);
                     int k = (int)(0.5 + c);
                     k = k % edo;
@@ -647,7 +660,6 @@ namespace meantone
             }
 
         }
-
         public virtual bool inScale(int pitch, int loc)
         {
             int period = scale.Length;

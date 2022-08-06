@@ -26,7 +26,11 @@ namespace meantone
             }
             commas[2] = new Comma(this, new int[] { -1, 8, 0 });
             pumps[3] = new Pump(commas[0], path );
-            pumpStructure = new PumpStructureRandom(this);
+            pumpStructure =
+                //new PumpStructureRandom(this);
+                new PumpStructureTwo(this, 0, 2);
+
+            build_dichotomy(new int[] {1, 3, 5, 9 });
             /*
             for (int i = 0; i < edo; i++)
             {
@@ -54,7 +58,7 @@ namespace meantone
                 scale[(20 * i) % 17] = true;
             }
             */
-
+            /*
             dichotomy = new bool[1, edo];
             dichotomy[0, 0] = true;
             dichotomy[0, 9] = true;
@@ -69,8 +73,10 @@ namespace meantone
             dichotomy[0, 6] = true;
             dichotomy[0, 29] = true;
             dichotomy[0, 5] = true;
+            */
         }
 
+        /*
         public override double vertical_interval_cost(int dp, int loc)
         {
             //return interval_cost(dp);
@@ -80,12 +86,12 @@ namespace meantone
             }
 
             int phase = 0;// loc % 2;
-            /*
+            
            if (loc % 12 == 11)
            {
                phase = 2;
            }
-            */
+            
             if (dp % edo == 0)
             {
                 return 85.0;
@@ -95,5 +101,6 @@ namespace meantone
                 return 0.0;
             return 5000.0;
         }
+    */
     }
 }
