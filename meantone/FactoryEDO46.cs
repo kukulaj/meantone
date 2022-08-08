@@ -15,9 +15,9 @@ namespace meantone
             commas[1] = new Comma(this, new int[] { 1, 0, 3, 0 });
             pumps[1] = new Pump(commas[1]);
             commas[2] = new Comma(this, new int[] { 1, -1, -1, -1 });
-            pumps[2] = new Pump(commas[1]);
+            pumps[2] = new Pump(commas[2]);
             commas[3] = new Comma(this, new int[] { 0, -2, -1, 1 });
-            pumps[3] = new Pump(commas[1]);
+            pumps[3] = new Pump(commas[3]);
             PumpStructure p1 = new PumpStructureStripe(this, new int[] { 0, 1 }, 0, 2);
             PumpStructure p2 = new PumpStructureStripe(this, new int[] { 2, 3 }, 1, 3);
             pumpStructure = new PumpStructureSum(this, p1, p2);
