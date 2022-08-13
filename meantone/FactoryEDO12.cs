@@ -14,11 +14,15 @@ namespace meantone
             commas = new Comma[2];
             pumps = new Pump[2];
             commas[0] = new Comma(this, new int[] { 4, -1 });
-            pumps[0] = new Pump(commas[0], new int[] { 0, 7, 2, 9, 4 });
+            pumps[0] = new Pump(commas[0]
+              //  , new int[] { 0, 7, 2, 9, 4 }
+                );
             commas[1] = new Comma(this, new int[] { 0, 3 });
             pumps[1] = new Pump(commas[1]);
 
-            pumpStructure = new PumpStructureRandom(this);
+            pumpStructure = new PumpStructureStripe(this, new int[] {0,1,0,1,0 }, 0, 1);
+
+            build_dichotomy(new int[] {1, 3, 5, 9 });
 
             /*
             for (int i = 0; i < edo; i++)
@@ -32,6 +36,7 @@ namespace meantone
             }
             */
 
+            /*
             augmented = new bool[4];
             augmented[0] = true;
             augmented[1] = true;
@@ -46,9 +51,9 @@ namespace meantone
             dichotomy[0, 9] = true;
             dichotomy[0, 2] = true;
             dichotomy[0, 10] = true;
-
+            */
         }
-
+        /*
         public override double vertical_interval_cost(int dp, int loc)
         {
             return interval_cost(dp);
@@ -58,12 +63,12 @@ namespace meantone
             }
 
             int phase = 0;
-            /*
+            
             if ((loc+1) % map.row_size == 0)
             {
                 phase = 1;
             }
-            */
+            
             if (dp % edo == 0)
             {
                 return 100.0;
@@ -73,6 +78,8 @@ namespace meantone
                 return 0.0;
             return 5000.0;
         }
+        */
+
         private bool inAScale(bool[] aScale, int pitch)
         {
             int period = aScale.Length;
