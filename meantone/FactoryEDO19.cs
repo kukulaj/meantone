@@ -26,7 +26,7 @@ namespace meantone
             commas[3] = new Comma(this, new int[] { 0, 0, 0 });
             pumps[3] = new Pump(commas[3]);
 
-            PumpStructure pa = new PumpStructureStripe(this, new int[] {0, 3, 0, 3, 0, 3 }, 0, 1);
+            PumpStructure pa = new PumpStructureStripe(this, new int[] {3, 0, 0}, 0, 1);
             PumpStructure pb = new PumpStructureBig(this, 1);
 
             pumpStructure =
