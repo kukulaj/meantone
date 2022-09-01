@@ -39,6 +39,12 @@ namespace meantone
              
             int width = side / pumps.Length;
             int p = ((coord[cut] + width/2)  / width) % pumps.Length;
+
+            if(pumps[p].sequence.Length == 0)
+            {
+                return 0;
+            }
+
             int f = coord[flow] * pumps[p].sequence.Length / side;
 
             return pumps[p].sequence[f];
