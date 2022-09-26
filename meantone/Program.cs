@@ -37,7 +37,7 @@ namespace meantone
 
             Vertex.parallelism = 0.0;
             double temp = 3.0;
-            meter.Set_Target(0.14);
+            meter.Set_Target(0.095);
             int windex = 0;
             for (int iter = 0; iter < 1; iter++)
             {
@@ -51,14 +51,14 @@ namespace meantone
 
                 //target = target * 0.97;
                 
-                bool up = false;
+                bool up = true;
                 meter.Set_Up(up);
                 bool ahit = false;
 
                
-                for (temp = 300000.0; !ahit; temp *= 0.97)
+                for (temp = 50.0; !ahit; temp *= 1.03)
                 {
-                    work.equilibrate(temp, 80);
+                    work.equilibrate(temp, 200);
                     ahit = meter.Step(temp);
                 }
                  
