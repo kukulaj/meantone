@@ -45,7 +45,10 @@ namespace meantone
             commas[6] = new Comma(this, new int[] { -3, 2, 1, 0, -1 });
             pumps[6] = new Pump(commas[6]);
 
-            pumpStructure = new PumpStructureSimple(this, 6); 
+            commas[7] = new Comma(this, new int[] { 2, 1, 1, 0, 1 });
+            pumps[7] = new Pump(commas[7]);
+
+            pumpStructure = new PumpStructureSimple(this, 7); 
                 //new PumpStructureStripe(this, new int[] { 1, 0, 2 }, 0, 1);
                 //new PumpStructureTwo(this, 1, 0);
             //PumpStructure b53 = new PumpStructureBig(this, 2);
