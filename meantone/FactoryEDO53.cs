@@ -13,9 +13,9 @@ namespace meantone
         private bool[,] dichotomy;
         public FactoryEDO53(Type_Map map, bool[] pinc) : base(53, map, pinc)
         {
-            build_dichotomy(new int[] {1, 3, 5, 7, 9 });
-            commas = new Comma[10];
-            pumps = new Pump[12];
+            build_dichotomy(new int[] {1, 3, 7, 9, 13 });
+            commas = new Comma[14];
+            pumps = new Pump[18];
             commas[0] = new Comma(this, new int[] { 5, -6, 0 });
             int[] path = new int[6];
             for(int i=0; i<6; i++)
@@ -55,7 +55,10 @@ namespace meantone
             commas[9] = new Comma(this, new int[] { 1, 0, 1, 0, -2 });
             pumps[9] = new Pump(commas[9]);
 
-            pumpStructure = new PumpStructureSimple(this, 3); 
+            commas[10] = new Comma(this, new int[] { 6, 0, -1, 0, -1 });
+            pumps[10] = new Pump(commas[10]);
+
+            pumpStructure = new PumpStructureSimple(this, 10); 
                 //new PumpStructureStripe(this, new int[] { 1, 0, 2 }, 0, 1);
                 //new PumpStructureTwo(this, 1, 0);
             //PumpStructure b53 = new PumpStructureBig(this, 2);
