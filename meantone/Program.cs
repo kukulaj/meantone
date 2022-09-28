@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            int seed = 7078;
+            int seed = 7079;
             Type_Map map = new Type_Map(new Random(seed));
             map.type = map.rand.Next(3);
 
@@ -19,7 +19,7 @@ namespace meantone
             work.amplitudes();
 
             Meter meter = new Meter(work);
-            meter.BoundAlign();
+            //meter.BoundAlign();
 
             double cost = work.cost();
             Console.WriteLine(string.Format("initial cost {0}", cost));
@@ -58,7 +58,8 @@ namespace meantone
                
                 for (temp = 15.0; !ahit; temp *= 1.03)
                 {
-                    work.equilibrate(temp, 200);
+                    work.equilibrate(temp, 
+                        1000);
                     ahit = meter.Step(temp);
                 }
                  

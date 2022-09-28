@@ -33,12 +33,12 @@ namespace meantone
             bool[] primes = new bool[6];
             primes[0] = true;
             primes[1] = true;
-            //primes[2] = true;
-            primes[3] = true;
+            primes[2] = true;
+            //primes[3] = true;
             //primes[4] = true;
-            primes[5] = true;          
+            //primes[5] = true;          
 
-            vectorFactory = new FactoryEDO53( map, primes);
+            vectorFactory = new FactoryEDO31( map, primes);
             vectorFactory.show_pattern();
             vectorFactory.scaleSearch();
             rand = map.rand;
