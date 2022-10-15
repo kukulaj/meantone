@@ -12,25 +12,38 @@ namespace meantone
         bool[] negri;
         public FactoryEDO19(Type_Map map, bool[] pinc) : base(19, map, pinc)
         {
-            commas = new Comma[4];
-            pumps = new Pump[4];
+            commas = new Comma[14];
+            pumps = new Pump[14];
             commas[0] = new Comma(this, new int[] { 4, -1, 0 });
             pumps[0] = new Pump(commas[0]);
-            commas[1] = new Comma(this, new int[] { 1, -5, 0 });
+            commas[1] = new Comma(this, new int[] { 3, 4, 0 });
             pumps[1] = new Pump(commas[1]
              //   , new int[]    {5, 18, 10, 4, 17, 11 }
             );
-            commas[2] = new Comma(this, new int[] { 3, 4 });
-            pumps[2] = new Pump(commas[1], new int[]
-            {0, 6, 12, 4, 10, 2, 8 });
-            commas[3] = new Comma(this, new int[] { 0, 0, 0 });
+            commas[2] = new Comma(this, new int[] { -1, 5 });
+            pumps[2] = new Pump(commas[2]
+              //  , new int[]  {0, 6, 12, 4, 10, 2, 8 }
+            );
+
+            commas[3] = new Comma(this, new int[] { -4, 1, 0 });
             pumps[3] = new Pump(commas[3]);
+
+            commas[4] = new Comma(this, new int[] { -3, -4, 0 });
+            pumps[4] = new Pump(commas[4]);
+
+            commas[5] = new Comma(this, new int[] { 1, -5, 0 });
+            pumps[5] = new Pump(commas[5]);
+
+
+            commas[13] = new Comma(this, new int[] { 0, 0, 0 });
+            pumps[13] = new Pump(commas[3]);
 
             PumpStructure pa = new PumpStructureStripe(this, new int[] {3, 0, 0}, 0, 1);
             PumpStructure pb = new PumpStructureBig(this, 1);
 
             pumpStructure =
-                new PumpStructureSum(this,pa, pb);
+                new PumpStructureStripe(this, new int[] {0, 1, 2, 3, 4, 5 }, 0, 1);
+                // new PumpStructureSum(this,pa, pb);
                 // new PumpStructureRandom(this);
 
             build_dichotomy(new int[] {1, 3, 5, 9 });
