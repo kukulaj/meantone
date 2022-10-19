@@ -9,8 +9,8 @@ namespace meantone
         private bool[,] dichotomy;
         public FactoryEDO22(Type_Map map, bool[] pinc) : base(22, map, pinc)
         {
-            commas = new Comma[2];
-            pumps = new Pump[2];
+            commas = new Comma[12];
+            pumps = new Pump[12];
             commas[0] = new Comma(this, new int[] { 3, 7, 0 });
             int[] path = new int[] {0, 13, 20, 11, 8, 3, 10, 1, 8, 15 };
             
@@ -23,8 +23,21 @@ namespace meantone
 
             pumps[1] = new Pump(commas[1], path1);
 
+            commas[2] = new Comma(this, new int[] {4, 2 });
+            pumps[2] = new Pump(commas[2]);
 
-            pumpStructure = new PumpStructureRandom(this);
+            commas[3] = new Comma(this, new int[] { 1, -5 });
+            pumps[3] = new Pump(commas[3]);
+
+            commas[4] = new Comma(this, new int[] { -4, -2 });
+            pumps[4] = new Pump(commas[4]);
+
+            commas[5] = new Comma(this, new int[] {-1, 5 });
+            pumps[5] = new Pump(commas[5]);
+
+            pumpStructure = new PumpStructureSimple(this, 2); 
+                //new PumpStructureStripe(this, new int[] {2, 3, 4, 5 }, 0, 1);
+                //new PumpStructureRandom(this);
             //PumpStructure b53 = new PumpStructureBig(this, 2);
             //pumpStructure = new PumpStructureSum(this, a53, b53);
 

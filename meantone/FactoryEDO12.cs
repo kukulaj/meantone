@@ -11,8 +11,8 @@ namespace meantone
         bool[] augmented;
         public FactoryEDO12(Type_Map map, bool[] pinc) : base(12, map, pinc)
         {
-            commas = new Comma[2];
-            pumps = new Pump[2];
+            commas = new Comma[10];
+            pumps = new Pump[10];
             commas[0] = new Comma(this, new int[] { 4, -1 });
             pumps[0] = new Pump(commas[0]
               //  , new int[] { 0, 7, 2, 9, 4 }
@@ -20,7 +20,13 @@ namespace meantone
             commas[1] = new Comma(this, new int[] { 0, 3 });
             pumps[1] = new Pump(commas[1]);
 
-            pumpStructure = new PumpStructureStripe(this, new int[] {0,1,0,1,0 }, 0, 1);
+            commas[2] = new Comma(this, new int[] {-4, 1 });
+            pumps[2] = new Pump(commas[2]);
+
+            commas[3] = new Comma(this, new int[] { 0, -3 });
+            pumps[3] = new Pump(commas[3]);
+
+            pumpStructure = new PumpStructureStripe(this, new int[] {0,1,2,3 }, 0, 1);
 
             build_dichotomy(new int[] {1, 3, 5, 9 });
 
