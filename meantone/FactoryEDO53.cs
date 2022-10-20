@@ -14,8 +14,8 @@ namespace meantone
         public FactoryEDO53(Type_Map map, bool[] pinc) : base(53, map, pinc)
         {
             build_dichotomy(new int[] {1, 3, 5, 9 });
-            commas = new Comma[14];
-            pumps = new Pump[18];
+            commas = new Comma[30];
+            pumps = new Pump[30];
             commas[0] = new Comma(this, new int[] { 5, -6, 0 });
             int[] path = new int[6];
             for(int i=0; i<6; i++)
@@ -61,14 +61,25 @@ namespace meantone
             commas[11] = new Comma(this, new int[] { 3, 0, 4 });
             pumps[11] = new Pump(commas[11]);
 
+            commas[12] = new Comma(this, new int[] { -5, 6, 0 });
+            pumps[12] = new Pump(commas[12]);
+
+            commas[13] = new Comma(this, new int[] { -8, -1, 0 });
+            pumps[13] = new Pump(commas[13]);
+
+            commas[14] = new Comma(this, new int[] { -3, -7, 0 });
+            pumps[14] = new Pump(commas[14]);
+
+
             //PumpStructure p1 = new PumpStructureStripe(this, new int[] { 11, 10 }, 0, 1);
             PumpStructure p1 = new PumpStructureSimple(this, 0);
             PumpStructure p2 = new PumpStructureBig(this, 2);
 
 
-            pumpStructure = new PumpStructureSum(this, p1, p2);
+            pumpStructure = 
+                //new PumpStructureSum(this, p1, p2);
                 //new PumpStructureSimple(this, 10); 
-                //new PumpStructureStripe(this, new int[] { 1, 0, 2 }, 0, 1);
+                new PumpStructureStripe(this, new int[] { 0, 1, 2, 12, 13, 14 }, 0, 1);
                 //new PumpStructureTwo(this, 1, 0);
             //PumpStructure b53 = new PumpStructureBig(this, 2);
             //pumpStructure = new PumpStructureSum(this, a53, b53);
