@@ -229,33 +229,53 @@ namespace meantone
             return 0.01 * result;
         }
 
-        public double equilibrate(double temp, int effort)
+        public double equilibrate(double temp, int effort, int level)
         {
-            double result = 0.0;
-            double ccost = cost();
-            double lcost = ccost;
-            double hcost = ccost;
-
-            bool moved = true;
-            while(moved)
+            if (level == 0)
             {
-                moved = false;
-                result += jostle(temp, effort);
-                ccost = cost();
-                if (ccost > hcost)
-                {
-                    moved = true;
-                    hcost = ccost;
-                }
-                if (ccost < lcost)
-                {
-                    moved = true;
-                    lcost = ccost;
-                }
+                jostle(temp, effort);
+                return cost();
             }
-            return result;
+
+            else
+            {
+                double ccost = equilibrate(temp, effort, level - 1);
+                double lcost = ccost;
+                double hcost = ccost;
+
+                bool moved = true;
+                while (moved)
+                {
+                    moved = false;
+                    ccost = equilibrate(temp, effort, level - 1);
+                    
+                    if (ccost > hcost)
+                    {
+                        moved = true;
+                        hcost = ccost;
+                    }
+                    if (ccost < lcost)
+                    {
+                        moved = true;
+                        lcost = ccost;
+                    }
+                }
+                return ccost;
+            }
         }
 
+
+        public void report(double temp, double ccost)
+        {
+            System.Console.Write(string.Format("temp {0}; cost {1}; ",
+                temp, ccost));
+
+            System.Console.Write(string.Format("v: {0}; ", vertical_cost()));
+            System.Console.Write(string.Format("h: {0}; ", horizontal_cost()));
+            System.Console.Write(string.Format("a: {0}; ", across_cost()));
+            System.Console.Write(string.Format("p: {0}; ", parallel_cost()));
+            System.Console.Write(string.Format("s: {0}; ", self_cost()));
+        }
         public double jostle(double temp, int effort)
         {
             double ccost = cost();
@@ -314,12 +334,25 @@ namespace meantone
 
                 if (ccost < lcost)
                 {
+                    if (since > 200)
+                    {
+                        report(temp, ccost);
+                        System.Console.Write(string.Format("after {0}", since));
+                        System.Console.WriteLine();
+                    }
                     since = 0;
                     lcost = ccost;
                     // System.Console.WriteLine(string.Format("temp {0}; cost {1}", temp, ccost));
                 }
                 else if (ccost > hcost)
                 {
+                    if (since > 200)
+                    {
+                        report(temp, ccost);
+                        System.Console.Write(string.Format("after {0}", since));
+                        System.Console.WriteLine();
+                    }
+
                     since = 0;
                     hcost = ccost;
                     // System.Console.WriteLine(string.Format("temp {0}; cost {1}", temp, ccost));
@@ -330,15 +363,8 @@ namespace meantone
                 }
             }
 
-            
-            System.Console.Write(string.Format("temp {0}; cost {1}; ",
-                temp, ccost));
-
-            System.Console.Write(string.Format("v: {0}; ", vertical_cost()));
-            System.Console.Write(string.Format("h: {0}; ", horizontal_cost()));
-            System.Console.Write(string.Format("a: {0}; ", across_cost()));
-            System.Console.Write(string.Format("p: {0}; ", parallel_cost()));
-            System.Console.Write(string.Format("s: {0}; ", self_cost()));
+            report(temp, ccost);
+            System.Console.Write(string.Format("at {0}", since));
             System.Console.WriteLine();
 
             double checkit2 = cost();

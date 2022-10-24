@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            int seed = 7088;
+            int seed = 7090;
             Type_Map map = new Type_Map(new Random(seed));
             map.type = map.rand.Next(3);
 
@@ -36,8 +36,8 @@ namespace meantone
             //work.voices[0].freeze = true;
 
             Vertex.parallelism = 0.0;
-            double temp = 3.0;
-            meter.Set_Target(0.15);
+            double temp = 20000.0;
+            //meter.Set_Target(0.15);
             int windex = 0;
             for (int iter = 0; iter < 1; iter++)
             {
@@ -51,18 +51,19 @@ namespace meantone
 
                 //target = target * 0.97;
                 
-                bool up = true;
+                bool up = false;
                 meter.Set_Up(up);
-                bool ahit = false;
 
-               
-                for (temp = 30.0; !ahit; temp *= 1.015)
-                {
-                    work.equilibrate(temp, 
-                        10000);
-                    ahit = meter.Step(temp);
-                }
-                 
+
+                /*
+                 bool ahit = false;
+                 for (temp = 30.0; !ahit; temp *= 1.015)
+                 {
+                     work.equilibrate(temp, 
+                         5000, 4);
+                     ahit = meter.Step(temp);
+                 }
+               */
 
                 /*
                 work.jostle(temp, 1000);
@@ -99,12 +100,12 @@ namespace meantone
 
 
                 double move = 0.015;
-                int effort = 800;
+                int effort = 100;
                 //double target = 0.1;
 
                
                 int bounce = 0;
-                while (bounce < 0)
+                while (bounce < 18)
                 {
                     bool hit = false;
                     if (up)
@@ -113,7 +114,7 @@ namespace meantone
                         while (temp < upper_lim && !hit)
                         {
                             temp = temp / (1.0 - move);
-                            work.equilibrate(temp, effort + (int)(meter.capacity/500.0));
+                            work.jostle(temp, effort + (int)(meter.capacity/500.0));
                             hit = meter.Step(temp);
                         }
                         if (temp >= upper_lim)
@@ -131,7 +132,7 @@ namespace meantone
                         while (temp > lower_lim && !hit)
                         {
                             temp *= (1.0 - move);
-                            work.equilibrate(temp, effort + (int)(meter.capacity / 500.0));
+                            work.jostle(temp, effort + (int)(meter.capacity / 500.0));
                             hit = meter.Step(temp);
                             //effort = (108 * effort) / 100;
 
