@@ -278,14 +278,17 @@ namespace meantone
         }
         public double jostle(double temp, int effort)
         {
+            int last = 0;
+            int sofar = 0;
             double ccost = cost();
             double lcost = ccost;
             double hcost = ccost;
             int since = 0;
             double tdel = 0.0;
 
-            while (since < effort)
+            while (since < effort /*|| sofar < last * 2 */ )
             {
+                sofar++;
                 int vi = rand.Next(vertex_count);
                 Vertex v = vertices[vi];
                 if (v.measure.voice.freeze)
@@ -334,6 +337,7 @@ namespace meantone
 
                 if (ccost < lcost)
                 {
+                    last = sofar;
                     if (since > 200)
                     {
                         report(temp, ccost);
@@ -346,6 +350,7 @@ namespace meantone
                 }
                 else if (ccost > hcost)
                 {
+                    last = sofar;
                     if (since > 200)
                     {
                         report(temp, ccost);

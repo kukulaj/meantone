@@ -8,7 +8,7 @@ namespace meantone
     {
         static void Main(string[] args)
         {
-            int seed = 7090;
+            int seed = 7091;
             Type_Map map = new Type_Map(new Random(seed));
             map.type = map.rand.Next(3);
 
@@ -36,7 +36,7 @@ namespace meantone
             //work.voices[0].freeze = true;
 
             Vertex.parallelism = 0.0;
-            double temp = 20000.0;
+            double temp = 30000.0;
             //meter.Set_Target(0.15);
             int windex = 0;
             for (int iter = 0; iter < 1; iter++)
@@ -100,17 +100,17 @@ namespace meantone
 
 
                 double move = 0.015;
-                int effort = 100;
+                int effort = 10000;
                 //double target = 0.1;
 
                
                 int bounce = 0;
-                while (bounce < 18)
+                while (bounce < 6)
                 {
                     bool hit = false;
                     if (up)
                     {
-                        const double upper_lim = 6000.0;
+                        const double upper_lim = 12000.0;
                         while (temp < upper_lim && !hit)
                         {
                             temp = temp / (1.0 - move);
