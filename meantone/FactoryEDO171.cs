@@ -9,7 +9,7 @@ namespace meantone
         private bool[] dichotomy;
         public FactoryEDO171(Type_Map map, bool[] pinc) : base(171, map, pinc)
         {
-            build_dichotomy2(9);
+            build_dichotomy(new int[]{ 3, 5, 7, 9, 15});
 
             commas = new Comma[10];
             pumps = new Pump[10];
@@ -86,11 +86,12 @@ namespace meantone
 
             PumpStructure a171 = new PumpStructureTwo(this, 0, 6);
             PumpStructure b171 = new PumpStructureTwoAcross(this, 1, 9);
-            pumpStructure = new PumpStructureSimple(this, 2);
+            pumpStructure = 
+                //new PumpStructureSimple(this, 2);
             //pumpStructure = new PumpStructureTwo(this, 0, 6);
             //pumpStructure =
                 //new PumpStructureStripe(this, new int[] {6, 0, 1 }, 0, 1);
-                //new PumpStructureRandom(this);
+                new PumpStructureRandom(this);
                  //new PumpStructureSum(this, a171, b171);
 
             /*
@@ -180,6 +181,7 @@ namespace meantone
         }
 
 
+        /*
         public override double vertical_interval_cost(int dp, int loc)
         {
             //return interval_cost(dp);
@@ -198,6 +200,8 @@ namespace meantone
                 return 0.0;
             return 5000.0;
         }
+        */
+
         private bool inAScale(bool[] aScale, int pitch)
         {
             int period = aScale.Length;
